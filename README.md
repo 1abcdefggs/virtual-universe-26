@@ -1,4 +1,4 @@
-![GitHub Virtual Universe 26 — three sessions on the latest from GitHub, Copilot, and the Universe keynote](assets/universe-banner.png)
+![GitHub Virtual Universe 26: three sessions on the latest from GitHub, Copilot, and the Universe keynote](assets/universe-banner.png)
 
 # GitHub Virtual Universe '26
 
