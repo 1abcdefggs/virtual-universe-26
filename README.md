@@ -4,8 +4,8 @@
 
 To get started, download the **[GitHub Copilot app](https://github.com/features/ai/github-app)**.
 
-| # | Session | Resources |
-|---|---------|-----------|
-| 1 | GitHub Latest Features | [Session resources](./01-github-latest-features) |
-| 2 | GitHub Copilot Latest Features | [Session resources](./02-github-copilot-latest-features) |
-| 3 | GitHub Universe Keynote | [Session resources](./03-github-universe-keynote) |
+| # | Session | Presenters | Resources |
+|---|---------|------------|-----------|
+| 1 | The Modern GitHub Experience | April and Camilla | [Session resources](./01-github-latest-features) |
+| 2 | GitHub Copilot Latest Features | James and Pierce | [Session resources](./02-github-copilot-latest-features) |
+| 3 | Keynote Recap | Carlotta and Cassidy | [Session resources](./03-github-universe-keynote) |

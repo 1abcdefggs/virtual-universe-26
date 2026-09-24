@@ -1,3 +1,5 @@
-# Session 1: GitHub Latest Features
+# Session 1: The Modern GitHub Experience
+
+**Presenters:** April and Camilla
 
 Resources for this session will be added here.
