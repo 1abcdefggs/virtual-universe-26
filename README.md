@@ -29,9 +29,9 @@ Are you an open source maintainer? Check out the settings we've shipped to help 
 
 [![Join the Maintainer Community](https://img.shields.io/badge/Join_the_Maintainer_Community-0969DA?style=flat&logo=github&logoColor=white)](https://maintainers.github.com/)
 
-- **Set participation boundaries:** Define how people and agents can contribute to your project.
-- **Manage your contribution queue:** Organize incoming pull requests and keep reviews focused on actionable work.
-- **Control contribution volume:** Keep incoming PRs manageable for your team.
+- [Set participation boundaries](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/disabling-pull-requests): Define how people and agents can contribute to your project.
+- [Manage your contribution queue](https://docs.github.com/en/communities/moderating-comments-and-conversations/archive-pull-requests): Organize incoming pull requests and keep reviews focused on actionable work.
+- [Control contribution volume](https://github.blog/changelog/2026-06-17-limit-open-pull-requests-for-users-without-write-access/): Keep incoming PRs manageable for your team.
 
 ## Section 2: Agentic Software Development with GitHub Copilot
 
