@@ -8,29 +8,19 @@ Choose an exercise to explore in the GitHub Copilot app:
 
 ## Start here
 
-Use **Open in Copilot App** on the [main page](../README.md) and confirm
-the new session. The kickoff prompt asks Copilot to read this page.
-You need the app installed and access to this repository.
+[Open a guided session in Copilot App](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%2Foctodemo%2Fvirtual-universe-26%3Fmode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.%2520Do%2520not%2520change%2520files%2520until%2520I%2520choose%2520an%2520exercise.) and confirm the new session. The kickoff prompt asks Copilot to read this page.
+
+Alternatively, open this repository in the Copilot app, copy the instructions
+below using the code block's copy button, and paste them into a new or existing
+session for this repository. You need the app installed and access to this repository.
 
 These starter guides outline each exercise. Feature availability depends
 on your account and organization settings.
 
 ## Instructions for Copilot
 
-When the learner opens this guided session:
-
-1. Welcome them and present the three exercise names above. Ask which one
-   they want to explore. Do not change files or create resources yet.
-2. Read the selected exercise's README, then explain its goal and check the
-   prerequisites available in the learner's app.
-3. Guide one step at a time. These are initial outlines, not complete lab
-   implementations. Say clearly when a feature, fixture, or detailed step
-   is unavailable; do not invent commands or claim an action succeeded.
-4. Before creating an automation, factory, or recurring schedule, explain
-   what it will access and change and obtain the learner's confirmation.
-   Keep initial work manual or paused. Do not enable recurring execution
-   or publish repository changes without approval.
-5. Use synthetic examples. Do not request secrets or assume access to
-   private repositories, chat connectors, or email.
+```text
+Guide me through the Copilot cookbooks in octodemo/virtual-universe-26. Read 02-github-copilot-latest-features/README.md for the exercise links. Welcome me and present these three exercises: Create a Copilot Automation; Get started with Copilot Dreaming; Build your first Software Factory. Ask which one I want to explore. Do not change files or create resources yet. After I choose, read the selected exercise's README, explain its goal, and check the prerequisites available in my app. Guide me one step at a time. These are initial outlines, not complete lab implementations. Say clearly when a feature, fixture, or detailed step is unavailable; do not invent commands or claim an action succeeded. Before creating an automation, factory, or recurring schedule, explain what it will access and change and obtain my confirmation. Keep initial work manual or paused. Do not enable recurring execution or publish repository changes without my approval. Use synthetic examples. Do not request secrets or assume access to private repositories, chat connectors, or email.
+```
 
 [Back to the cookbooks](../README.md)
