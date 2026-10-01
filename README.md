@@ -13,7 +13,9 @@ Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai
 
 ## Section 1: The Modern GitHub Experience
 
-### Build on GitHub
+### What's new on GitHub
+
+Click the button below to open a pre-configured Codespace with all the dependencies needed for the cookbooks in this section. 
 
 [![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-238636?style=flat&logo=github&logoColor=white)](https://codespaces.new/octodemo/virtual-universe-26)
 
@@ -23,6 +25,8 @@ Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai
 
 ### Manage your open source project
 
+Are you an open source maintainer? Check out the settings we've shipped to help you manage your projects and keep AI generated contributions under control. You can also join the community for to connect with other maintainers and get direct support from our team.  
+
 [![Join the Maintainer Community](https://img.shields.io/badge/Join_the_Maintainer_Community-0969DA?style=flat&logo=github&logoColor=white)](https://maintainers.github.com/)
 
 - **Set participation boundaries:** Define how people and agents can contribute to your project.
@@ -31,9 +35,9 @@ Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai
 
 ## Section 2: Agentic Software Development with GitHub Copilot
 
-[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%2Foctodemo%2Fvirtual-universe-26%3Fmode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.%2520Do%2520not%2520change%2520files%2520until%2520I%2520choose%2520an%2520exercise.)
+Click the button below to open the repository in Copilot App and confirm the new session to start a guided walkthrough of the cookbooks in this section.
 
-Open the repository in Copilot App and confirm the new session to start a guided walkthrough of the Copilot cookbooks.
+[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%2Foctodemo%2Fvirtual-universe-26%3Fmode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.%2520Do%2520not%2520change%2520files%2520until%2520I%2520choose%2520an%2520exercise.)
 
 1. [Create a Copilot Automation](./02-github-copilot-latest-features/create-a-copilot-automation/): Connect the dots across code and documentation to identify what needs updating.
 2. [Get started with Copilot Dreaming](./02-github-copilot-latest-features/get-started-with-copilot-dreaming/): Explore how curated memories can carry useful context and preferences into future sessions.
@@ -41,10 +45,13 @@ Open the repository in Copilot App and confirm the new session to start a guided
 
 ## Section 3: GitHub Universe Highlights
 
+Copy the command below into your terminal for a surprise experience walking you through the GitHub Universe highlights. 
 
-[![Explore Universe highlights](https://img.shields.io/badge/Explore_Universe_highlights-0969DA?style=flat&logo=github&logoColor=white)](./03-github-universe-keynote/)
+```
+curl leereily.net
+```
 
-1. [GitHub Universe recap](./03-github-universe-keynote/github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
+1. [GitHub Universe recap page](./03-github-universe-keynote/github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
 2. [GitHub Universe cheat sheet](./03-github-universe-keynote/github-universe-cheat-sheet/): Find the key features, useful commands, and next steps in one place, with a terminal-friendly edition planned.
 
 [![Watch GitHub on YouTube](https://img.shields.io/badge/Watch_GitHub_on_YouTube-24292F?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/@GitHub)
