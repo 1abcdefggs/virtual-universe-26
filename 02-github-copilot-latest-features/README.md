@@ -1,3 +1,3 @@
-# Session 2: GitHub Copilot Latest Features
+# Section 2: Agentic Software Development with GitHub
 
-**Presenters:** James and Pierce
+
