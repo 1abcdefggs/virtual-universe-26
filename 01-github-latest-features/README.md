@@ -2,15 +2,26 @@
 
 **Presenters:** April and Camilla
 
-## Build on GitHub
+Try two new GitHub CLI features. Each tutorial takes about five minutes.
 
-Use a GitHub Codespace and your own fork for these exercises. These starter
-pages describe the goals and exercise sequence; the runnable app fixtures
-and full lab instructions are not included in this repository yet.
+1. [Attach images to an issue](attach-images-to-an-issue/README.md): add a screenshot to an issue from the terminal.
+2. [Create a stacked PR](create-a-stacked-pr/README.md): split one change into small pull requests that build on each other.
 
-1. [Getting started with GitHub Issue Artifacts](getting-started-with-artifacts/): Preserve a bug report, screenshot, and investigation.
-2. [Create your first stacked PR](create-your-first-stacked-pr/): Turn the issue into small, dependent changes.
-3. [Create your first agentic workflow](create-your-first-agentic-workflow/): Review a change automatically and inspect the result.
+## Before you start
+
+Work in your own fork, so the issues and pull requests you create are yours.
+Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and run:
+
+```bash
+unset GITHUB_TOKEN
+gh auth login --web
+gh auth setup-git
+gh repo fork --remote
+gh repo set-default "$(gh api user --jq .login)/virtual-universe-26"
+gh repo edit --enable-issues
+```
+
+Use this same terminal for both tutorials.
 
 ## Manage your open source project
 

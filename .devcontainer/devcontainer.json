@@ -1,0 +1,22 @@
+{
+  "name": "Section 1: The Modern GitHub Experience",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": { "version": "latest" }
+  },
+  "postCreateCommand": "gh extension install github/gh-stack; git config --global rerere.enabled true; git config --global remote.pushDefault origin",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["01-github-latest-features/README.md"]
+    },
+    "vscode": {
+      "extensions": ["GitHub.github-vscode-theme"],
+      "settings": {
+        "workbench.colorTheme": "GitHub Light Default",
+        "workbench.startupEditor": "none",
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        "markdown.styles": [".devcontainer/preview.css"]
+      }
+    }
+  }
+}

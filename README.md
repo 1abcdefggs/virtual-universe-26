@@ -17,11 +17,10 @@ Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai
 
 Click the button below to open a pre-configured Codespace with all the dependencies needed for the cookbooks in this section. 
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-238636?style=flat&logo=github&logoColor=white)](https://codespaces.new/octodemo/virtual-universe-26)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-238636?style=flat&logo=github&logoColor=white)](https://codespaces.new/octodemo/virtual-universe-26?quickstart=1)
 
-1. [Getting started with GitHub Issue Artifacts](./01-github-latest-features/getting-started-with-artifacts/): Create an issue with a screenshot, then preserve the bug report and agent investigation as Issue Artifacts.
-2. [Create your first stacked PR](./01-github-latest-features/create-your-first-stacked-pr/): Break a fix into small, dependent pull requests that are easier to review.
-3. [Create your first agentic workflow](./01-github-latest-features/create-your-first-agentic-workflow/): Explore an automated review workflow and follow a finding through to a fix.
+1. [Attach images to an issue](./01-github-latest-features/attach-images-to-an-issue/README.md): Add a screenshot to an issue from the terminal.
+2. [Create a stacked PR](./01-github-latest-features/create-a-stacked-pr/README.md): Split one change into small pull requests that build on each other.
 
 ### Manage your open source project
 

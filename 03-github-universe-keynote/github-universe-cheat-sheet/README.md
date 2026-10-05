@@ -7,8 +7,8 @@ with a terminal-friendly edition planned.
 
 | What you want to do | Where to start |
 | --- | --- |
-| Preserve an agent investigation | [Getting started with GitHub Issue Artifacts](../../01-github-latest-features/getting-started-with-artifacts/) |
-| Review a change in smaller pieces | [Create your first stacked PR](../../01-github-latest-features/create-your-first-stacked-pr/) |
+| Attach a screenshot to an issue | [Attach images to an issue](../../01-github-latest-features/attach-images-to-an-issue/) |
+| Review a change in smaller pieces | [Create a stacked PR](../../01-github-latest-features/create-a-stacked-pr/) |
 | Explore automated review | [Create your first agentic workflow](../../01-github-latest-features/create-your-first-agentic-workflow/) |
 | Automate an issue and a pull request | [Build your first Copilot automation](../../02-github-copilot-latest-features/build-your-first-copilot-automation/) |
 | Explore context across sessions | [Get started with Copilot Dreaming](../../02-github-copilot-latest-features/get-started-with-copilot-dreaming/) |
