@@ -36,11 +36,12 @@ Are you an open source maintainer? Check out the settings we've shipped to help 
 
 Click the button below to open the repository in Copilot App and confirm the new session to start a guided walkthrough of the cookbooks in this section.
 
-[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%2Foctodemo%2Fvirtual-universe-26%3Fmode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.%2520Do%2520not%2520change%2520files%2520until%2520I%2520choose%2520an%2520exercise.)
+[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.)
 
-1. [Build your first Copilot automation](./02-github-copilot-latest-features/build-your-first-copilot-automation/): Have an agent file an issue and propose a fix that exports a Word cheat sheet of the keynote highlights.
-2. [Get started with Copilot Dreaming](./02-github-copilot-latest-features/get-started-with-copilot-dreaming/): Explore how curated memories can carry useful context and preferences into future sessions.
-3. [Build your first Software Factory](./02-github-copilot-latest-features/build-your-first-software-factory/): Create a repeatable code-review workflow with security checks and human-approved improvements.
+1. **Skills:** Edit the [`issue-to-pr`](./.github/skills/issue-to-pr/SKILL.md) skill and run it with `/issue-to-pr`.
+2. **Tools:** Use `/agentfinder` to find an agent for CI/CD and GitHub Actions, then install a plugin.
+3. **Security review:** Run `/security-review` on the agent's pull request.
+4. **Automate:** Turn the skill into a paused software factory that runs when an issue is opened.
 
 ## Section 3: GitHub Universe Highlights
 

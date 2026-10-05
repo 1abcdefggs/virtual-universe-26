@@ -1,70 +1,305 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Universe '26 welcome</title>
 <style>
-:root{--g:#1f883d;--ink:#0d0d0d;--mute:#6e7781;--mono:"Monaspace Neon",ui-monospace,SFMono-Regular,Menlo,monospace}
+:root{--g:#1f883d;--ink:#0d0d0d;--mute:#59636e;--line:#d1d9e0;--mono:"Monaspace Neon","Mona Sans Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--ink);font-family:"Mona Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 .mono{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:28px 28px 22px;border-bottom:2px solid var(--g)}
 h1{margin:0;font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.1}
-.lede{padding:18px 28px;color:var(--mute);font-size:17px;line-height:1.5;border-bottom:2px solid var(--g);margin:0}
+.lede{padding:18px 28px;margin:0;border-bottom:2px solid var(--g)}
+.lede p{margin:0 0 10px;color:var(--mute);font-size:17px;line-height:1.5}
+.lede p:last-child{margin:0}
 .lede a{color:var(--g);font-weight:500}
 .lede b{color:var(--ink);font-weight:500}
-h2{margin:0;padding:18px 28px 0;font-size:20px;font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--g);margin-top:14px;border-top:2px solid var(--g)}
-.cell{all:unset;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;cursor:pointer;padding:18px 18px 20px;border-right:2px solid var(--g);opacity:0;transform:translateY(6px);animation:in .5s ease-out forwards;transition:background .2s}
-.cell:last-child{border-right:0}
-.cell:hover,.cell.on{background:#f6f8fa}
-.cell:focus-visible{outline:2px solid var(--g);outline-offset:-4px}
-.sq{width:40px;height:40px;display:grid;place-items:center;margin-bottom:14px;transition:transform .2s}
-.cell.on .sq{transform:scale(1.12)}
-.cell h3{margin:8px 0 0;font-size:17px;font-weight:500;line-height:1.3}
-@keyframes in{to{opacity:1;transform:none}}
-.detail{padding:16px 28px;min-height:96px;border-bottom:2px solid var(--g);display:grid;grid-template-columns:120px 1fr;gap:6px 16px;align-items:baseline}
-.detail p{margin:0;font-size:16px;line-height:1.45}
-.detail .ex{color:var(--mute)}
-.ex-list{display:grid;grid-template-columns:repeat(4,1fr)}
-.ex-btn{all:unset;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;cursor:pointer;padding:18px 20px;border-right:2px solid var(--g);transition:background .2s}
-.ex-btn:last-child{border-right:0}
-.ex-btn:focus-visible{outline:2px solid var(--g);outline-offset:-4px}
-.ex-btn:hover{background:#f6f8fa}
-.ex-btn strong{display:block;font-size:16px;font-weight:500;margin-top:6px}
-.ex-btn span.go{display:inline-block;margin-top:10px;font-size:13px;color:#fff;background:var(--g);padding:4px 10px;border-radius:999px}
-.ex-btn.sent span.go{background:var(--mute)}
-footer{padding:14px 28px;border-top:2px solid var(--g)}
-@media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.cell:nth-child(2){border-right:0}.cell:nth-child(-n+2){border-bottom:2px solid var(--g)}.ex-list{grid-template-columns:repeat(2,1fr)}.ex-btn:nth-child(2){border-right:0}.ex-btn:nth-child(-n+2){border-bottom:2px solid var(--g)}header{flex-direction:column;align-items:flex-start}}
+.def{margin:4px 0 16px;padding:12px 16px;border-left:3px solid var(--g);background:#f6f8fa}
+.def p{margin:6px 0 6px;color:var(--ink);font-size:17px;line-height:1.5}
+.lh{margin:0 0 6px!important;color:var(--ink)!important;font-weight:600;font-size:15px!important}
+.parts{margin:0;padding-left:20px;color:var(--mute);font-size:15px;line-height:1.7}
+.parts b{color:var(--ink);font-weight:600}
+.factory{display:grid;grid-template-columns:1fr 1fr}
+.chatcol{background:#f3f4f1;background-image:linear-gradient(#e7e8e4 1px,transparent 1px),linear-gradient(90deg,#e7e8e4 1px,transparent 1px);background-size:24px 24px;border-right:1px solid var(--line);padding:56px 32px}
+.list{padding:28px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--mute);margin-bottom:8px}
+h2{margin:0 0 20px;font-size:26px;font-weight:500;letter-spacing:-.01em}
+#acc{border-top:1px solid var(--line)}
+.item{border-bottom:1px solid var(--line)}
+.item>button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;padding:18px 0;font-weight:600;font-size:16px}
+.item>button:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.item>button::after{content:"";width:8px;height:8px;border-right:2px solid #1f2328;border-bottom:2px solid #1f2328;transform:rotate(45deg);margin:-4px 6px 0 0;transition:transform .2s}
+.item.on>button::after{transform:rotate(225deg);margin-top:6px}
+.panel{display:none;padding:0 0 22px}.item.on .panel{display:block}
+.desc{color:var(--mute);font-size:15px;line-height:1.6;margin:0 0 14px}
+.desc b{color:var(--ink);font-weight:600}
+.file{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.fh{padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px}
+pre{margin:0;padding:14px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;max-height:340px;overflow:auto;color:#1f2328}
+.k{color:#cf222e}.s{color:#0a3069}.c{color:#59636e}.h{color:#0550ae;font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.try{all:unset;cursor:pointer;background:var(--g);color:#fff;border-radius:6px;padding:9px 16px;font-size:14px;font-weight:600}
+.try:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.try.sent{background:var(--mute)}
+.hint{font-size:13px;color:var(--mute)}
+.you{display:flex;gap:12px;align-items:flex-start;justify-content:flex-end;margin-bottom:22px}
+.bubble{background:#fff;border:1px solid #d8dad4;border-radius:14px;padding:12px 18px;font-size:15px;line-height:1.45}
+.bubble small{display:block;color:var(--mute);font-size:12px;margin-bottom:4px}
+.bubble code{font-family:var(--mono);font-size:13px}
+.avatar{width:44px;height:44px;border-radius:50%;flex:none;object-fit:cover;background:#1f2328;box-shadow:0 0 0 2px #fff,0 0 0 3px #d8dad4}
+.cop{display:flex;gap:12px}
+.cop .ic{width:40px;flex:none;padding-top:6px}
+.cop h3{font-size:19px;font-weight:500;line-height:1.35;margin:2px 0 12px}
+.cop ul{list-style:none;padding:0;margin:12px 0 0;color:var(--mute);font-size:14px;line-height:1.9}
+.cop li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g);margin-right:10px}
+.card{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #d8dad4;border-radius:10px;padding:10px 14px;font-size:14px;background:#fafaf8}
+.card span{display:block;color:var(--mute);font-size:12px}
+.card .tag{border:1px solid var(--g);color:var(--g);border-radius:6px;padding:3px 10px;font-size:12px;flex:none}
+.fade{animation:f .35s ease}@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);height:40px;border-top:2px solid var(--g)}
+.inline-chat{display:none}
+#guide{max-width:820px;margin:0 auto;padding:24px 28px 40px}
+.back{all:unset;cursor:pointer;color:var(--g);font-weight:600;font-size:14px}
+.back:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+.ghead{border-bottom:2px solid var(--g);padding:18px 0 20px;margin-bottom:8px}
+.ghead h1{margin:8px 0 12px}
+.ghead p{margin:0;color:var(--mute);font-size:17px;line-height:1.5}
+.ghead code,.step code,.preview code{font-family:var(--mono);font-size:13px;background:#f6f8fa;padding:1px 5px;border-radius:4px}
+.meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.pill{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:20px;padding:3px 10px;color:var(--mute)}
+.preview{margin-top:14px;padding:10px 14px;border-left:3px solid #9a6700;background:#fff8c5;font-size:14px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{counter-increment:s;position:relative;padding:24px 0 8px 52px;border-bottom:1px solid var(--line)}
+.step::before{content:counter(s);position:absolute;left:0;top:22px;width:32px;height:32px;border-radius:50%;border:2px solid var(--g);color:var(--g);font-weight:600;display:grid;place-items:center;font-size:14px}
+.step h3{margin:4px 0 10px;font-size:19px;font-weight:600}
+.step>p{margin:0 0 12px;color:var(--mute);font-size:15px;line-height:1.6}
+.step>p b{color:var(--ink);font-weight:600}
+.step a{color:var(--g)}
+.block{margin:0 0 14px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bh{display:flex;justify-content:space-between;align-items:center;padding:6px 8px 6px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--mute);background:#f6f8fa}
+.copy{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;padding:3px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+.copy:focus-visible{outline:2px solid var(--g)}
+.chatblk .bh{background:#eef6ef}
+.chatblk pre{color:var(--g);font-weight:600}
+.add{display:block;background:#dafbe1}.del{display:block;background:#ffebe9}
+.note{margin:0 0 14px;padding:10px 14px;border-left:3px solid var(--g);background:#f6f8fa;font-size:14px;line-height:1.5}
+table.qa{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:14px}
+.qa td{border-top:1px solid var(--line);padding:9px 10px;vertical-align:top;line-height:1.5}
+.qa td:first-child{font-weight:600;width:36%;padding-left:0}
+.qa td code{font-family:var(--mono);font-size:12.5px}
+.done{margin-top:24px;padding:18px 20px;border:2px solid var(--g);border-radius:8px}
+.done p{margin:0 0 14px;font-size:16px;line-height:1.5}
+.ghost{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-size:14px;font-weight:600}
+.ghost:focus-visible{outline:2px solid var(--g)}
+.forkcard{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#f6f8fa}
+.forkcard.ok{border-color:var(--g);background:#eef6ef}
+.forkcard b{display:block;font-size:15px}
+.forkcard span{font-size:13px;color:var(--mute)}
+.forkcard code{font-family:var(--mono);font-size:13px}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+a.btn{text-decoration:none;cursor:pointer;background:var(--g);color:#fff!important;border-radius:6px;padding:7px 14px;font-size:13px;font-weight:600}
+a.btn.alt,button.btn{all:unset;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)!important;border-radius:6px;padding:6px 13px;font-size:13px;font-weight:600}
+a.btn.alt{display:inline-block}
+a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.forkerr{margin:-6px 0 14px!important;color:#cf222e!important;font-size:14px!important}
+.linkrow{display:inline-block;margin:0 8px 14px 0}
+.step a.open{font-family:"Mona Sans",-apple-system,"Segoe UI",sans-serif;text-decoration:none;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;background:var(--g);color:#fff;margin-right:6px}
+.step a.open:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.step a.open.off{background:#d0d7de;color:#59636e;pointer-events:none}
+@media (max-width:900px){.factory{grid-template-columns:1fr}.chatcol{display:none}.inline-chat{display:block;background:#f3f4f1;background-image:linear-gradient(#e7e8e4 1px,transparent 1px),linear-gradient(90deg,#e7e8e4 1px,transparent 1px);background-size:24px 24px;border:1px solid var(--line);border-radius:8px;padding:20px 16px;margin-bottom:16px}header{flex-direction:column;align-items:flex-start}}
+.shot{margin:14px 0;}.shot img{display:block;max-width:100%;border:1px solid var(--line,rgba(255,255,255,.15));border-radius:10px;}.shot figcaption{font-size:12px;opacity:.7;margin-top:6px;}
 </style></head>
 <body>
+<div id="home">
 <header><h1>Welcome to Agentic<br>Software Development</h1><div class="mono">Universe&#8217;26 &middot; Section 2</div></header>
-<p class="lede">In <a href="https://github.com/octodemo/virtual-universe-26/tree/main/01-github-latest-features" target="_blank" rel="noopener">Section 1</a> you <b>manually</b> created an issue and a stacked pull request with the GitHub CLI. In this section, an <b>agent automates that process</b> with Copilot automations, and takes on other critical parts of software development, like security review.</p>
-<h2>What you will learn</h2>
-<div class="grid" id="grid"></div>
-<div class="detail" aria-live="polite"><span class="mono" id="dl"></span><p id="dt"></p><span class="mono">You will use</span><p class="ex" id="de"></p></div>
-<h2 style="padding-bottom:4px">Choose where to start</h2>
-<div class="ex-list" style="margin-top:14px;border-top:2px solid var(--g)" id="ex"></div>
-<footer class="mono">Pick a chapter to start &middot; Copilot asks before it creates or changes anything</footer>
+<div class="lede">
+<p>In <a href="https://github.com/octodemo/virtual-universe-26/tree/main/01-github-latest-features" target="_blank" rel="noopener">Section 1</a> you <b>manually</b> created an issue and a stacked pull request with the GitHub CLI. In this section you'll learn some of the steps required to <b>build your own software factory</b>.</p>
+<blockquote class="def"><span class="mono">Software factory</span><p>A system of work where triggers, not humans, start agent sessions, so more work runs on its own and your time is saved for the decisions that need you.</p></blockquote>
+<p class="lh">What can go into a software factory</p>
+<p>Every software factory looks different. Here are some building blocks you can use:</p>
+<ul class="parts">
+<li><b>Skills</b> can teach the agent a job, like turning an issue into a fix.</li>
+<li><b>Tools</b> can give the agent more ways to do that job, like plugins, agents, or connectors.</li>
+<li><b>Reviews</b> can check the agent's work, for example for security issues.</li>
+<li><b>Triggers</b> can start the agent on their own, like a new issue, a schedule, or a failed CI run.</li>
+<li><b>People</b> decide where they step in, such as approving a pull request before it merges.</li>
+</ul>
+</div>
+<section class="factory">
+ <div class="chatcol" id="chat"></div>
+ <div class="list">
+  <div class="eyebrow">AGENTIC-SDLC()</div>
+  <h2>Build your own software factory</h2>
+  <div id="acc"></div>
+ </div>
+</section>
+</div>
+<main id="guide" hidden></main>
+<div class="strip"><div style="background:#4c8df6"></div><div style="background:#a78bfa"></div><div style="background:#3f8a3f"></div><div style="background:#d9d9d6"></div></div>
+<script src="walkthroughs.js"></script>
 <script>
-const steps=[
- {n:"01",l:"Automate",q:"Build your first Copilot automation",c:"#b388ff",i:'<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="none" stroke="#1a1424" stroke-width="2.5"/><path d="M11 6.5V11.5L14.5 13.5" stroke="#1a1424" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>',
-  t:"Turn the Section 1 issue and stacked pull request flow into a saved agent task with a trigger, a prompt, tools, and a result.",e:"Copilot automations, starting manual and read-only"},
- {n:"02",l:"Customize",q:"Customize an agent",c:"#f7347a",i:'<svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 6L10 11L5 16" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.5H17" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>',
-  t:"Find a specialist agent for the job and give it a richer surface to work in.",e:"Agent Finder and canvases"},
- {n:"03",l:"Connect",q:"Connect your agent",c:"#5fed83",i:'<svg width="22" height="22" viewBox="0 0 22 22"><rect x="8.5" y="3" width="5" height="16" fill="#c25100"/><rect x="3" y="8.5" width="16" height="5" fill="#c25100"/></svg>',
-  t:"Give your agent the tools and context it needs, and let Copilot pick the right model for each step.",e:"Copilot connectors, HydraFusion, and Auto mode"},
- {n:"04",l:"Review",q:"Review your agent\u2019s work",c:"#c25100",i:'<svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 11.5L9 15.5L17 6.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  t:"Check agent-written code for vulnerabilities before anything ships, and decide whether to ship or hold.",e:"The /security-review slash command"}];
-const ex=steps.map(s=>[s.n,s.q]);
-const g=document.getElementById("grid");let cur=0,auto=true;
-steps.forEach((s,k)=>{const b=document.createElement("button");b.className="cell";b.style.animationDelay=(.1+k*.15)+"s";
- b.innerHTML=`<div class="sq" style="background:${s.c}">${s.i}</div><div class="mono">${s.n} ${s.l}</div><h3>${s.q}</h3>`;
- b.onclick=()=>{auto=false;show(k)};b.onmouseenter=()=>{auto=false;show(k)};g.appendChild(b)});
-function show(k){cur=k;[...g.children].forEach((c,j)=>c.classList.toggle("on",j===k));
- dl.textContent=steps[k].n+" "+steps[k].l;dt.textContent=steps[k].t;de.textContent=steps[k].e}
-show(0);const tick=setInterval(()=>{if(!auto)return clearInterval(tick);show((cur+1)%4)},2600);
-const el=document.getElementById("ex");
-ex.forEach(([n,name])=>{const b=document.createElement("div");b.className="ex-btn";b.setAttribute("role","button");b.tabIndex=0;b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();b.click()}};
- b.innerHTML=`<div class="mono">Chapter ${n}</div><strong>${name}</strong><span class="go">Start in chat &rarr;</span>`;
- b.onclick=async()=>{b.classList.add("sent");b.querySelector(".go").textContent="Sent to chat";
-  await fetch("choose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({exercise:name})})};
- el.appendChild(b)});
+const COPILOT='<svg viewBox="0 0 48 44" width="40" height="37" aria-label="Copilot"><path fill="#4f46e5" d="M24 2c-6 0-10 2.2-12.6 4.6-3.6 1.3-5.6 4-5.6 8.6 0 .9.1 1.8.2 2.6-.6 1.2-1.1 2.4-1.4 3.3C2 22 .4 24.6 0 26.4V33c0 .5.2 1 .5 1.3C3 37.6 12.6 42 24 42s21-4.4 23.5-7.7c.3-.3.5-.8.5-1.3v-6.6c-.4-1.8-2-4.4-4.6-5.3-.3-.9-.8-2.1-1.4-3.3.1-.8.2-1.7.2-2.6 0-4.6-2-7.3-5.6-8.6C34 4.2 30 2 24 2Z"/><rect x="9.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="25.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="17" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/><rect x="27.4" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/></svg>';
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const tok=s=>s.split(/(`[^`]+`|"[^"]*")/).map((p,i)=>i%2?'<span class="s">'+esc(p)+'</span>':esc(p)).join('');
+const hl=s=>s.split('\n').map(l=>{if(l==='---')return '<span class="c">---</span>';if(/^#/.test(l))return '<span class="h">'+esc(l)+'</span>';const m=l.match(/^([\w-]+):(.*)$/);if(m)return '<span class="k">'+m[1]+'</span>:'+tok(m[2]);return tok(l)}).join('\n');
+const file=(p,c)=>`<div class="file"><div class="fh">${p}</div><pre>${hl(c)}</pre></div>`;
+const card=(t,d,a)=>`<div class="card"><div><b>${t}</b><span>${d}</span></div><div class="tag">${a}</div></div>`;
+const I=[
+{id:'skills',name:'Skills',
+ desc:'A skill teaches the agent one job. This one reads an issue, writes the smallest fix, and opens a draft pull request, using the same <code>gh</code> commands you ran in Section 1.',
+ file:['.github/skills/issue-to-pr/SKILL.md',`---
+name: issue-to-pr
+description: Read an open issue, propose a fix, and open a draft pull request.
+---
+
+# Issue to PR
+1. Read the issue: \`gh issue view <n>\`
+2. Branch: \`git switch -c fix/issue-<n>\`
+3. Make the smallest fix and run the tests.
+4. Open a draft PR: \`gh pr create --draft --body "Closes #<n>"\`
+
+## Rules
+- Never merge or approve. A person reviews the PR.
+- If the fix is unclear, ask on the issue instead.`],
+ you:'Can you turn new issues into suggested fixes for this repo?',
+ cop:'I read the issue, wrote the smallest fix, and opened a draft pull request for your review.',
+ steps:['Read issue #42 and the code it mentions','Wrote a fix and ran the tests','Opened draft PR #43 that closes #42']},
+{id:'tools',name:'Tools',
+ desc:'Ask <code>/agentfinder</code> for the tools your agent needs. It searches GitHub\u2019s Agent Finder and installs the plugin you choose.',
+ file:['plugins/repo-actions-hub/plugin.json',`{
+  "name": "repo-actions-hub",
+  "description": "Browse repository GitHub Actions workflows, inspect recent runs, and trigger manual workflow_dispatch runs from a Copilot canvas.",
+  "version": "1.0.2",
+  "author": { "name": "James Montemagno" },
+  "keywords": ["actions", "canvas", "github-actions", "recent-runs", "workflow-dispatch"],
+  "extensions": {
+    "com.github.awesome-copilot": {
+      "extensions": ["./extensions/repo-actions-hub"]
+    }
+  }
+}`],
+ you:'<code>/agentfinder</code> find an agent that can help with CI/CD pipelines and GitHub Actions workflows',
+ cop:'I found a match. Install it and your agent can check the workflows before it opens the pull request.',
+ extra:card('repo-actions-hub','Browse workflows, inspect runs, trigger workflow_dispatch','Install'),
+ steps:['Searched GitHub\u2019s Agent Finder','Matched CI/CD and GitHub Actions','Ready to install repo-actions-hub']},
+{id:'security',name:'Security review',
+ desc:'Run <code>/security-review</code> on the draft pull request. A dedicated review agent checks the changed lines for exploitable vulnerabilities and reports only high-confidence findings.',
+ file:['security-review.agent.yaml',`name: security-review
+displayName: Security Review Agent
+description: >
+  Performs security-focused code review to identify
+  high-confidence vulnerabilities in the diff.
+tools:
+  - "*"
+prompt: |
+  Identify HIGH-CONFIDENCE security vulnerabilities
+  in the modified and added lines of code.
+  1. MINIMIZE FALSE POSITIVES: only flag issues you
+     are more than 80% confident are exploitable.
+  2. FOCUS ON IMPACT: unauthorized access, data
+     breaches, or system compromise.
+  3. Skip style, performance, and theoretical issues.`],
+ you:'<code>/security-review</code>',
+ cop:'I checked the changed code for security risks and found one issue that needs your attention.',
+ extra:card('HIGH \u00b7 src/export.js:42','User input is passed to a shell command','Fix'),
+ steps:['Reviewed the diff and related code','Explained the finding with the affected line','Suggested a fix for your approval']},
+{id:'automate',name:'Automate',
+ desc:'Put it all together. The <b>worker</b> runs the skill on every new issue, the <b>assessment</b> checks the results each week, and <b>improvement</b> suggests changes for you to approve.',
+ file:['factory.json',`{
+  "worker": {
+    "name": "issue-to-pr",
+    "prompt": "/issue-to-pr then /security-review",
+    "triggers": { "issues": { "types": ["opened"] } },
+    "tools": ["gh", "repo-actions-hub"],
+    "requireActorWritePermission": true
+  },
+  "assessment": {
+    "name": "Weekly fix check",
+    "interval": "weekly"
+  },
+  "improvement": {
+    "name": "Suggest skill changes",
+    "interval": "manual"
+  },
+  "definition": {
+    "desiredOutcome": "Every new issue gets a reviewed draft PR",
+    "dimensions": ["pr_opened", "checks_passed", "security_clean"]
+  }
+}`],
+ you:'Run this for every new issue and tell me how it is doing.',
+ cop:'Your factory is ready. It starts paused, so you can review it before turning it on.',
+ steps:['Created the worker from /issue-to-pr','Added a weekly assessment','Left improvements for your approval']}];
+const chatHtml=t=>`<div class="you fade"><div class="bubble"><small>You</small>${t.you}</div><img class="avatar" src="mona.png" alt="Mona"></div>
+<div class="cop fade"><div class="ic">${COPILOT}</div><div class="bubble"><small style="font-family:var(--mono)">Copilot</small><h3>${t.cop}</h3>${t.extra||''}<ul>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ul></div></div>`;
+acc.innerHTML=I.map(t=>`<div class="item"><button aria-expanded="false">${t.name}</button><div class="panel">
+ <div class="inline-chat"></div>
+ <p class="desc">${t.desc}</p>${file(...t.file)}
+ <div class="actions"><button class="try" data-id="${t.id}">Try this example &rarr;</button><span class="hint">Opens a step-by-step guide.</span></div></div></div>`).join('');
+const items=[...document.querySelectorAll('.item')];
+function show(k){items.forEach((e,i)=>{e.classList.toggle('on',i===k);e.querySelector('button').setAttribute('aria-expanded',i===k)});
+ const h=chatHtml(I[k]);chat.innerHTML=h;items[k].querySelector('.inline-chat').innerHTML=h;}
+items.forEach((e,i)=>e.querySelector('button').onclick=()=>show(i));
+document.querySelectorAll('.try').forEach(b=>b.onclick=()=>{location.hash='#/'+b.dataset.id});
+const label={term:'Terminal',chat:'Copilot chat'};
+const diff=s=>s.split('\n').map(l=>l[0]==='+'?'<span class="add">'+esc(l)+'</span>':l[0]==='-'?'<span class="del">'+esc(l)+'</span>':esc(l)+'\n').join('');
+let ME=null,JUST=false;
+// DEMO: "Fork and open project" skips the real fork, shows the fork as created, and opens the event repository.
+const DEMO=true;
+const demoMe=m=>({...m,fork:(m&&m.login||'mona')+'/virtual-universe-26',repo:m&&m.upstream||'octodemo/virtual-universe-26',issues:true,demo:true});
+window.go=u=>{location.href=u};
+const enc=encodeURIComponent;
+const fill=s=>{const f=ME&&ME.fork||(ME&&ME.login||'YOUR-USERNAME')+'/virtual-universe-26';return s.replace(/\{fork\}/g,f).replace(/\{login\}/g,ME&&ME.login||'YOUR-USERNAME').replace(/\{issue\}/g,ME&&ME.issue?' '+ME.issue:'').replace(/\{pr\}/g,ME&&ME.pr||'')};
+const sessionLink=(prompt,pr)=>{if(!ME||!ME.fork)return null;let q='repo='+enc(ME.repo||ME.fork);if(pr){if(!ME.pr)return null;q+='&pr='+ME.pr}return 'ghapp://session/new?'+q+'&mode=interactive&prompt='+enc(prompt)};
+function forkCard(){
+ if(!ME)return `<div class="forkcard"><div><b>Checking your GitHub account&hellip;</b></div></div>`;
+ if(!ME.login)return `<div class="forkcard"><div><b>Sign in to the GitHub CLI</b><span>Run <code>gh auth login</code>, then check again.</span></div><div class="btns"><button class="btn" data-refresh>Check again</button></div></div>`;
+ if(!ME.fork)return `<div class="forkcard"><div><b>No fork yet, @${ME.login}</b><span>One click forks <code>${ME.upstream}</code> to your account and opens it as a project in the Copilot app.</span></div><div class="btns"><a class="btn" href="#" data-forkopen>Fork and open project</a><button class="btn" data-refresh>Check again</button></div></div><p class="forkerr" hidden></p>`;
+ const issuesOff=ME.issues===false?`<div class="note">Forks start with issues turned off. Turn them on: <code>gh repo edit ${ME.fork} --enable-issues</code> <button class="btn" data-refresh>Check again</button></div>`:'';
+ return `<div class="forkcard ok"><div><b>&#10003; Your fork: <code>${ME.fork}</code></b><span>${JUST?'Fork created. Opening the project in the Copilot app.':'Links and commands in these guides use it.'}</span></div><div class="btns"><a class="btn" href="ghapp://github.com/${ME.repo||ME.fork}">Open in Copilot app</a><a class="btn alt" href="https://github.com/${ME.repo||ME.fork}" target="_blank" rel="noopener">View on GitHub</a></div></div>${issuesOff}`;
+}
+const blk=b=>{
+ if(typeof b==='string')return `<p>${fill(b)}</p>`;
+ if(b.fork)return forkCard();
+ if(b.link){if(b.link.needs&&!(ME&&ME[b.link.needs]))return '';const hr=fill(b.link.href);const ext=hr.startsWith('http');return `<div class="linkrow"><a class="btn${ext?' alt':''}" href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
+ if(b.img)return `<figure class="shot"><img src="${b.img.src}" alt="${b.img.alt}"><figcaption>${b.img.alt}</figcaption></figure>`;
+ if(b.note)return `<div class="note">${fill(b.note)}</div>`;
+ if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${fill(r[0])}</td><td>${fill(r[1])}</td></tr>`).join('')}</table>`;
+ const text=fill(b.text);
+ const body=b.k==='diff'?diff(text):b.k==='file'?hl(text):esc(text);
+ let open='';
+ if(b.k==='chat'&&!b.noOpen){const l=sessionLink(text,b.pr);open=!l&&ME&&ME.login&&!ME.fork&&!b.pr?`<a class="open" href="#" data-forkopen data-prompt="${enc(text)}" title="Forks the repository to your account, then starts a session in it">Open in Copilot app</a>`:l?`<a class="open" href="${l}" title="Start a session in ${ME.fork}${b.pr?' on pull request #'+ME.pr:''}">Open in Copilot app</a>`:`<a class="open off" title="${b.pr?'Open a pull request in your fork first':'Fork the repository first'}">Open in Copilot app</a>`}
+ return `<div class="block ${b.k==='chat'?'chatblk':''}"><div class="bh"><span>${b.label||label[b.k]}</span><span>${open}<button class="copy" data-t="${enc(b.k==='diff'?text.split('\n').filter(l=>l[0]!=='-').map(l=>l.slice(1)).join('\n'):text)}">Copy</button></span></div><pre>${body}</pre></div>`};
+function copy(t){const done=()=>true;if(navigator.clipboard)return navigator.clipboard.writeText(t).then(done,()=>fallback(t));return Promise.resolve(fallback(t))}
+function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();return ok}
+async function loadMe(force){let v;try{v=await (await fetch('me'+(force?'?refresh=1':''),{cache:'no-store'})).json()}catch{v={login:null}}if(JUST&&ME&&ME.fork&&!v.fork)return;ME=v;if(DEMO&&sessionStorage.demoForked&&!v.fork){ME=demoMe(v);JUST=true}}
+function rerender(){const y=scrollY;route(true);scrollTo(0,y)}
+function route(keep){
+ const id=location.hash.slice(2),w=window.WALK&&WALK[id];
+ home.hidden=!!w;guide.hidden=!w;
+ if(!w){return}
+ const i=I.findIndex(t=>t.id===id);
+ guide.innerHTML=`<button class="back">&larr; Build your own software factory</button>
+ <div class="ghead"><div class="mono">${w.eyebrow}</div><h1>${w.title}</h1><p>${w.intro}</p>
+ <div class="meta"><span class="pill">${w.time}</span><span class="pill">${w.steps.length} steps</span><span class="pill">Part ${i+1} of ${I.length}</span></div>
+ ${w.preview?`<div class="preview">${w.preview}</div>`:''}</div>
+ <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${fill(s.h)}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
+ <div class="done"><p>${w.done}</p><div class="actions" style="margin-top:0">
+ ${w.next?`<button class="try" data-next="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:''}
+ <button class="ghost" data-help="${id}">Stuck? Ask Copilot in chat</button></div></div>`;
+ guide.querySelector('.back').onclick=()=>{location.hash='';};
+ guide.querySelectorAll('.copy').forEach(c=>c.onclick=async()=>{const ok=await copy(decodeURIComponent(c.dataset.t));c.textContent=ok===false?'Select and copy':'Copied';setTimeout(()=>c.textContent='Copy',1600)});
+ const n=guide.querySelector('[data-next]');if(n)n.onclick=()=>{location.hash='#/'+n.dataset.next};
+ const hb=guide.querySelector('[data-help]');hb.onclick=async()=>{hb.textContent='Sent to chat';hb.disabled=true;
+  await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})})};
+ guide.querySelectorAll('[data-forkopen]').forEach(a=>a.onclick=async e=>{e.preventDefault();
+  if(DEMO){ME=demoMe(ME);JUST=true;sessionStorage.demoForked=1;const t=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.repo;rerender();window.go(t);return}
+  if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Creating your fork\u2026';
+  let r;try{r=await (await fetch('fork',{method:'POST'})).json()}catch{r={error:'Could not reach the canvas. Try again.'}}
+  if(r.error||!r.fork){a.textContent='Try again';delete a.dataset.busy;const er=guide.querySelector('.forkerr');if(er){er.hidden=false;er.textContent=r.error||'Something went wrong.'}else alert(r.error);return}
+  ME=r;JUST=true;const target=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.fork;rerender();window.go(target)});
+ guide.querySelectorAll('[data-refresh]').forEach(r=>r.onclick=async()=>{r.textContent='Checking\u2026';await loadMe(true);rerender()});
+ if(!keep)window.scrollTo(0,0);
+}
+addEventListener('focus',()=>{if(!guide.hidden)loadMe().then(rerender)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!guide.hidden)loadMe().then(rerender)});
+addEventListener('hashchange',()=>{route();if(!location.hash){const k=items.findIndex(e=>e.classList.contains('on'));items[k]&&items[k].scrollIntoView({block:'center'})}});
+show(0);route();loadMe().then(()=>{if(!guide.hidden)rerender()});
 </script></body></html>

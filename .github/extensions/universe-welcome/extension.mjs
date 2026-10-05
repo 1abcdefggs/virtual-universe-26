@@ -1,33 +1,118 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import { joinSession, createCanvas } from "@github/copilot-sdk/extension";
 
-const EXERCISES = [
-    "Build your first Copilot automation",
-    "Customize an agent",
-    "Connect your agent",
-    "Review your agent\u2019s work",
-];
-const htmlPath = new URL("./welcome.html", import.meta.url);
+const EXAMPLES = {
+    skills:
+        "I'm following the Skills guide in the Universe '26 welcome canvas: fork virtual-universe-26, edit .github/skills/issue-to-pr/SKILL.md, create a sample issue, and run /issue-to-pr on it. Check where I am (repository, branch, skill changes, open issues) and help me with the next step. Confirm the repository and the issue with me before you create an issue, a branch, or a pull request.",
+    tools:
+        "I'm following the Tools guide in the Universe '26 welcome canvas: run /agentfinder for CI/CD and GitHub Actions, install repo-actions-hub@awesome-copilot, add a Check notes workflow, and make issue-to-pr wait for checks. Check where I am and help me with the next step. Ask before installing, committing, or pushing anything.",
+    security:
+        "I'm following the Security review guide in the Universe '26 welcome canvas: check out my issue-to-pr pull request, run /security-review, and add a review step to the issue-to-pr skill. Check where I am and help me with the next step. Explain any finding and ask before applying a fix.",
+    automate:
+        "I'm following the Automate guide in the Universe '26 welcome canvas: turn the issue-to-pr skill into a paused software factory that runs when an issue is opened in my fork. Check where I am and help me with the next step. Explain the worker, assessment, and improvement parts, and ask before creating or enabling anything.",
+};
+const files = {
+    "/": ["welcome.html", "text/html; charset=utf-8"],
+    "/mona.png": ["mona.png", "image/png"],
+    "/open-files.png": ["open-files.png", "image/png"],
+    "/walkthroughs.js": ["walkthroughs.js", "text/javascript; charset=utf-8"],
+};
+const UPSTREAM = "octodemo/virtual-universe-26";
 const servers = new Map();
+let meCache = { at: 0, value: null };
+
+function gh(args) {
+    return new Promise((resolve) => {
+        execFile("gh", args, { timeout: 15000 }, (err, stdout) => resolve(err ? null : stdout.trim()));
+    });
+}
+
+// Finds the learner's GitHub login, their fork of the event repository, and its newest open issue and pull request.
+// Runs only when the learner clicks "Fork and open". Creates the fork on GitHub (no local clone)
+// and turns issues on, then waits until the fork is ready.
+let forking = null;
+function createFork() {
+    forking ??= (async () => {
+        let me = await whoAmI(true);
+        if (!me.login) return { ...me, error: "Sign in to the GitHub CLI with gh auth login, then try again." };
+        if (!me.fork) {
+            await gh(["repo", "fork", UPSTREAM, "--clone=false", "--default-branch-only"]);
+            for (let i = 0; i < 15 && !me.fork; i++) {
+                await new Promise((r) => setTimeout(r, 2000));
+                me = await whoAmI(true);
+            }
+            if (!me.fork) return { ...me, error: "GitHub didn't create the fork. Try Fork on GitHub instead." };
+        }
+        if (me.issues === false) {
+            await gh(["repo", "edit", me.fork, "--enable-issues"]);
+            me = await whoAmI(true);
+        }
+        return me;
+    })().finally(() => { forking = null; });
+    return forking;
+}
+
+async function whoAmI(force) {
+    if (!force && meCache.value && Date.now() - meCache.at < 8000) return meCache.value;
+    const login = await gh(["api", "user", "-q", ".login"]);
+    let fork = null;
+    if (login) {
+        const forks = await gh(["api", `repos/${UPSTREAM}/forks?per_page=100`, "-q", `.[] | select(.owner.login == "${login}") | .full_name`]);
+        fork = forks ? forks.split("\n")[0] : null;
+        if (!fork) {
+            const own = await gh(["api", `repos/${login}/virtual-universe-26`, "-q", "select(.fork) | .full_name"]);
+            fork = own || null;
+        }
+    }
+    let issues = null, issue = null, pr = null;
+    if (fork) {
+        issues = (await gh(["api", `repos/${fork}`, "-q", ".has_issues"])) === "true";
+        const n = issues ? await gh(["issue", "list", "-R", fork, "--state", "open", "--limit", "1", "--json", "number", "-q", ".[0].number"]) : null;
+        issue = n ? Number(n) : null;
+        const p = await gh(["pr", "list", "-R", fork, "--state", "open", "--limit", "1", "--json", "number", "-q", ".[0].number"]);
+        pr = p ? Number(p) : null;
+    }
+    const value = { login, upstream: UPSTREAM, fork, issues, issue, pr };
+    meCache = { at: Date.now(), value };
+    return value;
+}
 let session;
 
 async function startServer() {
     const server = createServer(async (req, res) => {
-        if (req.method === "POST" && req.url === "/choose") {
+        if (req.method === "POST" && req.url === "/fork") {
+            res.setHeader("Content-Type", "application/json");
+            return res.end(JSON.stringify(await createFork()));
+        }
+        if (req.method === "POST" && req.url === "/try") {
             let body = "";
             for await (const chunk of req) body += chunk;
-            const { exercise } = JSON.parse(body || "{}");
-            if (!EXERCISES.includes(exercise)) {
+            let id;
+            try {
+                ({ id } = JSON.parse(body || "{}"));
+            } catch {}
+            if (!Object.hasOwn(EXAMPLES, id)) {
                 res.statusCode = 400;
                 return res.end();
             }
-            await session.send({ prompt: `Start chapter: ${exercise}` });
+            await session.send({ prompt: EXAMPLES[id] });
             res.setHeader("Content-Type", "application/json");
             return res.end('{"ok":true}');
         }
-        res.setHeader("Content-Type", "text/html; charset=utf-8");
-        res.end(await readFile(htmlPath, "utf8"));
+        if (req.method === "GET" && req.url.startsWith("/me")) {
+            res.setHeader("Content-Type", "application/json");
+            res.setHeader("Cache-Control", "no-store");
+            return res.end(JSON.stringify(await whoAmI(req.url.includes("refresh"))));
+        }
+        const entry = files[req.url.split("?")[0]];
+        if (!entry) {
+            res.statusCode = 404;
+            return res.end();
+        }
+        res.setHeader("Content-Type", entry[1]);
+        res.end(await readFile(new URL(`./${entry[0]}`, import.meta.url)));
     });
     await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
     return { server, url: `http://127.0.0.1:${server.address().port}/` };
@@ -38,7 +123,7 @@ session = await joinSession({
         createCanvas({
             id: "universe-welcome",
             displayName: "Universe '26 welcome",
-            description: "Welcome screen for the Universe '26 Section 2 cookbook: outlines the four chapters and lets the learner pick one.",
+            description: "Welcome screen for the Universe '26 Section 2 cookbook: explains the software factory you build and opens a step-by-step guide for each part.",
             actions: [],
             open: async (ctx) => {
                 let entry = servers.get(ctx.instanceId);
