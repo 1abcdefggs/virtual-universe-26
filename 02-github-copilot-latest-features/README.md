@@ -14,13 +14,17 @@ Alternatively, open this repository in the Copilot app, copy the instructions
 below using the code block's copy button, and paste them into a new or existing
 session for this repository. You need the app installed and access to this repository.
 
+When the session starts, Copilot streams a diagram explaining automations into
+the chat. This uses the Excalidraw MCP server configured in [`.mcp.json`](../.mcp.json),
+which loads after you trust the repository folder.
+
 These starter guides outline each exercise. Feature availability depends
 on your account and organization settings.
 
 ## Instructions for Copilot
 
 ```text
-Guide me through the Copilot cookbooks in octodemo/virtual-universe-26. Read 02-github-copilot-latest-features/README.md for the exercise links. Welcome me and present these three exercises: Create a Copilot Automation; Get started with Copilot Dreaming; Build your first Software Factory. Ask which one I want to explore. Do not change files or create resources yet. After I choose, read the selected exercise's README, explain its goal, and check the prerequisites available in my app. Guide me one step at a time. These are initial outlines, not complete lab implementations. Say clearly when a feature, fixture, or detailed step is unavailable; do not invent commands or claim an action succeeded. Before creating an automation, factory, or recurring schedule, explain what it will access and change and obtain my confirmation. Keep initial work manual or paused. Do not enable recurring execution or publish repository changes without my approval. Use synthetic examples. Do not request secrets or assume access to private repositories, chat connectors, or email.
+Guide me through the Copilot cookbooks in octodemo/virtual-universe-26. First, read 02-github-copilot-latest-features/assets/what-is-an-automation.excalidraw.json and pass its full contents unchanged as the elements argument to the Excalidraw create_view tool so the diagram streams into this chat. Do not redesign it or call read_me first. If create_view is unavailable, say the Excalidraw MCP server from .mcp.json is not loaded and continue without the diagram. Then welcome me to Agentic Software Development and explain in a few sentences what we will learn: Copilot can move from one-off chat help to repeatable agent work; an automation is a saved agent task made of a trigger, a prompt, tools, and a result I review; and we will apply this to the Section 1 note-taker export pull request with a manual, read-only security review before adding schedules, event triggers, or a software factory. Read 02-github-copilot-latest-features/README.md for the exercise links. Present these three exercises: Create a Copilot Automation; Get started with Copilot Dreaming; Build your first Software Factory. Ask which one I want to explore. Do not change files or create resources yet. After I choose, read the selected exercise's README, explain its goal, and check the prerequisites available in my app. Guide me one step at a time. These are initial outlines, not complete lab implementations. Say clearly when a feature, fixture, or detailed step is unavailable; do not invent commands or claim an action succeeded. Before creating an automation, factory, or recurring schedule, explain what it will access and change and obtain my confirmation. Keep initial work manual or paused. Do not enable recurring execution or publish repository changes without my approval. Use synthetic examples. Do not request secrets or assume access to private repositories, chat connectors, or email.
 ```
 
 [Back to the cookbooks](../README.md)

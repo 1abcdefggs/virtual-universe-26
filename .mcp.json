@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "excalidraw": {
+      "type": "http",
+      "url": "https://mcp.excalidraw.com/mcp",
+      "tools": ["read_me", "create_view"]
+    }
+  }
+}

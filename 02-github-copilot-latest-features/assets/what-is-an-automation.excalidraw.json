@@ -1,0 +1,23 @@
+[
+{"type":"cameraUpdate","width":600,"height":450,"x":100,"y":-40},
+{"type":"text","id":"title","x":195,"y":20,"text":"What is a Copilot automation?","fontSize":28,"strokeColor":"#1e1e1e"},
+{"type":"text","id":"subtitle","x":100,"y":66,"text":"A saved agent task that runs manually, on a schedule, or after a GitHub event","fontSize":16,"strokeColor":"#757575"},
+{"type":"cameraUpdate","width":800,"height":600,"x":0,"y":-10},
+{"type":"rectangle","id":"trigger","x":25,"y":130,"width":150,"height":120,"roundness":{"type":3},"backgroundColor":"#ffd8a8","fillStyle":"solid","strokeColor":"#f59e0b","label":{"text":"1. Trigger\nWhen should\nit run?","fontSize":18}},
+{"type":"arrow","id":"a1","x":175,"y":190,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"trigger","fixedPoint":[1,0.5]},"endBinding":{"elementId":"prompt","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"prompt","x":225,"y":130,"width":150,"height":120,"roundness":{"type":3},"backgroundColor":"#a5d8ff","fillStyle":"solid","strokeColor":"#4a9eed","label":{"text":"2. Prompt\nWhat should\nCopilot do?","fontSize":18}},
+{"type":"arrow","id":"a2","x":375,"y":190,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"prompt","fixedPoint":[1,0.5]},"endBinding":{"elementId":"tools","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"tools","x":425,"y":130,"width":150,"height":120,"roundness":{"type":3},"backgroundColor":"#d0bfff","fillStyle":"solid","strokeColor":"#8b5cf6","label":{"text":"3. Tools\nWhat can it\nread or change?","fontSize":18}},
+{"type":"arrow","id":"a3","x":575,"y":190,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"tools","fixedPoint":[1,0.5]},"endBinding":{"elementId":"result","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"result","x":625,"y":130,"width":150,"height":120,"roundness":{"type":3},"backgroundColor":"#b2f2bb","fillStyle":"solid","strokeColor":"#22c55e","label":{"text":"4. Result\nWhere do I\nreview it?","fontSize":18}},
+{"type":"rectangle","id":"zone","x":15,"y":290,"width":770,"height":190,"roundness":{"type":3},"backgroundColor":"#fff3bf","fillStyle":"solid","strokeColor":"#f59e0b","strokeWidth":1,"strokeStyle":"dashed","opacity":60},
+{"type":"text","id":"zonelabel","x":35,"y":302,"text":"Example: the Section 1 note-taker","fontSize":18,"strokeColor":"#b45309"},
+{"type":"rectangle","id":"e1","x":25,"y":350,"width":150,"height":100,"roundness":{"type":3},"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":"#f59e0b","label":{"text":"Export PR\nopened","fontSize":16}},
+{"type":"arrow","id":"b1","x":175,"y":400,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e1","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e2","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"e2","x":225,"y":350,"width":150,"height":100,"roundness":{"type":3},"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":"#4a9eed","label":{"text":"Review exports\nfor security\nrisks","fontSize":16}},
+{"type":"arrow","id":"b2","x":375,"y":400,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e2","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e3","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"e3","x":425,"y":350,"width":150,"height":100,"roundness":{"type":3},"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":"#8b5cf6","label":{"text":"Read-only\nreview tools","fontSize":16}},
+{"type":"arrow","id":"b3","x":575,"y":400,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e3","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e4","fixedPoint":[0,0.5]}},
+{"type":"rectangle","id":"e4","x":625,"y":350,"width":150,"height":100,"roundness":{"type":3},"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":"#22c55e","label":{"text":"Ship or hold\nsummary","fontSize":16}},
+{"type":"text","id":"footer","x":100,"y":505,"text":"Start manual and read-only. Add a schedule or event trigger after it works.","fontSize":16,"strokeColor":"#15803d"}
+]
