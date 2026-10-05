@@ -1,0 +1,69 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Universe '26 welcome</title>
+<style>
+:root{--g:#1f883d;--ink:#0d0d0d;--mute:#6e7781;--mono:"Monaspace Neon",ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Mona Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:28px 28px 22px;border-bottom:2px solid var(--g)}
+h1{margin:0;font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.1}
+.lede{padding:18px 28px;color:var(--mute);font-size:17px;line-height:1.5;border-bottom:2px solid var(--g);margin:0}
+.lede b{color:var(--ink);font-weight:500}
+h2{margin:0;padding:18px 28px 0;font-size:20px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--g);margin-top:14px;border-top:2px solid var(--g)}
+.cell{all:unset;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;cursor:pointer;padding:18px 18px 20px;border-right:2px solid var(--g);opacity:0;transform:translateY(6px);animation:in .5s ease-out forwards;transition:background .2s}
+.cell:last-child{border-right:0}
+.cell:hover,.cell.on{background:#f6f8fa}
+.cell:focus-visible{outline:2px solid var(--g);outline-offset:-4px}
+.sq{width:40px;height:40px;display:grid;place-items:center;margin-bottom:14px;transition:transform .2s}
+.cell.on .sq{transform:scale(1.12)}
+.cell h3{margin:8px 0 0;font-size:17px;font-weight:500}
+@keyframes in{to{opacity:1;transform:none}}
+.detail{padding:16px 28px;min-height:96px;border-bottom:2px solid var(--g);display:grid;grid-template-columns:120px 1fr;gap:6px 16px;align-items:baseline}
+.detail p{margin:0;font-size:16px;line-height:1.45}
+.detail .ex{color:var(--mute)}
+.ex-list{display:grid;grid-template-columns:repeat(3,1fr)}
+.ex-btn{all:unset;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;cursor:pointer;padding:18px 20px;border-right:2px solid var(--g);transition:background .2s}
+.ex-btn:last-child{border-right:0}
+.ex-btn:focus-visible{outline:2px solid var(--g);outline-offset:-4px}
+.ex-btn:hover{background:#f6f8fa}
+.ex-btn strong{display:block;font-size:16px;font-weight:500;margin-top:6px}
+.ex-btn span.go{display:inline-block;margin-top:10px;font-size:13px;color:#fff;background:var(--g);padding:4px 10px;border-radius:999px}
+.ex-btn.sent span.go{background:var(--mute)}
+footer{padding:14px 28px;border-top:2px solid var(--g)}
+@media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.cell:nth-child(2){border-right:0}.cell:nth-child(-n+2){border-bottom:2px solid var(--g)}.ex-list{grid-template-columns:1fr}.ex-btn{border-right:0;border-bottom:2px solid var(--g)}header{flex-direction:column;align-items:flex-start}}
+</style></head>
+<body>
+<header><h1>Welcome to Agentic<br>Software Development</h1><div class="mono">Universe&#8217;26 &middot; Section 2</div></header>
+<p class="lede">In Section 1 you fixed the note-taker with <b>one-off agent help</b>. Now you will turn that help into <b>repeatable agent work</b>: an automation that reviews the next export pull request for security risks.</p>
+<h2>What is a Copilot automation?</h2>
+<div class="grid" id="grid"></div>
+<div class="detail" aria-live="polite"><span class="mono" id="dl">Trigger</span><p id="dt"></p><span class="mono">Example</span><p class="ex" id="de"></p></div>
+<h2 style="padding-bottom:4px">Choose where to start</h2>
+<div class="ex-list" style="margin-top:14px;border-top:2px solid var(--g)" id="ex"></div>
+<footer class="mono">Start manual and read-only &middot; add a schedule or event trigger after it works</footer>
+<script>
+const steps=[
+ {n:"01",l:"Trigger",q:"When does it run?",c:"#b388ff",i:'<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="none" stroke="#1a1424" stroke-width="2.5"/><path d="M11 6.5V11.5L14.5 13.5" stroke="#1a1424" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>',
+  t:"Manually, on a schedule, or after a GitHub event such as a pull request being opened.",e:"Manual for today. Later: run when an export pull request opens."},
+ {n:"02",l:"Prompt",q:"What should it do?",c:"#f7347a",i:'<svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 6L10 11L5 16" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.5H17" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>',
+  t:"The instructions Copilot follows on every run. Clear scope makes results easy to trust.",e:"Review export code for security risks and report file, line, and severity."},
+ {n:"03",l:"Tools",q:"What can it touch?",c:"#5fed83",i:'<svg width="22" height="22" viewBox="0 0 22 22"><rect x="8.5" y="3" width="5" height="16" fill="#c25100"/><rect x="3" y="8.5" width="16" height="5" fill="#c25100"/></svg>',
+  t:"The files, commands, and services the automation is allowed to use.",e:"Read-only: read the code and diff. No edits, comments, labels, or merges."},
+ {n:"04",l:"Result",q:"How do I review it?",c:"#c25100",i:'<svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 11.5L9 15.5L17 6.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  t:"A summary, comment, or pull request you check before anything ships.",e:"A ship or hold summary you read in the session."}];
+const ex=[["01","Create a Copilot Automation"],["02","Get started with Copilot Dreaming"],["03","Build your first Software Factory"]];
+const g=document.getElementById("grid");let cur=0,auto=true;
+steps.forEach((s,k)=>{const b=document.createElement("button");b.className="cell";b.style.animationDelay=(.1+k*.15)+"s";
+ b.innerHTML=`<div class="sq" style="background:${s.c}">${s.i}</div><div class="mono">${s.n} ${s.l}</div><h3>${s.q}</h3>`;
+ b.onclick=()=>{auto=false;show(k)};b.onmouseenter=()=>{auto=false;show(k)};g.appendChild(b)});
+function show(k){cur=k;[...g.children].forEach((c,j)=>c.classList.toggle("on",j===k));
+ dl.textContent=steps[k].l;dt.textContent=steps[k].t;de.textContent=steps[k].e}
+show(0);const tick=setInterval(()=>{if(!auto)return clearInterval(tick);show((cur+1)%4)},2600);
+const el=document.getElementById("ex");
+ex.forEach(([n,name])=>{const b=document.createElement("div");b.className="ex-btn";b.setAttribute("role","button");b.tabIndex=0;b.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();b.click()}};
+ b.innerHTML=`<div class="mono">Exercise ${n}</div><strong>${name}</strong><span class="go">Start in chat &rarr;</span>`;
+ b.onclick=async()=>{b.classList.add("sent");b.querySelector(".go").textContent="Sent to chat";
+  await fetch("choose",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({exercise:name})})};
+ el.appendChild(b)});
+</script></body></html>
