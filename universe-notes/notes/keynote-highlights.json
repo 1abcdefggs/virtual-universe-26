@@ -1,0 +1,12 @@
+{
+  "event": "GitHub Universe '26 keynote",
+  "note": "Sample notes for the cookbook. Replace them with your own notes from the keynote.",
+  "highlights": [
+    { "topic": "The modern GitHub experience", "title": "AI overview tab", "summary": "A repository tab that summarizes what is happening and where to start.", "tryIt": "Open a repository and select the overview tab." },
+    { "topic": "The modern GitHub experience", "title": "Media in issues from the CLI", "summary": "Attach screenshots and recordings when you create issues and pull requests.", "tryIt": "gh issue create --attach screenshot.png" },
+    { "topic": "The modern GitHub experience", "title": "Stacked pull requests", "summary": "Split a change into small dependent pull requests that are easier to review.", "tryIt": "gh stack" },
+    { "topic": "Open source maintainers", "title": "Contribution controls", "summary": "Set participation boundaries, manage the queue, and limit open pull requests.", "tryIt": "Repository settings > General > Pull requests" },
+    { "topic": "Agentic software development", "title": "Copilot automations", "summary": "Save an agent task with a trigger, a prompt, tools, and a result to review.", "tryIt": "Copilot app > Automations > New automation" },
+    { "topic": "Agentic software development", "title": "Security review", "summary": "Ask Copilot to check agent-written code for vulnerabilities before it ships.", "tryIt": "/security-review" }
+  ]
+}

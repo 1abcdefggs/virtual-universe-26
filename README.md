@@ -39,7 +39,7 @@ Click the button below to open the repository in Copilot App and confirm the new
 
 [![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%2Foctodemo%2Fvirtual-universe-26%3Fmode%3Dinteractive%26prompt%3DRead%252002-github-copilot-latest-features%252FREADME.md%2520and%2520follow%2520its%2520instructions%2520to%2520guide%2520me%2520through%2520the%2520Copilot%2520cookbook.%2520Do%2520not%2520change%2520files%2520until%2520I%2520choose%2520an%2520exercise.)
 
-1. [Create a Copilot Automation](./02-github-copilot-latest-features/create-a-copilot-automation/): Connect the dots across code and documentation to identify what needs updating.
+1. [Build your first Copilot automation](./02-github-copilot-latest-features/build-your-first-copilot-automation/): Have an agent file an issue and propose a fix that exports a Word cheat sheet of the keynote highlights.
 2. [Get started with Copilot Dreaming](./02-github-copilot-latest-features/get-started-with-copilot-dreaming/): Explore how curated memories can carry useful context and preferences into future sessions.
 3. [Build your first Software Factory](./02-github-copilot-latest-features/build-your-first-software-factory/): Create a repeatable code-review workflow with security checks and human-approved improvements.
 

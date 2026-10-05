@@ -10,7 +10,7 @@ with a terminal-friendly edition planned.
 | Preserve an agent investigation | [Getting started with GitHub Issue Artifacts](../../01-github-latest-features/getting-started-with-artifacts/) |
 | Review a change in smaller pieces | [Create your first stacked PR](../../01-github-latest-features/create-your-first-stacked-pr/) |
 | Explore automated review | [Create your first agentic workflow](../../01-github-latest-features/create-your-first-agentic-workflow/) |
-| Compare code with its documentation | [Create a Copilot Automation](../../02-github-copilot-latest-features/create-a-copilot-automation/) |
+| Automate an issue and a pull request | [Build your first Copilot automation](../../02-github-copilot-latest-features/build-your-first-copilot-automation/) |
 | Explore context across sessions | [Get started with Copilot Dreaming](../../02-github-copilot-latest-features/get-started-with-copilot-dreaming/) |
 | Design a repeatable review process | [Build your first Software Factory](../../02-github-copilot-latest-features/build-your-first-software-factory/) |
 
