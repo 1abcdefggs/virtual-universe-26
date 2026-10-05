@@ -7,7 +7,7 @@ Catch up on the main announcements, with links to demos and resources.
 - [The Modern GitHub Experience](../../01-github-latest-features/):
   Issue Artifacts, stacked PRs, agentic workflows, and maintainer controls.
 - [Agentic Software Development with GitHub Copilot](../../02-github-copilot-latest-features/):
-  Automations, Dreaming, and Software Factories.
+  Build your own software factory with skills, tools, security review, and automations.
 
 This initial page maps the cookbook topics. It is not yet a verified recap
 of the keynote. Announcement details should be linked to published
