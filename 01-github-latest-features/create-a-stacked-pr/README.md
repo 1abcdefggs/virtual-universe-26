@@ -9,6 +9,14 @@ reviewers see one layer at a time.
    cd 01-github-latest-features/create-a-stacked-pr
    ```
 
+   Make sure `gh` opens pull requests in the repository you push to. If you
+   work in a fork, that is your fork:
+
+   ```bash
+   gh repo set-default "$(git remote get-url origin)"
+   gh repo set-default --view
+   ```
+
 2. Start a stack, then commit the first change:
 
    ```bash
