@@ -6,10 +6,8 @@
   },
   // Runs during the prebuild, so new codespaces start with it already done.
   "onCreateCommand": "bash .devcontainer/setup.sh",
+  "postAttachCommand": "bash .devcontainer/open-readme.sh",
   "customizations": {
-    "codespaces": {
-      "openFiles": ["01-github-latest-features/README.md"]
-    },
     "vscode": {
       "extensions": ["GitHub.github-vscode-theme"],
       "settings": {
