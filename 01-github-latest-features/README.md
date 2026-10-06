@@ -6,14 +6,20 @@ issue and to create a stacked pull request. Each tutorial takes about five minut
 ## Getting started
 
 Work in your own fork, so the issues and pull requests you create are yours.
-Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and run:
+Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and sign in:
 
 ```bash
-unset GITHUB_TOKEN
-gh auth login --web
-gh auth setup-git
-gh repo fork --remote
-gh repo set-default "$(gh api user --jq .login)/virtual-universe-26"
+unset GH_TOKEN GITHUB_TOKEN
+gh auth login --hostname github.com --git-protocol https --web
+```
+
+Finish authorizing in the browser and wait for the terminal prompt to return.
+Then create your fork and make it the target for issues and pull requests:
+
+```bash
+gh auth setup-git &&
+gh repo fork --remote &&
+gh repo set-default "$(git remote get-url origin)" &&
 gh repo edit --enable-issues
 ```
 

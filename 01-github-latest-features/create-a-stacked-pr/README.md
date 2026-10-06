@@ -6,6 +6,7 @@ reviewers see one layer at a time.
 1. Go to this folder:
 
    ```bash
+   cd "$(git rev-parse --show-toplevel)"
    cd 01-github-latest-features/create-a-stacked-pr
    ```
 
@@ -16,6 +17,10 @@ reviewers see one layer at a time.
    gh repo set-default "$(git remote get-url origin)"
    gh repo set-default --view
    ```
+
+   The output should name your fork, not `octodemo/virtual-universe-26`.
+   If you haven't forked yet, complete [Getting started](../README.md#getting-started)
+   first.
 
 2. Start a stack, then commit the first change:
 
@@ -36,10 +41,19 @@ reviewers see one layer at a time.
 4. Push both branches and open a draft pull request for each:
 
    ```bash
-   gh stack submit --auto
+   gh stack submit --auto --remote origin
    ```
 
 5. Open the links that `gh` prints. The latte pull request is based on the
    espresso branch, so it only shows the latte change.
+
+If a previous submit pushed the branches but failed with "Head ref must be a
+branch" or "No commits between", point `gh` at your fork and retry. You do not
+need to recreate the branches or commits:
+
+```bash
+gh repo set-default "$(git remote get-url origin)" &&
+gh stack submit --auto --remote origin
+```
 
 [Back to Section 1](../README.md)

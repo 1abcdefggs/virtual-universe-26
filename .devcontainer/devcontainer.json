@@ -8,6 +8,9 @@
   "onCreateCommand": "bash .devcontainer/setup.sh",
   "postAttachCommand": "bash .devcontainer/open-readme.sh",
   "customizations": {
+    "codespaces": {
+      "openFiles": []
+    },
     "vscode": {
       "extensions": ["GitHub.github-vscode-theme"],
       "settings": {

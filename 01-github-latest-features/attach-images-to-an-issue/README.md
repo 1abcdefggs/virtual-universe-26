@@ -5,6 +5,7 @@ Use `--attach` to add a screenshot to an issue, straight from the terminal.
 1. Go to this folder:
 
    ```bash
+   cd "$(git rev-parse --show-toplevel)"
    cd 01-github-latest-features/attach-images-to-an-issue
    ```
 
@@ -21,5 +22,4 @@ Use `--attach` to add a screenshot to an issue, straight from the terminal.
 
 `--attach` also works with `gh issue comment` and `gh pr create`.
 
-[Next: Create a stacked PR](../create-a-stacked-pr/README.md) ·
-[Back to Section 1](../README.md)
+**Next:** [Start the stacked PR tutorial](../create-a-stacked-pr/README.md).
