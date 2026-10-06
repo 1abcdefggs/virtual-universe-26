@@ -23,7 +23,7 @@ Then pick a tutorial. Use this same terminal for both.
 2. [Create a stacked PR](create-a-stacked-pr/README.md): split one change into small pull requests that build on each other.
 
 If you're an open source maintainer, check out the
-[settings we've shipped to help you manage your project](../README.md#manage-your-open-source-project)
+[settings we've shipped to help you manage your project](manage-your-open-source-project/README.md)
 and keep AI-generated contributions under control.
 
 [Back to the cookbooks](../README.md)
