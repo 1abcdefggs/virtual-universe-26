@@ -23,9 +23,12 @@ const UPSTREAM = "octodemo/virtual-universe-26";
 const servers = new Map();
 let meCache = { at: 0, value: null };
 
-function gh(args) {
-    return new Promise((resolve) => {
-        execFile("gh", args, { timeout: 15000 }, (err, stdout) => resolve(err ? null : stdout.trim()));
+function gh(args, required = false) {
+    return new Promise((resolve, reject) => {
+        execFile("gh", args, { timeout: required ? 60000 : 15000 }, (err, stdout, stderr) => {
+            if (err && required) return reject(new Error(stderr?.trim() || err.message));
+            resolve(err ? null : stdout.trim());
+        });
     });
 }
 
@@ -38,7 +41,7 @@ function createFork() {
         let me = await whoAmI(true);
         if (!me.login) return { ...me, error: "Sign in to the GitHub CLI with gh auth login, then try again." };
         if (!me.fork) {
-            await gh(["repo", "fork", UPSTREAM, "--clone=false", "--default-branch-only"]);
+            await gh(["repo", "fork", UPSTREAM, "--clone=false", "--default-branch-only"], true);
             for (let i = 0; i < 15 && !me.fork; i++) {
                 await new Promise((r) => setTimeout(r, 2000));
                 me = await whoAmI(true);
@@ -46,11 +49,12 @@ function createFork() {
             if (!me.fork) return { ...me, error: "GitHub didn't create the fork. Try Fork on GitHub instead." };
         }
         if (me.issues === false) {
-            await gh(["repo", "edit", me.fork, "--enable-issues"]);
+            await gh(["repo", "edit", me.fork, "--enable-issues"], true);
             me = await whoAmI(true);
+            if (!me.issues) return { ...me, error: "Could not confirm that issues are enabled in your fork. Check its settings and try again." };
         }
         return me;
-    })().finally(() => { forking = null; });
+    })().catch((error) => ({ error: error.message })).finally(() => { forking = null; });
     return forking;
 }
 

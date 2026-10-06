@@ -241,19 +241,16 @@ document.querySelectorAll('.try').forEach(b=>b.onclick=()=>{location.hash='#/'+b
 const label={term:'Terminal',chat:'Copilot chat'};
 const diff=s=>s.split('\n').map(l=>l[0]==='+'?'<span class="add">'+esc(l)+'</span>':l[0]==='-'?'<span class="del">'+esc(l)+'</span>':esc(l)+'\n').join('');
 let ME=null,JUST=false;
-// DEMO: "Fork and open project" skips the real fork, shows the fork as created, and opens the event repository.
-const DEMO=true;
-const demoMe=m=>({...m,fork:(m&&m.login||'mona')+'/virtual-universe-26',repo:m&&m.upstream||'octodemo/virtual-universe-26',issues:true,demo:true});
 window.go=u=>{location.href=u};
 const enc=encodeURIComponent;
 const fill=s=>{const f=ME&&ME.fork||(ME&&ME.login||'YOUR-USERNAME')+'/virtual-universe-26';return s.replace(/\{fork\}/g,f).replace(/\{login\}/g,ME&&ME.login||'YOUR-USERNAME').replace(/\{issue\}/g,ME&&ME.issue?' '+ME.issue:'').replace(/\{pr\}/g,ME&&ME.pr||'')};
-const sessionLink=(prompt,pr)=>{if(!ME||!ME.fork)return null;let q='repo='+enc(ME.repo||ME.fork);if(pr){if(!ME.pr)return null;q+='&pr='+ME.pr}return 'ghapp://session/new?'+q+'&mode=interactive&prompt='+enc(prompt)};
+const sessionLink=(prompt,pr)=>{if(!ME||!ME.fork)return null;let q='repo='+enc(ME.fork);if(pr){if(!ME.pr)return null;q+='&pr='+ME.pr}return 'ghapp://session/new?'+q+'&mode=interactive&prompt='+enc(prompt)};
 function forkCard(){
  if(!ME)return `<div class="forkcard"><div><b>Checking your GitHub account&hellip;</b></div></div>`;
  if(!ME.login)return `<div class="forkcard"><div><b>Sign in to the GitHub CLI</b><span>Run <code>gh auth login</code>, then check again.</span></div><div class="btns"><button class="btn" data-refresh>Check again</button></div></div>`;
  if(!ME.fork)return `<div class="forkcard"><div><b>No fork yet, @${ME.login}</b><span>One click forks <code>${ME.upstream}</code> to your account and opens it as a project in the Copilot app.</span></div><div class="btns"><a class="btn" href="#" data-forkopen>Fork and open project</a><button class="btn" data-refresh>Check again</button></div></div><p class="forkerr" hidden></p>`;
  const issuesOff=ME.issues===false?`<div class="note">Forks start with issues turned off. Turn them on: <code>gh repo edit ${ME.fork} --enable-issues</code> <button class="btn" data-refresh>Check again</button></div>`:'';
- return `<div class="forkcard ok"><div><b>&#10003; Your fork: <code>${ME.fork}</code></b><span>${JUST?'Fork created. Opening the project in the Copilot app.':'Links and commands in these guides use it.'}</span></div><div class="btns"><a class="btn" href="ghapp://github.com/${ME.repo||ME.fork}">Open in Copilot app</a><a class="btn alt" href="https://github.com/${ME.repo||ME.fork}" target="_blank" rel="noopener">View on GitHub</a></div></div>${issuesOff}`;
+ return `<div class="forkcard ok"><div><b>&#10003; Your fork: <code>${ME.fork}</code></b><span>${JUST?'Your fork is ready. Opening the project in the Copilot app.':'Links and commands in these guides use it.'}</span></div><div class="btns"><a class="btn" href="ghapp://github.com/${ME.fork}">Open in Copilot app</a><a class="btn alt" href="https://github.com/${ME.fork}" target="_blank" rel="noopener">View on GitHub</a></div></div>${issuesOff}`;
 }
 const blk=b=>{
  if(typeof b==='string')return `<p>${fill(b)}</p>`;
@@ -269,7 +266,7 @@ const blk=b=>{
  return `<div class="block ${b.k==='chat'?'chatblk':''}"><div class="bh"><span>${b.label||label[b.k]}</span><span>${open}<button class="copy" data-t="${enc(b.k==='diff'?text.split('\n').filter(l=>l[0]!=='-').map(l=>l.slice(1)).join('\n'):text)}">Copy</button></span></div><pre>${body}</pre></div>`};
 function copy(t){const done=()=>true;if(navigator.clipboard)return navigator.clipboard.writeText(t).then(done,()=>fallback(t));return Promise.resolve(fallback(t))}
 function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();return ok}
-async function loadMe(force){let v;try{v=await (await fetch('me'+(force?'?refresh=1':''),{cache:'no-store'})).json()}catch{v={login:null}}if(JUST&&ME&&ME.fork&&!v.fork)return;ME=v;if(DEMO&&sessionStorage.demoForked&&!v.fork){ME=demoMe(v);JUST=true}}
+async function loadMe(force){let v;try{v=await (await fetch('me'+(force?'?refresh=1':''),{cache:'no-store'})).json()}catch{v={login:null}}ME=v}
 function rerender(){const y=scrollY;route(true);scrollTo(0,y)}
 function route(keep){
  const id=location.hash.slice(2),w=window.WALK&&WALK[id];
@@ -290,7 +287,6 @@ function route(keep){
  const hb=guide.querySelector('[data-help]');hb.onclick=async()=>{hb.textContent='Sent to chat';hb.disabled=true;
   await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})})};
  guide.querySelectorAll('[data-forkopen]').forEach(a=>a.onclick=async e=>{e.preventDefault();
-  if(DEMO){ME=demoMe(ME);JUST=true;sessionStorage.demoForked=1;const t=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.repo;rerender();window.go(t);return}
   if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Creating your fork\u2026';
   let r;try{r=await (await fetch('fork',{method:'POST'})).json()}catch{r={error:'Could not reach the canvas. Try again.'}}
   if(r.error||!r.fork){a.textContent='Try again';delete a.dataset.busy;const er=guide.querySelector('.forkerr');if(er){er.hidden=false;er.textContent=r.error||'Something went wrong.'}else alert(r.error);return}

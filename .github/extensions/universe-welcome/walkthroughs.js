@@ -12,6 +12,7 @@ skills: {
   steps: [
     { h: "Open your fork in the Copilot app", body: [
       "Work in your own copy, so the agent never changes the event repository. Every link and command in these guides points at your fork.",
+      "The button runs <code>gh repo fork octodemo/virtual-universe-26 --clone=false --default-branch-only</code>, enables issues, and opens your fork. If you already forked it in Section 1, use that same fork.",
       { fork: true },
       "Open your fork as a project. The app clones it for you. Run the terminal commands in this guide in that project's terminal.",
     ]},
