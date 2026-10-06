@@ -22,13 +22,8 @@ Then pick a tutorial. Use this same terminal for both.
 1. [Attach images to an issue](attach-images-to-an-issue/README.md): add a screenshot to an issue from the terminal.
 2. [Create a stacked PR](create-a-stacked-pr/README.md): split one change into small pull requests that build on each other.
 
-## Manage your open source project
-
-- **Set participation boundaries:** Define how people and agents can contribute to your project.
-- **Manage your contribution queue:** Organize incoming pull requests and keep reviews focused on actionable work.
-- **Control contribution volume:** Keep incoming PRs manageable for your team.
-
-[Join the Maintainer Community](https://maintainers.github.com/) to request
-an invitation and connect with other maintainers.
+If you're an open source maintainer, check out the
+[settings we've shipped to help you manage your project](../README.md#manage-your-open-source-project)
+and keep AI-generated contributions under control.
 
 [Back to the cookbooks](../README.md)
