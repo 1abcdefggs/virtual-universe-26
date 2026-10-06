@@ -1,10 +1,9 @@
 {
   "name": "Section 1: The Modern GitHub Experience",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": { "version": "latest" }
-  },
-  "postCreateCommand": "gh extension install github/gh-stack; git config --global rerere.enabled true; git config --global remote.pushDefault origin",
+  // The default Codespaces image is cached on every host, so it starts without a build.
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  // Runs after the editor opens, so it never delays the README.
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "codespaces": {
       "openFiles": ["01-github-latest-features/README.md"]
@@ -14,8 +13,11 @@
       "settings": {
         "workbench.colorTheme": "GitHub Light Default",
         "workbench.startupEditor": "none",
+        "workbench.tips.enabled": false,
         "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
-        "markdown.styles": [".devcontainer/preview.css"]
+        "markdown.preview.openMarkdownLinks": "inPreview",
+        "markdown.styles": [".devcontainer/preview.css"],
+        "extensions.ignoreRecommendations": true
       }
     }
   }

@@ -1,7 +1,5 @@
 # Section 1: The Modern GitHub Experience
 
-**Presenters:** April and Camilla
-
 Try two new GitHub CLI features. Each tutorial takes about five minutes.
 
 1. [Attach images to an issue](attach-images-to-an-issue/README.md): add a screenshot to an issue from the terminal.

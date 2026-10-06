@@ -1,7 +1,5 @@
 # Section 3: GitHub Universe Highlights
 
-**Presenters:** Carlotta and Cassidy
-
 1. [GitHub Universe recap](github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
 2. [GitHub Universe cheat sheet](github-universe-cheat-sheet/): Find the key features, useful commands, and next steps in one place, with a terminal-friendly edition planned.
 
