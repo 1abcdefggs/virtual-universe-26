@@ -1,9 +1,11 @@
 {
   "name": "Section 1: The Modern GitHub Experience",
-  // The default Codespaces image is cached on every host, so it starts without a build.
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  // Runs after the editor opens, so it never delays the README.
-  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": { "version": "latest" }
+  },
+  // Runs during the prebuild, so new codespaces start with it already done.
+  "onCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "codespaces": {
       "openFiles": ["01-github-latest-features/README.md"]
