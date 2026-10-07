@@ -5,6 +5,9 @@ issue and to create a stacked pull request. Each tutorial takes about five minut
 
 ## Getting started
 
+The Codespace opens this folder in Explorer and this README in preview.
+The terminal starts at the repository root, so the tutorial commands work unchanged.
+
 Work in your own fork, so the issues and pull requests you create are yours.
 Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and sign in:
 

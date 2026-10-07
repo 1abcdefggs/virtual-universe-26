@@ -1,0 +1,8 @@
+{
+  "workbench.startupEditor": "readme",
+  "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+  "markdown.preview.openMarkdownLinks": "inPreview",
+  "markdown.styles": [".vscode/preview.css"],
+  "terminal.integrated.cwd": "${workspaceFolder}/..",
+  "git.openRepositoryInParentFolders": "always"
+}
