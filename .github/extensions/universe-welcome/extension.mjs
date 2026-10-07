@@ -7,7 +7,7 @@ const EXAMPLES = {
     skills:
         "I'm following the Skills guide in the Universe '26 welcome canvas: fork virtual-universe-26, edit .github/skills/issue-to-pr/SKILL.md, create a sample issue, and run /issue-to-pr on it. Check where I am (repository, branch, skill changes, open issues) and help me with the next step. Confirm the repository and the issue with me before you create an issue, a branch, or a pull request.",
     tools:
-        "I'm following the Tools guide in the Universe '26 welcome canvas: run /agentfinder for CI/CD and GitHub Actions, install repo-actions-hub@awesome-copilot, add a Check notes workflow, and make issue-to-pr wait for checks. Check where I am and help me with the next step. Ask before installing, committing, or pushing anything.",
+        "I'm following the Tools and connectors guide: discover and explicitly add Microsoft Learn's public MCP server, then use it for a public documentation query without an account or API key. Help with my current step. Ask before installing anything, do not send private data, and do not substitute web search for a connector tool call.",
     security:
         "I'm following the Security review guide in the Universe '26 welcome canvas: check out my issue-to-pr pull request, run /security-review, and add a review step to the issue-to-pr skill. Check where I am and help me with the next step. Explain any finding and ask before applying a fix.",
     automate:
@@ -23,25 +23,36 @@ const UPSTREAM = "octodemo/virtual-universe-26";
 const servers = new Map();
 let meCache = { at: 0, value: null };
 
-function gh(args, required = false) {
+function command(program, args, { cwd } = {}) {
     return new Promise((resolve, reject) => {
-        execFile("gh", args, { timeout: required ? 60000 : 15000 }, (err, stdout, stderr) => {
-            if (err && required) return reject(new Error(stderr?.trim() || err.message));
-            resolve(err ? null : stdout.trim());
+        execFile(program, args, { cwd, timeout: 60000 }, (err, stdout, stderr) => {
+            if (err) return reject(new Error(stderr?.trim() || err.message));
+            resolve(stdout.trim());
         });
     });
 }
+const gh = (args) => command("gh", args);
 
-// Finds the learner's GitHub login, their fork of the event repository, and its newest open issue and pull request.
-// Runs only when the learner clicks "Fork and open". Creates the fork on GitHub (no local clone)
-// and turns issues on, then waits until the fork is ready.
+async function workingContext() {
+    const { workingDirectory: cwd, isRemote } = await session.rpc.metadata.snapshot();
+    if (isRemote) throw new Error("Open this workshop in a local repository session to verify its working checkout.");
+    const [origin, branch] = await Promise.all([
+        command("git", ["remote", "get-url", "origin"], { cwd }),
+        command("git", ["branch", "--show-current"], { cwd }),
+    ]);
+    const repo = JSON.parse(await command("gh", ["repo", "view", origin, "--json", "nameWithOwner,isFork,parent"], { cwd }));
+    const parent = repo.parent ? `${repo.parent.owner.login}/${repo.parent.name}` : null;
+    return { repo: repo.nameWithOwner, parent, branch: branch || "(detached HEAD)" };
+}
+
+// Only the learner's explicit fork button creates a fork or enables issues.
 let forking = null;
 function createFork() {
     forking ??= (async () => {
         let me = await whoAmI(true);
         if (!me.login) return { ...me, error: "Sign in to the GitHub CLI with gh auth login, then try again." };
         if (!me.fork) {
-            await gh(["repo", "fork", UPSTREAM, "--clone=false", "--default-branch-only"], true);
+            await gh(["repo", "fork", UPSTREAM, "--clone=false", "--default-branch-only"]);
             for (let i = 0; i < 15 && !me.fork; i++) {
                 await new Promise((r) => setTimeout(r, 2000));
                 me = await whoAmI(true);
@@ -49,7 +60,7 @@ function createFork() {
             if (!me.fork) return { ...me, error: "GitHub didn't create the fork. Try Fork on GitHub instead." };
         }
         if (me.issues === false) {
-            await gh(["repo", "edit", me.fork, "--enable-issues"], true);
+            await gh(["repo", "edit", me.fork, "--enable-issues"]);
             me = await whoAmI(true);
             if (!me.issues) return { ...me, error: "Could not confirm that issues are enabled in your fork. Check its settings and try again." };
         }
@@ -60,25 +71,24 @@ function createFork() {
 
 async function whoAmI(force) {
     if (!force && meCache.value && Date.now() - meCache.at < 8000) return meCache.value;
-    const login = await gh(["api", "user", "-q", ".login"]);
+    const [login, current] = await Promise.all([gh(["api", "user", "-q", ".login"]), workingContext()]);
     let fork = null;
     if (login) {
-        const forks = await gh(["api", `repos/${UPSTREAM}/forks?per_page=100`, "-q", `.[] | select(.owner.login == "${login}") | .full_name`]);
-        fork = forks ? forks.split("\n")[0] : null;
-        if (!fork) {
-            const own = await gh(["api", `repos/${login}/virtual-universe-26`, "-q", "select(.fork) | .full_name"]);
-            fork = own || null;
+        if (current.parent?.toLowerCase() === UPSTREAM.toLowerCase() &&
+            current.repo.split("/")[0].toLowerCase() === login.toLowerCase()) {
+            fork = current.repo;
+        } else {
+            const forks = await gh(["api", "--paginate", `repos/${UPSTREAM}/forks?per_page=100`, "-q", `.[] | select(.owner.login == "${login}") | .full_name`]);
+            fork = forks ? forks.split("\n")[0] : null;
         }
     }
-    let issues = null, issue = null, pr = null;
+    let issues = null;
     if (fork) {
         issues = (await gh(["api", `repos/${fork}`, "-q", ".has_issues"])) === "true";
-        const n = issues ? await gh(["issue", "list", "-R", fork, "--state", "open", "--limit", "1", "--json", "number", "-q", ".[0].number"]) : null;
-        issue = n ? Number(n) : null;
-        const p = await gh(["pr", "list", "-R", fork, "--state", "open", "--limit", "1", "--json", "number", "-q", ".[0].number"]);
-        pr = p ? Number(p) : null;
     }
-    const value = { login, upstream: UPSTREAM, fork, issues, issue, pr };
+    const working = Boolean(fork && current.repo.toLowerCase() === fork.toLowerCase() &&
+        current.parent?.toLowerCase() === UPSTREAM.toLowerCase());
+    const value = { login, upstream: UPSTREAM, fork, issues, repo: current.repo, branch: current.branch, working };
     meCache = { at: Date.now(), value };
     return value;
 }
@@ -86,37 +96,62 @@ let session;
 
 async function startServer() {
     const server = createServer(async (req, res) => {
-        if (req.method === "POST" && req.url === "/fork") {
-            res.setHeader("Content-Type", "application/json");
-            return res.end(JSON.stringify(await createFork()));
-        }
-        if (req.method === "POST" && req.url === "/try") {
-            let body = "";
-            for await (const chunk of req) body += chunk;
-            let id;
-            try {
-                ({ id } = JSON.parse(body || "{}"));
-            } catch {}
-            if (!Object.hasOwn(EXAMPLES, id)) {
-                res.statusCode = 400;
+        try {
+            if (req.method === "POST" && req.headers.origin !== `http://127.0.0.1:${server.address().port}`) {
+                res.writeHead(403, { "Content-Type": "application/json" });
+                return res.end(JSON.stringify({ error: "Use the buttons in the workshop canvas to send an action." }));
+            }
+            if (req.method === "POST" && req.url === "/fork") {
+                const result = await createFork();
+                res.writeHead(result.error ? 500 : 200, { "Content-Type": "application/json" });
+                return res.end(JSON.stringify(result));
+            }
+            if (req.method === "POST" && req.url === "/try") {
+                let body = "";
+                for await (const chunk of req) {
+                    body += chunk;
+                    if (body.length > 16000) {
+                        res.writeHead(413, { "Content-Type": "application/json" });
+                        return res.end(JSON.stringify({ error: "The guide request is too large." }));
+                    }
+                }
+                let request;
+                try {
+                    request = JSON.parse(body);
+                } catch {
+                    res.writeHead(400, { "Content-Type": "application/json" });
+                    return res.end(JSON.stringify({ error: "Invalid guide request." }));
+                }
+                if (!request || !Object.hasOwn(EXAMPLES, request.id) ||
+                    (request.text !== undefined && (typeof request.text !== "string" || !request.text.trim() || request.text.length > 4000))) {
+                    res.writeHead(400, { "Content-Type": "application/json" });
+                    return res.end(JSON.stringify({ error: "Choose a valid guide action." }));
+                }
+                const me = await whoAmI(true);
+                if (!me.working) {
+                    res.writeHead(409, { "Content-Type": "application/json" });
+                    return res.end(JSON.stringify({ error: "Switch to your fork's working session before sending this step." }));
+                }
+                await session.send({ prompt: request.text || EXAMPLES[request.id] });
+                res.setHeader("Content-Type", "application/json");
+                return res.end('{"ok":true}');
+            }
+            if (req.method === "GET" && req.url.startsWith("/me")) {
+                res.setHeader("Content-Type", "application/json");
+                res.setHeader("Cache-Control", "no-store");
+                return res.end(JSON.stringify(await whoAmI(req.url.includes("refresh"))));
+            }
+            const entry = files[req.url.split("?")[0]];
+            if (!entry) {
+                res.statusCode = 404;
                 return res.end();
             }
-            await session.send({ prompt: EXAMPLES[id] });
-            res.setHeader("Content-Type", "application/json");
-            return res.end('{"ok":true}');
+            res.setHeader("Content-Type", entry[1]);
+            res.end(await readFile(new URL(`./${entry[0]}`, import.meta.url)));
+        } catch (error) {
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: error.message }));
         }
-        if (req.method === "GET" && req.url.startsWith("/me")) {
-            res.setHeader("Content-Type", "application/json");
-            res.setHeader("Cache-Control", "no-store");
-            return res.end(JSON.stringify(await whoAmI(req.url.includes("refresh"))));
-        }
-        const entry = files[req.url.split("?")[0]];
-        if (!entry) {
-            res.statusCode = 404;
-            return res.end();
-        }
-        res.setHeader("Content-Type", entry[1]);
-        res.end(await readFile(new URL(`./${entry[0]}`, import.meta.url)));
     });
     await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
     return { server, url: `http://127.0.0.1:${server.address().port}/` };

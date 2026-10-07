@@ -1,51 +1,72 @@
 # Section 2: Agentic Software Development with GitHub Copilot
 
-In [Section 1](../01-github-latest-features/) you manually created an issue and a
-stacked pull request with the GitHub CLI. In this section you'll learn some of the
-steps required to build your own software factory.
+Build on the GitHub CLI work from [Section 1](../01-github-latest-features/):
+teach an agent a job, give it a public documentation connector, review its work,
+and prepare a paused software factory.
 
-> **Software factory:** A system of work where triggers, not humans, start agent
-> sessions, so more work runs on its own and your time is saved for the decisions
-> that need you.
+> **Software factory:** A system where triggers can start agent work, while
+> people choose its scope and review the results.
 
-Every software factory looks different. Here are some building blocks you can use:
+## Start once, keep your working session
 
-- **Skills** can teach the agent a job, like turning an issue into a fix.
-- **Tools** can give the agent more ways to do that job, like plugins, agents, or connectors.
-- **Reviews** can check the agent's work, for example for security issues.
-- **Triggers** can start the agent on their own, like a new issue, a schedule, or a failed CI run.
-- **People** decide where they step in, such as approving a pull request before it merges.
-
-In this section you build a small software factory in four parts:
-
-1. **Skills:** Edit the [`issue-to-pr`](../.github/skills/issue-to-pr/SKILL.md) skill, which turns an issue into a draft pull request, then run it with `/issue-to-pr`.
-2. **Tools:** Use `/agentfinder` to find an agent for CI/CD pipelines and GitHub Actions workflows, then install the `repo-actions-hub` plugin.
-3. **Security review:** Run `/security-review` on the agent's pull request and add a review step to the skill.
-4. **Automate:** Turn the skill into a paused software factory that runs when an issue is opened.
-
-## Start here
-
-[Open the welcome canvas in Copilot App](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520canvasId%2520universe-welcome%2520with%2520instanceId%2520universe-welcome%2520now%252C%2520before%2520reading%2520files%2520or%2520checking%2520prerequisites.%2520Once%2520open%252C%2520say%2520only%253A%2520%2522Welcome%2520to%2520Section%25202.%2520Read%2520the%2520canvas%2520and%2520use%2520its%2520Try%2520this%2520example%2520buttons%2520to%2520open%2520the%2520guides.%2520I%2520will%2520help%2520in%2520chat%2520when%2520you%2520ask.%2522%2520Then%2520stop.%2520Do%2520not%2520show%2520a%2520chat%2520menu%252C%2520list%2520the%2520four%2520parts%252C%2520or%2520ask%2520what%2520to%2520try.%2520Do%2520not%2520change%2520files%2520or%2520create%2520resources.%2520If%2520the%2520canvas%2520is%2520unavailable%252C%2520explain%2520that%2520the%2520repository%2520must%2520be%2520trusted%2520and%2520its%2520universe-welcome%2520extension%2520loaded%253B%2520do%2520not%2520start%2520a%2520chat%2520walkthrough.) and confirm the new session. The kickoff prompt asks Copilot to open the canvas directly, without reading this page first.
-
-Alternatively, open this repository in the Copilot app, copy the instructions
-below using the code block's copy button, and paste them into a new or existing
-session for this repository. You need the app installed and access to this repository.
-
-When the session starts, Copilot opens a welcome canvas that explains the
-software factory you build in this section. Open each part (Skills, Tools,
-Security review, and Automate) to see an example, then select **Try this example**
-to open its step-by-step guide in the canvas. Use chat when you need help, rather
-than choosing from a second menu. The canvas comes from the repository
-extension in [`.github/extensions/universe-welcome`](../.github/extensions/universe-welcome/),
-which loads after you trust the repository folder.
-
-Each part has a step-by-step guide in the canvas. Feature availability depends
-on your account and organization settings.
-
-## Instructions for Copilot
+[Open in Copilot App](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520the%2520Universe%2520welcome%2520canvas.)
+and confirm the new session. The visible prompt is simply:
 
 ```text
-Open canvasId universe-welcome with instanceId universe-welcome now, before reading files or checking prerequisites. Once open, say only: "Welcome to Section 2. Read the canvas and use its Try this example buttons to open the guides. I will help in chat when you ask." Then stop. Do not show a chat menu, list the four parts, or ask what to try. Do not change files or create resources. If the canvas is unavailable, explain that the repository must be trusted and its universe-welcome extension loaded; do not start a chat walkthrough.
+Open the Universe welcome canvas.
 ```
+
+The app must initialize the session and load the trusted repository extension
+before the canvas can open. The link still uses a model turn; it is not an
+instant direct-canvas shortcut.
+
+**Already in a session for this repository or your fork?** Stay there. Once the
+extension has loaded, use **+ → Installed extensions → Universe '26 welcome**
+above the panel to open the canvas without asking the model. If it is unavailable,
+check repository trust and extension loading rather than creating more sessions.
+
+In the Skills guide, switch to your fork once if needed. Then keep that working
+chat and canvas open. **Send to this chat** runs the visible step in that session;
+it does not launch another one. The canvas shows the actual repository and branch.
+It does not guess which issue or PR belongs to your exercise.
+
+For an older fork, first use **Sync fork → Update branch** on GitHub so it
+contains the new guide and repository instructions. Stop and ask for help if
+there are conflicts; never force-sync over your own work. Existing local sessions
+must also bring in that update and reload the extension before showing the new UI.
+
+## The core path
+
+Allow about 25–30 minutes of guided activity, plus initial setup and agent runs.
+Optional steps can be done later.
+
+1. **Skills:** Edit the existing
+   [`issue-to-pr`](../.github/skills/issue-to-pr/SKILL.md) skill to require a
+   **How to test** section. Create one sample issue, run the skill on that exact
+   issue, and keep the resulting draft PR branch checked out.
+2. **Tools and connectors:** Discover integrations with `/agentfinder`. Review
+   and add [Microsoft Learn's public MCP server](https://learn.microsoft.com/en-us/training/support/mcp),
+   then use its tools to retrieve official documentation with source links.
+   No new account, API key, or paid subscription is required. The connection
+   sends a public documentation query, not repository content. CI/CD plugin
+   exploration is optional.
+3. **Security review:** Run `/security-review` on the identified draft PR in
+   the same working session. Review any findings; no findings is also valid.
+   No intentionally unsafe file or destructive cleanup is required.
+4. **Automate:** Check which skill version is available on your fork's default
+   branch, then prepare a factory with explicit permissions. Create it only
+   after review and keep the worker and scheduled assessment paused.
+
+**Cannot find `.github`?** It is a hidden folder. Open **+ → Files**, then
+**gear menu → Show tracked hidden files**, and browse to
+`.github/skills/issue-to-pr/SKILL.md`. Check the current repository if it is
+still missing; do not create a duplicate skill.
+
+The canvas is supplied by
+[`.github/extensions/universe-welcome`](../.github/extensions/universe-welcome/).
+Its startup behavior and workshop boundaries live in
+[`.github/copilot-instructions.md`](../.github/copilot-instructions.md), not in
+a long launch prompt. Installation, connector availability, and factories remain
+subject to app version and organization policy; do not bypass restrictions.
 
 [Back to the cookbooks](../README.md)

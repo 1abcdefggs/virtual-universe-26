@@ -36,10 +36,12 @@ Are you an open source maintainer? Check out the settings we've shipped to help 
 
 Click the button below to open the repository in Copilot App and confirm the new session. Copilot opens the welcome canvas; read it and use its **Try this example** buttons to open the guides.
 
-[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520canvasId%2520universe-welcome%2520with%2520instanceId%2520universe-welcome%2520now%252C%2520before%2520reading%2520files%2520or%2520checking%2520prerequisites.%2520Once%2520open%252C%2520say%2520only%253A%2520%2522Welcome%2520to%2520Section%25202.%2520Read%2520the%2520canvas%2520and%2520use%2520its%2520Try%2520this%2520example%2520buttons%2520to%2520open%2520the%2520guides.%2520I%2520will%2520help%2520in%2520chat%2520when%2520you%2520ask.%2522%2520Then%2520stop.%2520Do%2520not%2520show%2520a%2520chat%2520menu%252C%2520list%2520the%2520four%2520parts%252C%2520or%2520ask%2520what%2520to%2520try.%2520Do%2520not%2520change%2520files%2520or%2520create%2520resources.%2520If%2520the%2520canvas%2520is%2520unavailable%252C%2520explain%2520that%2520the%2520repository%2520must%2520be%2520trusted%2520and%2520its%2520universe-welcome%2520extension%2520loaded%253B%2520do%2520not%2520start%2520a%2520chat%2520walkthrough.)
+[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520the%2520Universe%2520welcome%2520canvas.)
+
+Already in your working session? Open **+ → Installed extensions → Universe '26 welcome** after the extension loads. Switch to your fork once, then keep the same chat and canvas. [Read the setup guide](./02-github-copilot-latest-features/README.md).
 
 1. **Skills:** Edit the [`issue-to-pr`](./.github/skills/issue-to-pr/SKILL.md) skill and run it with `/issue-to-pr`.
-2. **Tools:** Use `/agentfinder` to find an agent for CI/CD and GitHub Actions, then install a plugin.
+2. **Tools and connectors:** Discover integrations with `/agentfinder`, then use Microsoft Learn's public documentation MCP connector. No new account or API key needed.
 3. **Security review:** Run `/security-review` on the agent's pull request.
 4. **Automate:** Turn the skill into a paused software factory that runs when an issue is opened.
 
