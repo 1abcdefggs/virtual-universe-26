@@ -6,13 +6,11 @@ skills: {
   time: "8–10 min",
   intro: "Teach Copilot how you want a job done. Edit one existing skill, then use it to turn a sample issue into a draft pull request. Keep this guide and the same working chat open.",
   steps: [
-    { h: "Find the skill, including hidden folders", body: [
+    { h: "Ask Copilot to open the skill", body: [
       "Start here in the session you already have. You can read the skill and try the documentation connector without a fork. There is nothing to reopen or switch to.",
-      "Select <b>+ → Files</b> above the panel. In Files, open the <b>gear menu → Show tracked hidden files</b>. Then expand <code>.github → skills → issue-to-pr → SKILL.md</code>.",
-      { img: { src: "open-files.png", alt: "First open Files using +. Then use the Files gear menu to show tracked hidden files." } },
-      "<code>.github</code> is a folder, not a file. It is hidden by default. If it still does not appear, ask Copilot to locate the exact path in this checkout; do not create a duplicate skill.",
+      "Select <b>Send to this chat</b> below to ask Copilot to open the existing skill for you.",
       "The <code>name</code> in the file defines <code>/issue-to-pr</code>, the description explains when to use it, and the body describes its steps and boundaries.",
-      { k: "chat", text: "Show me .github/skills/issue-to-pr/SKILL.md in this checkout and explain its name, description, and steps. Read only; do not fork, change files, or open a new session." },
+      { k: "chat", text: "Open .github/skills/issue-to-pr/SKILL.md from this checkout in the editor and explain its name, description, and steps. Read only; do not fork, change files, or open a new session." },
     ]},
     { h: "Ready to make changes?", body: [
       "Only now do you need a fork: it is where your issue and pull request will live. Copilot can prepare that destination while keeping this session, checkout, and guide. Reuse your Section 1 fork if you have one.",

@@ -42,8 +42,10 @@ when the user sends an exercise or asks a question.
   a factory for the event repository.
 - Ask which issue to use when its number is not supplied. Remember the exact
   issue and resulting pull request within this session. Verify them before acting.
-- `.github` is a folder. To reveal the skill, use Files > gear menu >
-  Show tracked hidden files, then `.github/skills/issue-to-pr/SKILL.md`.
+- When the learner asks to open the skill, open the existing
+  `.github/skills/issue-to-pr/SKILL.md` from this checkout in the editor.
+  Do not send them through file-browser menus or create a duplicate skill.
+  If it is missing or cannot be opened, explain the actual blocker.
 - Explain and obtain approval before installing or connecting a tool, creating
   an issue or pull request, committing/pushing, or creating/enabling a factory.
   Keep initial factory creation paused. Never merge on the learner's behalf.

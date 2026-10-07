@@ -15,7 +15,6 @@ const EXAMPLES = {
 const files = {
     "/": ["welcome.html", "text/html; charset=utf-8"],
     "/mona.png": ["mona.png", "image/png"],
-    "/open-files.png": ["open-files.png", "image/png"],
     "/walkthroughs.js": ["walkthroughs.js", "text/javascript; charset=utf-8"],
 };
 const servers = new Map();

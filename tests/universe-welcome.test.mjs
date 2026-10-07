@@ -88,7 +88,7 @@ test("read-only, connector, setup, and help requests all stay in the owning chat
 
 test("fork setup follows reading and precedes editing without project switches", () => {
     const steps = guides.skills.steps;
-    assert.equal(steps[0].h, "Find the skill, including hidden folders");
+    assert.equal(steps[0].h, "Ask Copilot to open the skill");
     assert.equal(steps[1].h, "Ready to make changes?");
     assert.equal(steps[2].h, "Make one useful edit");
     assert.match(JSON.stringify(steps[0]), /Read only/);
@@ -97,7 +97,9 @@ test("fork setup follows reading and precedes editing without project switches",
     assert.match(JSON.stringify(steps[1]), /Do not open another session or clone/);
     assert.match(JSON.stringify(guides.tools.steps[0]), /No fork/);
     assert.doesNotMatch(guide, /git reset --hard|\{fork\}|\{issue\}|\{pr\}/);
-    assert.match(guide, /Show tracked hidden files/);
+    assert.match(JSON.stringify(steps[0]), /Open \.github\/skills\/issue-to-pr\/SKILL\.md from this checkout in the editor/);
+    assert.equal(steps[0].body.some((block) => typeof block === "object" && block.img), false);
+    assert.doesNotMatch(guide, /gear menu|Show tracked hidden files|open-files\.png/);
     const blocks = Object.values(guides).flatMap((part) => part.steps.flatMap((step) => step.body));
     const install = blocks.find((block) => typeof block !== "string" && block.link?.href.startsWith("ghapp://mcp/install?"));
     assert.deepEqual(JSON.parse(decodeURIComponent(install.link.href.split("?")[1])), {

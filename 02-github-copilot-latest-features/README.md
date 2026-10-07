@@ -63,10 +63,8 @@ Optional steps can be done later.
    plan for later; do not auto-switch sessions. Only create against a verified
    fork project, after review, with the worker and assessment paused.
 
-**Cannot find `.github`?** It is a hidden folder. Open **+ → Files**, then
-**gear menu → Show tracked hidden files**, and browse to
-`.github/skills/issue-to-pr/SKILL.md`. Check the current repository if it is
-still missing; do not create a duplicate skill.
+**Open the skill:** Use **Send to this chat** in the Skills guide to ask Copilot
+to open `.github/skills/issue-to-pr/SKILL.md` in the editor and explain it.
 
 The canvas is supplied by
 [`.github/extensions/universe-welcome`](../.github/extensions/universe-welcome/).
