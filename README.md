@@ -38,7 +38,7 @@ Click the button below to open the repository in Copilot App and confirm the new
 
 [![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520the%2520Universe%2520welcome%2520canvas.)
 
-Already in your working session? Open **+ → Installed extensions → Universe '26 welcome** after the extension loads. Switch to your fork once, then keep the same chat and canvas. [Read the setup guide](./02-github-copilot-latest-features/README.md).
+Already in a session? Open **+ → Installed extensions → Universe '26 welcome** after the extension loads. Start reading immediately—no fork or session switch needed. Prepare a fork destination later, in the same checkout, when you are ready to make changes. [Read the guide](./02-github-copilot-latest-features/README.md).
 
 1. **Skills:** Edit the [`issue-to-pr`](./.github/skills/issue-to-pr/SKILL.md) skill and run it with `/issue-to-pr`.
 2. **Tools and connectors:** Discover integrations with `/agentfinder`, then use Microsoft Learn's public documentation MCP connector. No new account or API key needed.

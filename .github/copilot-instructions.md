@@ -16,13 +16,30 @@ when the user sends an exercise or asks a question.
 
 ## Working through the guides
 
-- Keep work in the current session and keep the guide available. Create another
-  session only when switching to the learner's fork or explicitly requested.
-- Before changing files or creating resources, verify the current checkout,
-  branch, and origin. Work in the learner's fork, not the event repository.
-  Do not assume that discovering a fork means this checkout uses it.
-- Target GitHub CLI commands explicitly at the verified fork. Do not infer the
-  target from upstream remotes or the latest open issue or pull request.
+- Let learners start in the event repository. Reading guides, finding the skill,
+  asking questions, and using the public documentation connector need no fork.
+  Do not check account/fork status just to open or browse a guide.
+- Keep the current session and canvas. Never offer an "Open in Copilot app" or
+  "Switch to your fork" loop, create another session, or navigate away as setup.
+- Introduce a fork only at the Skills guide's "Ready to make changes?" step.
+  Inspect the checkout, branch, status, and remotes. With approval, reuse or
+  create the learner's fork using `gh repo fork octodemo/virtual-universe-26
+  --clone=false --default-branch-only`. Verify its parent and the learner's
+  access; enable issues with approval. Stop on policy or access errors.
+- Keep the current checkout and its existing history and origin. If necessary,
+  propose adding a named `workshop-fork` remote for the verified fork; remote
+  configuration is shared with other worktrees, so ask before changing it.
+  Never overwrite an existing remote without checking its destination. Do not
+  clone or reopen an old fork just to continue the exercise.
+- Before edits or resource creation, confirm the exact fork target and working
+  branch. Target GitHub CLI operations explicitly with `GH_REPO=<owner/repo>` or
+  `-R <owner/repo>`, and push explicitly to the verified fork remote. Origin may
+  still be the event repository: never push there or infer the target from it.
+- A factory is bound to the app project, not merely a Git remote. Before factory
+  creation, verify that its resolved project is the learner's fork. If this
+  session is still app-bound to the event repository, explain the distinction
+  and leave this as a plan for later. Do not silently switch sessions or create
+  a factory for the event repository.
 - Ask which issue to use when its number is not supplied. Remember the exact
   issue and resulting pull request within this session. Verify them before acting.
 - `.github` is a folder. To reveal the skill, use Files > gear menu >

@@ -7,7 +7,7 @@ and prepare a paused software factory.
 > **Software factory:** A system where triggers can start agent work, while
 > people choose its scope and review the results.
 
-## Start once, keep your working session
+## Start reading in your current session
 
 [Open in Copilot App](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520the%2520Universe%2520welcome%2520canvas.)
 and confirm the new session. The visible prompt is simply:
@@ -25,15 +25,19 @@ extension has loaded, use **+ → Installed extensions → Universe '26 welcome*
 above the panel to open the canvas without asking the model. If it is unavailable,
 check repository trust and extension loading rather than creating more sessions.
 
-In the Skills guide, switch to your fork once if needed. Then keep that working
-chat and canvas open. **Send to this chat** runs the visible step in that session;
-it does not launch another one. The canvas shows the actual repository and branch.
-It does not guess which issue or PR belongs to your exercise.
+Start with the existing skill in this checkout. Reading the guides, asking for
+help, and trying the public documentation connector require no fork or account
+check. **Send to this chat** stays in the current session. There are no fork
+status cards, project-switch buttons, or repeated app-launch buttons.
 
-For an older fork, first use **Sync fork → Update branch** on GitHub so it
-contains the new guide and repository instructions. Stop and ask for help if
-there are conflicts; never force-sync over your own work. Existing local sessions
-must also bring in that update and reload the extension before showing the new UI.
+At **Ready to make changes?**, ask Copilot to prepare a fork destination with
+your approval. It reuses or creates your fork and can add a named push remote
+while preserving this checkout, origin, and local work. It does not clone or
+reopen the fork. Issues, PRs, and pushes must explicitly target the verified fork.
+An older remote fork does not need to supply the guide: this checkout keeps it.
+
+An already-open session needs the updated repository files and extension
+reloaded to show this revised guide. Preserve local changes when updating.
 
 ## The core path
 
@@ -53,9 +57,11 @@ Optional steps can be done later.
 3. **Security review:** Run `/security-review` on the identified draft PR in
    the same working session. Review any findings; no findings is also valid.
    No intentionally unsafe file or destructive cleanup is required.
-4. **Automate:** Check which skill version is available on your fork's default
-   branch, then prepare a factory with explicit permissions. Create it only
-   after review and keep the worker and scheduled assessment paused.
+4. **Automate:** Check the skill version on your fork's default branch and the
+   app's project binding. A fork push remote does not change that binding. If
+   the session still belongs to the event project, keep factory creation as a
+   plan for later; do not auto-switch sessions. Only create against a verified
+   fork project, after review, with the worker and assessment paused.
 
 **Cannot find `.github`?** It is a hidden folder. Open **+ → Files**, then
 **gear menu → Show tracked hidden files**, and browse to

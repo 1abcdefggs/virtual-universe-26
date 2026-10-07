@@ -1,4 +1,4 @@
-// Guide navigation stays in the canvas; chat blocks run in its owning fork session.
+// Guides open immediately; chat blocks stay in the current session.
 window.WALK = {
 skills: {
   eyebrow: "SKILLS · GUIDE",
@@ -6,19 +6,18 @@ skills: {
   time: "8–10 min",
   intro: "Teach Copilot how you want a job done. Edit one existing skill, then use it to turn a sample issue into a draft pull request. Keep this guide and the same working chat open.",
   steps: [
-    { h: "Work in your fork once", body: [
-      "Check the repository and branch shown below. If this is the event repository, switch to your fork once. After that, the guide buttons send work to this chat rather than opening new sessions.",
-      "If you forked the repository earlier, first open your fork on GitHub and use <b>Sync fork → Update branch</b> to bring in this guide and its repository instructions. If GitHub reports conflicts, stop and ask for help; do not discard your own work.",
-      { fork: true },
-      "The fork button runs <code>gh repo fork octodemo/virtual-universe-26 --clone=false --default-branch-only</code> and enables issues. Reuse the fork from Section 1 if you have one.",
-      { note: "Already in your fork? Stay here. To reopen this guide without a model turn, use the panel's <b>+ → Installed extensions → Universe '26 welcome</b> after the repository extension has loaded." },
-    ]},
     { h: "Find the skill, including hidden folders", body: [
+      "Start here in the session you already have. You can read the skill and try the documentation connector without a fork. There is nothing to reopen or switch to.",
       "Select <b>+ → Files</b> above the panel. In Files, open the <b>gear menu → Show tracked hidden files</b>. Then expand <code>.github → skills → issue-to-pr → SKILL.md</code>.",
       { img: { src: "open-files.png", alt: "First open Files using +. Then use the Files gear menu to show tracked hidden files." } },
-      "<code>.github</code> is a folder, not a file. It is hidden by default. If it still does not appear, check the repository shown above and ask Copilot to locate the exact path; do not create a duplicate skill.",
-      { link: { href: "https://github.com/{fork}/blob/main/.github/skills/issue-to-pr/SKILL.md", text: "View the skill in your fork on GitHub" } },
+      "<code>.github</code> is a folder, not a file. It is hidden by default. If it still does not appear, ask Copilot to locate the exact path in this checkout; do not create a duplicate skill.",
       "The <code>name</code> in the file defines <code>/issue-to-pr</code>, the description explains when to use it, and the body describes its steps and boundaries.",
+      { k: "chat", text: "Show me .github/skills/issue-to-pr/SKILL.md in this checkout and explain its name, description, and steps. Read only; do not fork, change files, or open a new session." },
+    ]},
+    { h: "Ready to make changes?", body: [
+      "Only now do you need a fork: it is where your issue and pull request will live. Copilot can prepare that destination while keeping this session, checkout, and guide. Reuse your Section 1 fork if you have one.",
+      { k: "chat", text: "I'm ready to make changes. Help me prepare a fork destination in this same checkout. Inspect my branch, changes, and remotes. Reuse my existing fork or ask before creating one with gh repo fork octodemo/virtual-universe-26 --clone=false --default-branch-only. Verify its parent and my access. Ask before enabling issues or adding a workshop-fork remote. Preserve origin, existing remotes, and local work. Tell me the exact fork and remote we will target, and use them explicitly for GitHub commands and pushes. Do not open another session or clone." },
+      "Approve the proposed setup, then continue below. If you are only exploring, skip the editing steps and go to Tools & connectors—no fork is needed there.",
     ]},
     { h: "Make one useful edit", body: [
       "In the skill's draft-PR step, require a <b>How to test</b> section in the pull request body, alongside the issue-closing reference and summary. Save the file. You can edit it yourself or send this request:",
@@ -49,6 +48,7 @@ tools: {
   intro: "A skill teaches a job; tools add abilities; a connector gives tools access to a service. Use Microsoft Learn's public MCP server to retrieve documentation without a new account, API key, or paid subscription.",
   steps: [
     { h: "Discover with Agent Finder", body: [
+      "You can do this in your current session, including the event repository. No fork, repository switch, or issue is required.",
       { k: "chat", text: "/agentfinder Find an MCP server for Microsoft's public documentation that requires no account or API key. Do not install anything." },
       "Results vary. A relevance score measures the search match, not trust or safety. If Microsoft Learn is not listed, use the official reference below instead of choosing an unrelated result.",
       { link: { href: "https://learn.microsoft.com/en-us/training/support/mcp", text: "Read Microsoft's server documentation" } },
@@ -120,7 +120,8 @@ automate: {
       "A local edit or an unmerged PR is not automatically the version a cloud worker will run. Keep the factory exercise paused if its source is not ready.",
     ]},
     { h: "Create only after review", body: [
-      { k: "chat", text: "/factory-creator Prepare an issue-to-pr factory for my verified fork. Trigger on new issues, create only branches and draft PRs, never merge, and require the actor to have write access. Explain the source branch and granted tools. Ask for confirmation before creating it and leave the worker and any scheduled assessment paused." },
+      "A factory uses the app's project binding, not just your Git push remote. If this session still belongs to the event project, keep this step as a plan for later; do not create a factory there or reopen the app automatically.",
+      { k: "chat", text: "/factory-creator Plan an issue-to-pr factory for my verified fork. First verify the app's resolved repository target, not only my Git remotes. If this session is bound to the event repository, stop at a plan for later without switching sessions or creating resources. Otherwise propose a new-issue trigger, branches and draft PRs only, no merges, and require actor write access. Explain the source and tools, ask before creating, and keep the worker and scheduled assessment paused." },
       "Review the repository, permissions, source, and trigger. Choose the create-only option, not create-and-enable. Do not assume the local documentation connector is available to the cloud worker.",
     ]},
     { h: "Optional: try one run later", body: [

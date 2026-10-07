@@ -89,21 +89,11 @@ table.qa{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:14px}
 .done p{margin:0 0 14px;font-size:16px;line-height:1.5}
 .ghost{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-size:14px;font-weight:600}
 .ghost:focus-visible{outline:2px solid var(--g)}
-.forkcard{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#f6f8fa}
-.forkcard.ok{border-color:var(--g);background:#eef6ef}
-.forkcard b{display:block;font-size:15px}
-.forkcard span{font-size:13px;color:var(--mute)}
-.forkcard code{font-family:var(--mono);font-size:13px}
-.btns{display:flex;gap:8px;flex-wrap:wrap}
 a.btn{text-decoration:none;cursor:pointer;background:var(--g);color:#fff!important;border-radius:6px;padding:7px 14px;font-size:13px;font-weight:600}
 a.btn.alt,button.btn{all:unset;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)!important;border-radius:6px;padding:6px 13px;font-size:13px;font-weight:600}
 a.btn.alt{display:inline-block}
 a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.forkerr{margin:-6px 0 14px!important;color:#cf222e!important;font-size:14px!important}
 .linkrow{display:inline-block;margin:0 8px 14px 0}
-.step a.open{font-family:"Mona Sans",-apple-system,"Segoe UI",sans-serif;text-decoration:none;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;background:var(--g);color:#fff;margin-right:6px}
-.step a.open:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.step a.open.off{background:#d0d7de;color:#59636e;pointer-events:none}
 .send{cursor:pointer;font:inherit;font-size:12px;font-weight:600;padding:3px 10px;border:0;border-radius:6px;background:var(--g);color:#fff;margin-right:6px}
 .send:disabled{background:#d0d7de;color:#59636e;cursor:not-allowed}
 .send:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
@@ -118,7 +108,7 @@ a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outlin
 <p>In <a href="https://github.com/octodemo/virtual-universe-26/tree/main/01-github-latest-features" target="_blank" rel="noopener">Section 1</a> you <b>manually</b> created an issue and a stacked pull request with the GitHub CLI. In this section you'll learn some of the steps required to <b>build your own software factory</b>.</p>
 <blockquote class="def"><span class="mono">Software factory</span><p>A system of work where triggers, not humans, start agent sessions, so more work runs on its own and your time is saved for the decisions that need you.</p></blockquote>
 <p class="lh">What can go into a software factory</p>
-<p>Set up your fork once, then keep this canvas and the same working chat open. The core guides take about 25–30 minutes, plus setup and agent runs. Optional exercises can wait.</p>
+<p>Start reading here—no fork or session switch needed. Keep this canvas and chat open. Prepare a fork only when you are ready to make changes. The core guides take about 25–30 minutes, plus setup and agent runs.</p>
 <p>Every software factory looks different. Here are some building blocks you can use:</p>
 <ul class="parts">
 <li><b>Skills</b> can teach the agent a job, like turning an issue into a fix.</li>
@@ -238,36 +228,20 @@ items.forEach((e,i)=>e.querySelector('button').onclick=()=>show(i));
 document.querySelectorAll('.try').forEach(b=>b.onclick=()=>{location.hash='#/'+b.dataset.id});
 const label={term:'Terminal',chat:'Copilot chat'};
 const diff=s=>s.split('\n').map(l=>l[0]==='+'?'<span class="add">'+esc(l)+'</span>':l[0]==='-'?'<span class="del">'+esc(l)+'</span>':esc(l)+'\n').join('');
-let ME=null;
-window.go=u=>{location.href=u};
 const enc=encodeURIComponent;
-const fill=s=>{const f=ME&&ME.fork||(ME&&ME.login||'YOUR-USERNAME')+'/virtual-universe-26';return s.replace(/\{fork\}/g,f).replace(/\{login\}/g,ME&&ME.login||'YOUR-USERNAME')};
-const sessionLink=()=>ME&&ME.fork?'ghapp://session/new?repo='+enc(ME.fork)+'&mode=interactive&prompt='+enc('Open the Universe welcome canvas.'):null;
-function forkCard(){
- if(!ME)return `<div class="forkcard"><div><b>Checking this working session&hellip;</b></div></div>`;
- if(ME.error)return `<div class="note" role="alert">${esc(ME.error)} <button class="btn" data-refresh>Check again</button></div>`;
- if(!ME.login)return `<div class="forkcard"><div><b>Sign in to the GitHub CLI</b><span>Run <code>gh auth login</code>, then check again.</span></div><div class="btns"><button class="btn" data-refresh>Check again</button></div></div>`;
- const current=`<span>This session: <code>${esc(ME.repo)}</code> · <code>${esc(ME.branch)}</code></span>`;
- if(!ME.fork)return `<div class="forkcard"><div><b>Create your working fork</b>${current}<span>This creates a fork, enables issues, then opens one working session.</span></div><div class="btns"><button class="btn" data-forkopen>Fork and start working session</button></div></div><p class="forkerr" role="alert" hidden></p>`;
- const issuesOff=ME.issues===false?`<div class="note">Issues are disabled in your fork. <button class="btn" data-forkopen>Enable issues${ME.working?'':' and switch to fork'}</button></div>`:'';
- return `<div class="forkcard${ME.working?' ok':''}"><div><b>${ME.working?'Working in your fork':'Switch to your fork once'}</b>${current}</div><div class="btns">${ME.working?'':`<a class="btn" href="${sessionLink()}">Switch to your fork</a>`}<button class="btn" data-refresh>Refresh status</button><a class="btn alt" href="https://github.com/${ME.fork}" target="_blank" rel="noopener">View fork on GitHub</a></div></div>${issuesOff}<p class="forkerr" role="alert" hidden></p>`;
-}
 const blk=b=>{
- if(typeof b==='string')return `<p>${fill(b)}</p>`;
- if(b.fork)return forkCard();
- if(b.link){if(b.link.href.includes('{fork}')&&!(ME&&ME.fork))return '';const hr=fill(b.link.href);const ext=hr.startsWith('http');return `<div class="linkrow"><a class="btn${ext?' alt':''}" href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
+ if(typeof b==='string')return `<p>${b}</p>`;
+ if(b.link){const hr=b.link.href;const ext=hr.startsWith('http');return `<div class="linkrow"><a class="btn${ext?' alt':''}" href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
  if(b.img)return `<figure class="shot"><img src="${b.img.src}" alt="${b.img.alt}"><figcaption>${b.img.alt}</figcaption></figure>`;
- if(b.note)return `<div class="note">${fill(b.note)}</div>`;
- if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${fill(r[0])}</td><td>${fill(r[1])}</td></tr>`).join('')}</table>`;
- const text=fill(b.text);
+ if(b.note)return `<div class="note">${b.note}</div>`;
+ if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`;
+ const text=b.text;
  const body=b.k==='diff'?diff(text):b.k==='file'?hl(text):esc(text);
  let open='';
- if(b.k==='chat')open=`<button class="send" data-send="${enc(text)}"${ME&&ME.working?'':' disabled'} title="Sends this visible prompt to the current working chat">Send to this chat</button>`;
+ if(b.k==='chat')open=`<button class="send" data-send="${enc(text)}" title="Sends this visible prompt to the current chat">Send to this chat</button>`;
  return `<div class="block ${b.k==='chat'?'chatblk':''}"><div class="bh"><span>${b.label||label[b.k]}</span><span>${open}<button class="copy" data-t="${enc(b.k==='diff'?text.split('\n').filter(l=>l[0]!=='-').map(l=>l.slice(1)).join('\n'):text)}">Copy</button></span></div><pre>${body}</pre><span class="sendstatus" role="status"></span></div>`};
 function copy(t){const done=()=>true;if(navigator.clipboard)return navigator.clipboard.writeText(t).then(done,()=>fallback(t));return Promise.resolve(fallback(t))}
 function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();return ok}
-async function loadMe(force){try{const r=await fetch('me'+(force?'?refresh=1':''),{cache:'no-store'});ME=await r.json();if(!r.ok&&!ME.error)ME={error:'Could not verify this working session.'}}catch{ME={error:'Could not reach the canvas server. Reopen the canvas and try again.'}}}
-function rerender(){const y=scrollY;route(true);scrollTo(0,y)}
 function route(keep){
  const id=location.hash.slice(2),w=window.WALK&&WALK[id];
  home.hidden=!!w;guide.hidden=!w;
@@ -277,11 +251,10 @@ function route(keep){
  <div class="ghead"><div class="mono">${w.eyebrow}</div><h1>${w.title}</h1><p>${w.intro}</p>
  <div class="meta"><span class="pill">${w.time}</span><span class="pill">${w.steps.length} steps</span><span class="pill">Part ${i+1} of ${I.length}</span></div>
  ${w.preview?`<div class="preview">${w.preview}</div>`:''}</div>
- ${id==='skills'?'':forkCard()}
- <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${fill(s.h)}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
+ <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${s.h}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
  <div class="done"><p>${w.done}</p><div class="actions" style="margin-top:0">
  ${w.next?`<button class="try" data-next="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:''}
- <button class="ghost" data-help="${id}"${ME&&ME.working?'':' disabled'}>Stuck? Ask Copilot in chat</button></div><span class="sendstatus" role="status"></span></div>`;
+ <button class="ghost" data-help="${id}">Stuck? Ask Copilot in chat</button></div><span class="sendstatus" role="status"></span></div>`;
  guide.querySelector('.back').onclick=()=>{location.hash='';};
  guide.querySelectorAll('.copy').forEach(c=>c.onclick=async()=>{const ok=await copy(decodeURIComponent(c.dataset.t));c.textContent=ok===false?'Select and copy':'Copied';setTimeout(()=>c.textContent='Copy',1600)});
  const n=guide.querySelector('[data-next]');if(n)n.onclick=()=>{location.hash='#/'+n.dataset.next};
@@ -294,16 +267,8 @@ function route(keep){
  }
  const hb=guide.querySelector('[data-help]');hb.onclick=()=>sendStep(hb);
  guide.querySelectorAll('[data-send]').forEach(b=>b.onclick=()=>sendStep(b,decodeURIComponent(b.dataset.send)));
- guide.querySelectorAll('[data-forkopen]').forEach(a=>a.onclick=async e=>{e.preventDefault();
-  if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Preparing your fork\u2026';
-  let r;try{r=await (await fetch('fork',{method:'POST'})).json()}catch{r={error:'Could not reach the canvas. Try again.'}}
-  if(r.error||!r.fork){a.textContent='Try again';delete a.dataset.busy;const er=guide.querySelector('.forkerr');if(er){er.hidden=false;er.textContent=r.error||'Something went wrong.'}else alert(r.error);return}
-  ME=r;const target=ME.working?null:sessionLink();rerender();if(target)window.go(target)});
- guide.querySelectorAll('[data-refresh]').forEach(r=>r.onclick=async()=>{r.textContent='Checking\u2026';await loadMe(true);rerender()});
  if(!keep)window.scrollTo(0,0);
 }
-addEventListener('focus',()=>{if(!guide.hidden)loadMe().then(rerender)});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!guide.hidden)loadMe().then(rerender)});
 addEventListener('hashchange',()=>{route();if(!location.hash){const k=items.findIndex(e=>e.classList.contains('on'));items[k]&&items[k].scrollIntoView({block:'center'})}});
-show(0);route();loadMe().then(()=>{if(!guide.hidden)rerender()});
+show(0);route();
 </script></body></html>
