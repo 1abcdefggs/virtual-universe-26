@@ -72,74 +72,41 @@ description: What the skill does and when to use it.
 
 tools: {
   eyebrow: "TOOLS · GUIDE",
-  title: "Find and add a tool with Agent Finder",
-  time: "15 min",
-  intro: "Tools give your agent more abilities. Agent Finder searches GitHub for plugins, agents, and MCP servers. In this guide you find a CI/CD plugin, install it, add a workflow, and teach your skill to wait for checks.",
+  title: "Give Copilot the right tools and context",
+  time: "10 min",
+  intro: "A custom agent gives Copilot a focused approach. A connector gives it access to tools and information.<br><br>APIs change, and Copilot's built-in knowledge may be out of date. Use Context7 to look up current Node.js documentation so your issue-to-pr skill can base its fixes on documented APIs and examples, with sources you can check.",
   steps: [
-    { h: "Search with Agent Finder", body: [
-      "In the Copilot app chat, describe the job you need help with:",
-      { k: "chat", text: `/agentfinder find an agent that can help with CI/CD pipelines and GitHub Actions workflows` },
-      "Copilot lists the matches with a relevance score. The score shows how well a result matches your search, not whether it is safe. Agent Finder never installs anything on its own.",
+    { h: "Find a documentation agent with Agent Finder", body: [
+      "<b>Copy the prompt</b> into this session's Copilot chat:",
+      { k: "chat", noOpen: true, text: `/agentfinder find the Context7 Expert custom agent in github/awesome-copilot for looking up current library documentation` },
+      "<b>Review the result</b>, then ask Copilot to add the agent.",
+      { k: "chat", noOpen: true, text: `Add the Context7 Expert agent from github/awesome-copilot to this project. Check compatibility with this app and use the keyless Context7 connector with its current resolve-library-id and query-docs tools. Ask before installing or changing its configuration. Keep this session open.` },
     ]},
-    { h: "Check what you're installing", body: [
-      "Pick <b>repo-actions-hub</b>. Before you install a plugin, read its <code>plugin.json</code> and the code it points to.",
-      { k: "file", label: "plugins/repo-actions-hub/plugin.json", text: `{
-  "name": "repo-actions-hub",
-  "description": "Browse repository GitHub Actions workflows, inspect recent runs, and trigger manual workflow_dispatch runs from a Copilot canvas.",
-  "version": "1.0.2",
-  "author": { "name": "James Montemagno" },
-  "extensions": {
-    "com.github.awesome-copilot": {
-      "extensions": ["./extensions/repo-actions-hub"]
-    }
-  }
-}` },
-      "The <code>extensions</code> entry is the code that runs. You can read it in <a href=\"https://github.com/github/awesome-copilot/tree/main/plugins/repo-actions-hub\" target=\"_blank\" rel=\"noopener\">github/awesome-copilot</a>.",
+    { h: "Add the Context7 connector", body: [
+      { list: [
+        "On the left of your screen in the Copilot app, <b>click Customize</b> at the top of the sidebar that shows your sessions.",
+        "Use the search bar to <b>search for Context7</b>, select the server, and <b>click Add server</b>.",
+        "<b>Select the HTTP tab</b> and accept the default settings presented.",
+        "<b>Return to this session's Universe welcome canvas tab</b> to continue.",
+      ] },
     ]},
-    { h: "Install the plugin", body: [
-      "Open the install form in the Copilot app and confirm:",
-      { link: { href: "ghapp://plugins/install?source=repo-actions-hub%40awesome-copilot", text: "Install repo-actions-hub in Copilot app" } },
-      "If the app says the marketplace is unknown, add it once and try again:",
-      { link: { href: "ghapp://plugins/marketplace/add?source=github%2Fawesome-copilot", text: "Add the awesome-copilot marketplace" } },
-      "The buttons below start new sessions, so they load the plugin.",
+    { h: "Try a documentation lookup", body: [
+      "<b>Copy the prompt</b> into this chat:",
+      { k: "chat", noOpen: true, text: `Use the Context7 Expert agent and the Context7 MCP connector to find how Node.js reads a UTF-8 file with node:fs/promises. Show a short example and its documentation source. Send only this public documentation query, not repository contents. If the agent or connector isn't available in this session, tell me; don't substitute web search.` },
+      "Look for a Context7 tool call and a linked Node.js source. The connector retrieves documentation; it doesn't certify that a PR is correct.",
     ]},
-    { h: "Add a workflow to check", body: [
-      "Your fork has no workflows yet. Ask Copilot to add one:",
-      { k: "chat", text: `Add a GitHub Actions workflow that checks universe-notes/notes/keynote-highlights.json is valid JSON on every pull request, and that I can also run by hand. Show me the file, then commit it to the default branch and push.` },
-      "It should look similar to this:",
-      { k: "file", label: ".github/workflows/check-notes.yml", text: `name: Check notes
-on: [pull_request, workflow_dispatch]
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: python3 -m json.tool universe-notes/notes/keynote-highlights.json > /dev/null` },
-    ]},
-    { h: "Run it from the plugin", body: [
-      { k: "chat", text: `Open the Repo Actions Hub for this repository` },
-      "Select <b>Check notes</b>, choose <b>Run workflow</b>, and watch the run finish.",
-    ]},
-    { h: "Teach your skill to wait for checks", body: [
-      "Add a step after the pull request is opened, and renumber the last step:",
-      { k: "diff", label: ".github/skills/issue-to-pr/SKILL.md", text: `    \`gh pr create --draft --title "Fix #<n>: <issue title>" --body "<body>"\`
-+7. Wait for the pull request checks and report the result:
-+   \`gh pr checks --watch\`
-+   If a check fails, read the log with \`gh run view --log-failed\`,
-+   fix the problem, and push again.
--7. Comment on the issue with what changed and how to test it, then switch back
-+8. Comment on the issue with what changed and how to test it, then switch back` },
-      { k: "term", text: `git commit -am "Wait for checks in issue-to-pr"
-git push` },
-    ]},
-    { h: "Run it on a new issue", body: [
-      { k: "term", text: `gh issue create -R {fork} --title "Add a software factory highlight" \\
-  --body "Add a highlight about building a software factory to universe-notes/notes/keynote-highlights.json, in the same format as the others."` },
-      { k: "chat", text: `/issue-to-pr{issue}` },
-      "This time Copilot waits for <b>Check notes</b> to pass before it reports back.",
+    { h: "Use it in your skill", body: [
+      "<b>Ask Copilot</b> to update the skill by copying this prompt into chat, or <b>edit it yourself</b> using the instructions below.",
+      { k: "chat", noOpen: true, text: `Update .github/skills/issue-to-pr/SKILL.md to use the Context7 Expert agent and connector when a fix needs library or API documentation. Send only public documentation queries, cite relevant sources in the draft PR, and report unavailable tools instead of pretending a lookup succeeded. Show me the edit; don't commit or push yet.` },
+      "To edit it yourself, <a href=\"#/tools\" data-open-skill>open the skill.md file here</a> <span data-open-skill-status role=\"status\"></span> and click the <code>&lt;&gt;</code> symbol. Add this instruction before the step that makes the fix, then save:",
+      { k: "file", label: "Add to .github/skills/issue-to-pr/SKILL.md", text: `When a fix needs library or API documentation, use the Context7 Expert
+agent and Context7 MCP connector to look it up. Send only public
+documentation queries, not repository contents. Cite relevant sources
+in the draft PR. If the agent or connector is unavailable, report it
+instead of claiming the lookup succeeded.` },
     ]},
   ],
-  done: "You found a tool, read it before installing it, and wired it into your skill. Next, add a security review.",
+  done: "Your skill can now ask for current documentation. Next, review the draft PR for security issues.",
   next: "security",
 },
 
@@ -147,51 +114,25 @@ security: {
   eyebrow: "SECURITY REVIEW · GUIDE",
   title: "Review the agent's work for security issues",
   time: "10 min",
-  intro: "The security review agent checks changed code and reports only vulnerabilities it is confident someone could exploit. In this guide you run it on your fix, see what a finding looks like, and make the review part of your skill.",
+  intro: "The security review agent checks changed code and reports only vulnerabilities it is confident someone could exploit. In this guide you run it on the fix in the PR and make the review part of your skill.",
   steps: [
-    { h: "Run the review on your fix", body: [
-      "Review the pull request the skill opened in the Skills guide. <b>Open in Copilot app</b> starts a session on that pull request's branch in your fork.",
-      { k: "chat", text: `/security-review`, pr: true },
-      "It reviews the changes on this branch and shows findings in a table with the severity, file, lines, and confidence. No findings is a good result.",
-    ]},
-    { h: "See what a finding looks like (optional)", body: [
-      "In that session's terminal, add a file that passes user input to a shell command, and commit it locally. Don't push it.",
-      { k: "file", label: "universe-notes/show-note.js", text: `import { execSync } from "node:child_process";
-
-const file = process.argv[2];
-console.log(execSync(\`cat \${file}\`).toString());` },
-      { k: "term", text: `git add universe-notes/show-note.js
-git commit -m "Try an unsafe change"` },
-      "Then run the review again in the same chat:",
-      { k: "chat", text: `/security-review`, noOpen: true },
-      "Expect a high-severity command injection finding with the line and a suggested fix. Then remove the commit:",
-      { k: "term", text: `git reset --hard HEAD~1` },
-    ]},
-    { h: "See how the review agent is defined", body: [
-      "The security review agent is built into Copilot. It is a prompt and a set of tools, like a skill.",
-      { k: "file", label: "security-review.agent.yaml (abridged)", text: `name: security-review
-description: >
-  Performs security-focused code review to identify
-  high-confidence vulnerabilities in the diff.
-prompt: |
-  Identify HIGH-CONFIDENCE security vulnerabilities
-  in the modified and added lines of code.
-  1. MINIMIZE FALSE POSITIVES: only flag issues you
-     are more than 80% confident are exploitable.
-  2. FOCUS ON IMPACT: unauthorized access, data
-     breaches, or system compromise.` },
+    { h: "Run the review on the fix in the PR", body: [
+      "Review the pull request the skill opened earlier.",
+      "<b>Copy the slash command</b> into this session's chat:",
+      { k: "chat", noOpen: true, text: `/security-review Review the last PR created by the issue-to-pr skill in this chat. Use the chat history to identify it and review the fix in that PR, not unrelated local changes. If the PR is unclear, ask me which one.` },
+      "The review shows findings in a table with the severity, file, lines, and confidence. No findings is a good result.",
     ]},
     { h: "Add the review to your skill", body: [
-      "Switch back to the default branch, then add a review step before the pull request is opened. Renumber the steps after it.",
-      { k: "term", text: `git switch main` },
+      "<a href=\"#/security\" data-open-skill>Open the skill.md file here</a> <span data-open-skill-status role=\"status\"></span> and <b>click &lt;&gt; to edit</b>. Add the review step shown below before the pull request is opened, then renumber the following steps and save.",
       { k: "diff", label: ".github/skills/issue-to-pr/SKILL.md", text: ` 5. Make the smallest change that fixes the issue, and run the project's tests
     if it has any.
 +6. Ask the security-review agent to review your changes. Fix any HIGH or
 +   CRITICAL findings, and list the others in the pull request body.
 -6. Commit, push, and open a draft pull request that closes the issue:
 +7. Commit, push, and open a draft pull request that closes the issue:` },
-      { k: "term", text: `git commit -am "Review security in issue-to-pr"
-git push` },
+      "<b>Copy this command</b> into chat to commit only the skill file on your current branch. The <code>!</code> prefix opens the terminal to run it. No branch switch is needed to use the edited skill locally.",
+      { k: "chat", noOpen: true, text: `!git add .github/skills/issue-to-pr/SKILL.md && git commit --only .github/skills/issue-to-pr/SKILL.md -m "Review security in issue-to-pr"` },
+      "This commits the edit locally. Before publishing it, ask Copilot to verify the fork remote and target branch rather than running a plain <code>git push</code>.",
     ]},
     { h: "Run it on a new issue", body: [
       { k: "term", text: `gh issue create -R {fork} --title "Add a search command to universe-notes" \\
@@ -206,67 +147,27 @@ git push` },
 
 automate: {
   eyebrow: "AUTOMATE · GUIDE",
-  title: "Turn your skill into a software factory",
-  time: "15 min",
-  intro: "So far you started every run yourself. A software factory starts the work for you when something happens, like a new issue. It also checks how the work is going and suggests improvements for you to approve.",
-  preview: "Software factories are in preview in the GitHub Copilot app. Names and options may change.",
+  title: "Turn your skill into an Automation",
+  time: "5 min",
+  intro: "Save your skill as an automation so you can run it again without rewriting the prompt. You can schedule it for a certain time, but for this tutorial you'll trigger it manually.",
   steps: [
-    { h: "Know the three parts", body: [
-      { table: [
-        ["Worker", "Does the job when a trigger fires. Here, it runs <code>issue-to-pr</code> when an issue is opened."],
-        ["Assessment", "Collects evidence about the results on a schedule, like whether pull requests pass checks and get merged."],
-        ["Improvement", "Uses the assessments to suggest changes to the prompt, triggers, or tools. You decide whether to apply them."],
-      ]},
+    { h: "Create an automation", body: [
+      "<b>Open Automations</b> in the app sidebar and <b>click New Automation</b>.",
+      "Give it a name, such as <code>Issue to PR</code>. Under <b>Trigger</b>, choose <b>Manual</b>. You can choose a scheduled time later.",
     ]},
-    { h: "Push your skill", body: [
-      "The factory runs from your fork on GitHub, so make sure your latest skill is pushed.",
-      { k: "term", text: `git switch main
-git status
-git push` },
+    { h: "Select your project and skill", body: [
+      "<b>Click the project selector</b> below the prompt box, marked by the green arrow, and select <b>your fork of virtual-universe-26</b>, not <code>octodemo/virtual-universe-26</code>.",
+      { img: { src: "new-automation.png", alt: "New automation form. The green arrow points to the project selector below the prompt box.", projectArrow: true } },
+      "The screenshot shows the event repository and a Daily trigger. For this tutorial, use <b>your fork</b> and <b>Manual</b> instead.",
+      "<b>Type <code>/issue-to-pr</code></b> in the prompt box and select the skill suggestion. Make sure the selected project has your updated skill.",
+      "<b>Copy this text</b> after the skill in the automation's prompt box:",
+      { k: "chat", label: "Automation prompt", noOpen: true, text: `Find the oldest open issue in this fork that has no linked pull request and use this skill to propose a fix. Notify me when the PR is ready to be reviewed to be merged.` },
     ]},
-    { h: "Start the factory creator", body: [
-      "Start a session in your fork with the factory creator:",
-      { k: "chat", text: `/factory-creator Turn the issue-to-pr skill into a software factory that runs when an issue is opened in my fork.` },
-      "It asks one question at a time and writes the configuration for you.",
-    ]},
-    { h: "Answer its questions", body: [
-      "These answers work well for this guide:",
-      { table: [
-        ["Which repository?", "<code>{fork}</code>"],
-        ["What outcome do you want?", "Every new issue gets a reviewed draft pull request."],
-        ["What should start it?", "When an issue is opened."],
-        ["What can it change?", "Create branches and draft pull requests. Never merge or close anything."],
-        ["How will you know it's working?", "A pull request is opened, checks pass, the security review is clean, and a person merges it."],
-        ["How often should it assess?", "Weekly."],
-      ]},
-    ]},
-    { h: "Create it paused", body: [
-      "Copilot summarizes the configuration. It looks similar to this:",
-      { k: "file", label: "factory configuration (abridged)", text: `{
-  "worker": {
-    "name": "issue-to-pr",
-    "prompt": "Run /issue-to-pr on the new issue",
-    "triggers": { "issues": { "types": ["opened"] } }
-  },
-  "assessment": { "name": "Weekly fix check", "interval": "weekly" },
-  "improvement": { "name": "Suggest skill changes", "interval": "manual" }
-}` },
-      "When it asks <b>Ready to create the factory?</b>, choose <b>Just create it</b>. Nothing runs until you turn it on.",
-    ]},
-    { h: "Turn it on and open an issue", body: [
-      "In the same chat where you created the factory, ask:",
-      { k: "chat", text: `Turn on the worker for my factory`, noOpen: true },
-      { k: "term", text: `gh issue create -R {fork} --title "Add a topic count to the universe-notes README" \\
-  --body "Add a section to universe-notes/README.md that lists each topic in notes/keynote-highlights.json and how many highlights it has."` },
-      "You don't start anything this time. Within a few minutes a new session starts on its own and opens a draft pull request for you to review.",
-    ]},
-    { h: "Check how it's doing", body: [
-      { k: "chat", text: `Run the assessment for my factory now`, noOpen: true },
-      { k: "chat", text: `Run improvement for my factory and show me what it suggests`, noOpen: true },
-      "Improvement only suggests changes. You choose what to apply. When you're done, pause it:",
-      { k: "chat", text: `Pause my factory`, noOpen: true },
+    { h: "Save and run when ready", body: [
+      "<b>Click Create</b> to save the automation. With a Manual trigger, it won't run until you start it.",
+      "When you're ready, <b>click the play button</b> on the automation. Follow its run and review the draft PR it produces; nothing should merge without your review.",
     ]},
   ],
-  done: "You built a software factory: a skill does the job, tools and a security review support it, a trigger starts it, and you make the final call.",
+  done: "You've turned your skill into an automation you can run on demand. Later, you can give it a schedule.",
 },
 };

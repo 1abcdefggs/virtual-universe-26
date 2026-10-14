@@ -108,6 +108,7 @@ a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outlin
 .step a.open.off{background:#d0d7de;color:#59636e;pointer-events:none}
 @media (max-width:900px){.factory{grid-template-columns:1fr}.chatcol{display:none}.inline-chat{display:block;background:#f3f4f1;background-image:linear-gradient(#e7e8e4 1px,transparent 1px),linear-gradient(90deg,#e7e8e4 1px,transparent 1px);background-size:24px 24px;border:1px solid var(--line);border-radius:8px;padding:20px 16px;margin-bottom:16px}header{flex-direction:column;align-items:flex-start}}
 .shot{margin:14px 0;}.shot img{display:block;max-width:100%;border:1px solid var(--line,rgba(255,255,255,.15));border-radius:10px;}.shot figcaption{font-size:12px;opacity:.7;margin-top:6px;}
+.shot-image{position:relative}.shot-image svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 </style></head>
 <body>
 <div id="home">
@@ -115,7 +116,7 @@ a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outlin
 <div class="lede">
 <p>Turn a new issue into a suggested fix and a draft pull request. <b>You review before anything merges.</b></p>
 <blockquote class="def"><span class="mono">What is an automation?</span><p>A saved agent task that runs on a schedule, on demand, or in response to a repository event.</p></blockquote>
-<p>In this tutorial, you'll turn a skill into a scheduled automation that connects to an MCP server, runs a security review on the draft PR, and notifies you when the PR is ready to merge.</p>
+<p>In this tutorial, you'll turn a skill into an automation, connect to an MCP server, and review the draft PR for security issues. Start with a manual trigger; add a schedule later.</p>
 </div>
 <section class="factory">
  <div class="chatcol" id="chat"></div>
@@ -157,23 +158,10 @@ description: Read an open issue, propose a fix, and open a draft pull request.
  cop:'I read the issue, wrote the smallest fix, and opened a draft pull request for your review.',
  steps:['Read issue #42 and the code it mentions','Wrote a fix and ran the tests','Opened draft PR #43 that closes #42']},
 {id:'tools',name:'Tools and connectors',
- desc:'Give Copilot access to the tools and services it needs. Start with a plugin for GitHub Actions.',
- file:['plugins/repo-actions-hub/plugin.json',`{
-  "name": "repo-actions-hub",
-  "description": "Browse repository GitHub Actions workflows, inspect recent runs, and trigger manual workflow_dispatch runs from a Copilot canvas.",
-  "version": "1.0.2",
-  "author": { "name": "James Montemagno" },
-  "keywords": ["actions", "canvas", "github-actions", "recent-runs", "workflow-dispatch"],
-  "extensions": {
-    "com.github.awesome-copilot": {
-      "extensions": ["./extensions/repo-actions-hub"]
-    }
-  }
-}`],
- you:'<code>/agentfinder</code> find an agent that can help with CI/CD pipelines and GitHub Actions workflows',
- cop:'I found a match. Install it and your agent can check the workflows before it opens the pull request.',
- extra:card('repo-actions-hub','Browse workflows, inspect runs, trigger workflow_dispatch','Install'),
- steps:['Searched GitHub\u2019s Agent Finder','Matched CI/CD and GitHub Actions','Ready to install repo-actions-hub']},
+ desc:'Find a documentation agent and connect Context7 for current Node.js examples.',
+ you:'Use Context7 to show how Node.js reads a UTF-8 file.',
+ cop:'Here is a file-reading example from the Node.js documentation.',
+ steps:['Looked up Node.js with Context7','Retrieved a relevant code example','Linked the documentation source']},
 {id:'security',name:'Security review',
  desc:'Use <code>/security-review</code> to check the proposed changes for security risks before merging.',
  file:['security-review.agent.yaml',`name: security-review
@@ -196,13 +184,10 @@ prompt: |
  extra:card('HIGH \u00b7 src/export.js:42','User input is passed to a shell command','Fix'),
  steps:['Reviewed the diff and related code','Explained the finding with the affected line','Suggested a fix for your approval']},
 {id:'automate',name:'Automate',
- desc:'Save the task as an automation and choose what starts it, such as a new issue.',
- file:['Example automation prompt',`Run /issue-to-pr for the new issue, then /security-review.
-Leave the pull request as a draft for a person to review.
-Never merge or approve it.`],
- you:'Run this whenever a new issue is opened.',
- cop:'The automation runs the task for each new issue. You review the draft pull request.',
- steps:['Use the issue-to-pr skill','Check the changes for security risks','Keep a person in charge of merging']}];
+ desc:'Save your skill as an automation with a manual trigger. Add a schedule later.',
+ you:'Can I save this skill as an automation?',
+ cop:'Choose your fork, enter /issue-to-pr, and select Manual to run it when you are ready.',
+ steps:['Open New Automation','Select your fork and skill','Save with a Manual trigger']}];
 const chatHtml=t=>`<div class="you fade"><div class="bubble"><small>You</small>${t.you}</div><img class="avatar" src="mona.png" alt="Mona"></div>
 <div class="cop fade"><div class="ic">${COPILOT}</div><div class="bubble"><small style="font-family:var(--mono)">Copilot</small><h3>${t.cop}</h3>${t.extra||''}<ul>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ul></div></div>`;
 acc.innerHTML=I.map(t=>`<div class="item"><button aria-expanded="false">${t.name}</button><div class="panel">
@@ -239,7 +224,7 @@ const blk=b=>{
  if(b.fork)return forkCard();
  if(b.openSkill)return `<p>For our <code>issue-to-pr</code> skill, the file path is <code>.github/skills/issue-to-pr/SKILL.md</code>. <a href="#/skills" data-open-skill>Open the skill.md file here</a> and take a closer look! <span data-open-skill-status role="status"></span></p>`;
  if(b.link){if(b.link.needs&&!(ME&&ME[b.link.needs]))return '';const hr=fill(b.link.href);const ext=hr.startsWith('http');return `<div class="linkrow"><a${b.link.plain?'':` class="btn${ext?' alt':''}"`} href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
- if(b.img)return `<figure class="shot"><img src="${b.img.src}" alt="${b.img.alt}"><figcaption>${b.img.alt}</figcaption></figure>`;
+ if(b.img)return `<figure class="shot"><div class="shot-image"><img src="${b.img.src}" alt="${b.img.alt}">${b.img.projectArrow?'<svg viewBox="0 0 1164 1023" aria-hidden="true"><path d="M570 852 L392 800 M416 784 L392 800 L405 825" fill="none" stroke="#1f883d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div><figcaption>${b.img.alt}</figcaption></figure>`;
  if(b.note)return `<div class="note">${fill(b.note)}</div>`;
  if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${fill(r[0])}</td><td>${fill(r[1])}</td></tr>`).join('')}</table>`;
  const text=fill(b.text);
@@ -260,7 +245,7 @@ function route(keep){
  <div class="ghead"><div class="mono">${w.eyebrow}</div><h1>${w.title}</h1><p>${w.intro}</p>
  <div class="meta"><span class="pill">${w.time}</span><span class="pill">${w.steps.length} steps</span><span class="pill">Part ${i+1} of ${I.length}</span></div>
  ${w.preview?`<div class="preview">${w.preview}</div>`:''}</div>
- ${id==='skills'?'':`<details class="example"><summary>View example</summary>${file(...I[i].file)}</details>`}
+ ${id==='skills'||!I[i].file?'':`<details class="example"><summary>View example</summary>${file(...I[i].file)}</details>`}
  <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${fill(s.h)}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
  <div class="done"><p>${w.done}</p><div class="actions" style="margin-top:0">
  ${w.next?`<button class="try" data-next="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:''}

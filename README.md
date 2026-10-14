@@ -34,16 +34,16 @@ Are you an open source maintainer? Check out the settings we've shipped to help 
 
 ## Section 2: Agentic Software Development with GitHub Copilot
 
-Click the button below to open the repository in Copilot App and confirm the new session. Copilot opens the welcome canvas; read it and use its **Try this example** buttons to open the guides.
+Build an automation with a skill, a documentation connector, and a security review. Open the welcome canvas and use its **Start** buttons to follow the four guides.
 
-[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26mode%3Dinteractive%26prompt%3DOpen%2520the%2520Universe%2520welcome%2520canvas.)
+[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-welcome)
 
 Already in a session? Open **+ → Installed extensions → Universe '26 welcome** after the extension loads. Start reading immediately—no fork or session switch needed. Prepare a fork destination later, in the same checkout, when you are ready to make changes. [Read the guide](./02-github-copilot-latest-features/README.md).
 
 1. **Skills:** Edit the [`issue-to-pr`](./.github/skills/issue-to-pr/SKILL.md) skill and run it with `/issue-to-pr`.
-2. **Tools and connectors:** Discover integrations with `/agentfinder`, then use Microsoft Learn's public documentation MCP connector. No new account or API key needed.
-3. **Security review:** Run `/security-review` on the agent's pull request.
-4. **Automate:** Turn the skill into a paused software factory that runs when an issue is opened.
+2. **Tools and connectors:** Discover a documentation agent with `/agentfinder`, add Context7 through **Customize**, and look up current Node.js documentation.
+3. **Security review:** Run `/security-review` on the agent's pull request and add a review step to the skill.
+4. **Automate:** Select your fork in **Automations → New Automation**, enter `/issue-to-pr`, and start with a **Manual** trigger. Add a schedule later.
 
 ## Section 3: GitHub Universe Highlights
 

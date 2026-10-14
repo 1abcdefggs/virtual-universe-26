@@ -7,16 +7,17 @@ const EXAMPLES = {
     skills:
         "I'm following the Skills guide in the Universe '26 welcome canvas: fork virtual-universe-26, edit .github/skills/issue-to-pr/SKILL.md, create a sample issue, and run /issue-to-pr on it. Check where I am (repository, branch, skill changes, open issues) and help me with the next step. Confirm the repository and the issue with me before you create an issue, a branch, or a pull request.",
     tools:
-        "I'm following the Tools guide in the Universe '26 welcome canvas: run /agentfinder for CI/CD and GitHub Actions, install repo-actions-hub@awesome-copilot, add a Check notes workflow, and make issue-to-pr wait for checks. Check where I am and help me with the next step. Ask before installing, committing, or pushing anything.",
+        "Help me with the Tools and Connectors guide: find the Context7 Expert agent in github/awesome-copilot, check its compatibility, and connect https://mcp.context7.com/mcp without an API key. Use current resolve-library-id and query-docs tools for a public Node.js documentation query, then add relevant documentation lookup to issue-to-pr. Keep this session. Ask before installing or changing configuration. Send no repository contents to the connector, and report missing tools or rate limits rather than substituting web search.",
     security:
         "I'm following the Security review guide in the Universe '26 welcome canvas: check out my issue-to-pr pull request, run /security-review, and add a review step to the issue-to-pr skill. Check where I am and help me with the next step. Explain any finding and ask before applying a fix.",
     automate:
-        "I'm following the Automate guide in the Universe '26 welcome canvas: turn the issue-to-pr skill into a paused software factory that runs when an issue is opened in my fork. Check where I am and help me with the next step. Explain the worker, assessment, and improvement parts, and ask before creating or enabling anything.",
+        "Help me follow the Automate guide: open Automations, choose New Automation, select my verified fork of virtual-universe-26 as the project, enter /issue-to-pr, and choose the Manual trigger. Make sure that project has my updated skill. Guide me through the form; do not create or run an automation without my approval.",
 };
 const files = {
     "/": ["welcome.html", "text/html; charset=utf-8"],
     "/mona.png": ["mona.png", "image/png"],
     "/open-files.png": ["open-files.png", "image/png"],
+    "/new-automation.png": ["new-automation.png", "image/png"],
     "/walkthroughs.js": ["walkthroughs.js", "text/javascript; charset=utf-8"],
 };
 const UPSTREAM = "octodemo/virtual-universe-26";
