@@ -14,10 +14,11 @@ h1{margin:0;font-size:34px;font-weight:500;letter-spacing:-.02em;line-height:1.1
 .lede b{color:var(--ink);font-weight:500}
 .def{margin:4px 0 16px;padding:12px 16px;border-left:3px solid var(--g);background:#f6f8fa}
 .def p{margin:6px 0 6px;color:var(--ink);font-size:17px;line-height:1.5}
-.lh{margin:0 0 6px!important;color:var(--ink)!important;font-weight:600;font-size:15px!important}
-.parts{margin:0;padding-left:20px;color:var(--mute);font-size:15px;line-height:1.7}
-.parts b{color:var(--ink);font-weight:600}
+.example summary{cursor:pointer;color:var(--mute);font-size:14px;margin-bottom:12px}
+.example summary:focus-visible{outline:2px solid var(--g);outline-offset:2px}
 .factory{display:grid;grid-template-columns:1fr 1fr}
+.factory.closed{grid-template-columns:1fr}
+.factory.closed .chatcol{display:none}
 .chatcol{background:#f3f4f1;background-image:linear-gradient(#e7e8e4 1px,transparent 1px),linear-gradient(90deg,#e7e8e4 1px,transparent 1px);background-size:24px 24px;border-right:1px solid var(--line);padding:56px 32px}
 .list{padding:28px}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--mute);margin-bottom:8px}
@@ -71,6 +72,7 @@ pre{margin:0;padding:14px;font-family:var(--mono);font-size:12.5px;line-height:1
 .step::before{content:counter(s);position:absolute;left:0;top:22px;width:32px;height:32px;border-radius:50%;border:2px solid var(--g);color:var(--g);font-weight:600;display:grid;place-items:center;font-size:14px}
 .step h3{margin:4px 0 10px;font-size:19px;font-weight:600}
 .step>p{margin:0 0 12px;color:var(--mute);font-size:15px;line-height:1.6}
+.step>ul{margin:0 0 14px;padding-left:20px;color:var(--mute);font-size:15px;line-height:1.6}
 .step>p b{color:var(--ink);font-weight:600}
 .step a{color:var(--g)}
 .block{margin:0 0 14px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
@@ -89,40 +91,37 @@ table.qa{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:14px}
 .done p{margin:0 0 14px;font-size:16px;line-height:1.5}
 .ghost{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-size:14px;font-weight:600}
 .ghost:focus-visible{outline:2px solid var(--g)}
+.forkcard{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#f6f8fa}
+.forkcard.ok{border-color:var(--g);background:#eef6ef}
+.forkcard b{display:block;font-size:15px}
+.forkcard span{font-size:13px;color:var(--mute)}
+.forkcard code{font-family:var(--mono);font-size:13px}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
 a.btn{text-decoration:none;cursor:pointer;background:var(--g);color:#fff!important;border-radius:6px;padding:7px 14px;font-size:13px;font-weight:600}
 a.btn.alt,button.btn{all:unset;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)!important;border-radius:6px;padding:6px 13px;font-size:13px;font-weight:600}
 a.btn.alt{display:inline-block}
 a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.forkerr{margin:-6px 0 14px!important;color:#cf222e!important;font-size:14px!important}
 .linkrow{display:inline-block;margin:0 8px 14px 0}
-.send{cursor:pointer;font:inherit;font-size:12px;font-weight:600;padding:3px 10px;border:0;border-radius:6px;background:var(--g);color:#fff;margin-right:6px}
-.send:disabled{background:#d0d7de;color:#59636e;cursor:not-allowed}
-.send:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.sendstatus{display:block;font-size:13px;padding:6px 14px}.sendstatus:empty{display:none}
+.step a.open{font-family:"Mona Sans",-apple-system,"Segoe UI",sans-serif;text-decoration:none;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;background:var(--g);color:#fff;margin-right:6px}
+.step a.open:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.step a.open.off{background:#d0d7de;color:#59636e;pointer-events:none}
 @media (max-width:900px){.factory{grid-template-columns:1fr}.chatcol{display:none}.inline-chat{display:block;background:#f3f4f1;background-image:linear-gradient(#e7e8e4 1px,transparent 1px),linear-gradient(90deg,#e7e8e4 1px,transparent 1px);background-size:24px 24px;border:1px solid var(--line);border-radius:8px;padding:20px 16px;margin-bottom:16px}header{flex-direction:column;align-items:flex-start}}
 .shot{margin:14px 0;}.shot img{display:block;max-width:100%;border:1px solid var(--line,rgba(255,255,255,.15));border-radius:10px;}.shot figcaption{font-size:12px;opacity:.7;margin-top:6px;}
 </style></head>
 <body>
 <div id="home">
-<header><h1>Welcome to Agentic<br>Software Development</h1><div class="mono">Universe&#8217;26 &middot; Section 2</div></header>
+<header><h1>Build your first automation</h1><div class="mono">Universe&#8217;26 &middot; Section 2</div></header>
 <div class="lede">
-<p>In <a href="https://github.com/octodemo/virtual-universe-26/tree/main/01-github-latest-features" target="_blank" rel="noopener">Section 1</a> you <b>manually</b> created an issue and a stacked pull request with the GitHub CLI. In this section you'll learn some of the steps required to <b>build your own software factory</b>.</p>
-<blockquote class="def"><span class="mono">Software factory</span><p>A system of work where triggers, not humans, start agent sessions, so more work runs on its own and your time is saved for the decisions that need you.</p></blockquote>
-<p class="lh">What can go into a software factory</p>
-<p>Start reading here—no fork or session switch needed. Keep this canvas and chat open. Prepare a fork only when you are ready to make changes. The core guides take about 25–30 minutes, plus setup and agent runs.</p>
-<p>Every software factory looks different. Here are some building blocks you can use:</p>
-<ul class="parts">
-<li><b>Skills</b> can teach the agent a job, like turning an issue into a fix.</li>
-<li><b>Tools and connectors</b> add abilities and access to services. Try a public documentation connector with no new account.</li>
-<li><b>Reviews</b> can check the agent's work, for example for security issues.</li>
-<li><b>Triggers</b> can start the agent on their own, like a new issue, a schedule, or a failed CI run.</li>
-<li><b>People</b> decide where they step in, such as approving a pull request before it merges.</li>
-</ul>
+<p>Turn a new issue into a suggested fix and a draft pull request. <b>You review before anything merges.</b></p>
+<blockquote class="def"><span class="mono">What is an automation?</span><p>A saved agent task that runs on a schedule, on demand, or in response to a repository event.</p></blockquote>
+<p>In this tutorial, you'll turn a skill into a scheduled automation that connects to an MCP server, runs a security review on the draft PR, and notifies you when the PR is ready to merge.</p>
 </div>
 <section class="factory">
  <div class="chatcol" id="chat"></div>
  <div class="list">
-  <div class="eyebrow">AGENTIC-SDLC()</div>
-  <h2>Build your own software factory</h2>
+  <div class="eyebrow">FOUR STEPS</div>
+  <h2>Start with a skill</h2>
   <div id="acc"></div>
  </div>
 </section>
@@ -139,7 +138,7 @@ const file=(p,c)=>`<div class="file"><div class="fh">${p}</div><pre>${hl(c)}</pr
 const card=(t,d,a)=>`<div class="card"><div><b>${t}</b><span>${d}</span></div><div class="tag">${a}</div></div>`;
 const I=[
 {id:'skills',name:'Skills',
- desc:'A skill teaches the agent one job. This one reads an issue, writes the smallest fix, and opens a draft pull request, using the same <code>gh</code> commands you ran in Section 1.',
+ desc:'Teach Copilot to read an issue, suggest a fix, and open a draft pull request.',
  file:['.github/skills/issue-to-pr/SKILL.md',`---
 name: issue-to-pr
 description: Read an open issue, propose a fix, and open a draft pull request.
@@ -157,19 +156,26 @@ description: Read an open issue, propose a fix, and open a draft pull request.
  you:'Can you turn new issues into suggested fixes for this repo?',
  cop:'I read the issue, wrote the smallest fix, and opened a draft pull request for your review.',
  steps:['Read issue #42 and the code it mentions','Wrote a fix and ran the tests','Opened draft PR #43 that closes #42']},
-{id:'tools',name:'Tools & connectors',
- desc:'Discover tools with <code>/agentfinder</code>, then review and add a connector yourself. Microsoft Learn gives your agent public documentation without a new account or API key.',
- file:['Microsoft Learn · MCP connection settings',`{
-  "name": "microsoft-learn",
-  "type": "http",
-  "url": "https://learn.microsoft.com/api/mcp"
+{id:'tools',name:'Tools and connectors',
+ desc:'Give Copilot access to the tools and services it needs. Start with a plugin for GitHub Actions.',
+ file:['plugins/repo-actions-hub/plugin.json',`{
+  "name": "repo-actions-hub",
+  "description": "Browse repository GitHub Actions workflows, inspect recent runs, and trigger manual workflow_dispatch runs from a Copilot canvas.",
+  "version": "1.0.2",
+  "author": { "name": "James Montemagno" },
+  "keywords": ["actions", "canvas", "github-actions", "recent-runs", "workflow-dispatch"],
+  "extensions": {
+    "com.github.awesome-copilot": {
+      "extensions": ["./extensions/repo-actions-hub"]
+    }
+  }
 }`],
- you:'Find two tips for writing a better GitHub Copilot prompt, with a source link.',
- cop:'A documentation connector can bring public sources into this chat.',
- extra:card('Microsoft Learn','Public documentation · no sign-in or API key','Review'),
- steps:['Discover a connector','Review and explicitly add it','Use its tool and inspect source links']},
+ you:'<code>/agentfinder</code> find an agent that can help with CI/CD pipelines and GitHub Actions workflows',
+ cop:'I found a match. Install it and your agent can check the workflows before it opens the pull request.',
+ extra:card('repo-actions-hub','Browse workflows, inspect runs, trigger workflow_dispatch','Install'),
+ steps:['Searched GitHub\u2019s Agent Finder','Matched CI/CD and GitHub Actions','Ready to install repo-actions-hub']},
 {id:'security',name:'Security review',
- desc:'Run <code>/security-review</code> on the draft pull request. A dedicated review agent checks the changed lines for exploitable vulnerabilities and reports only high-confidence findings.',
+ desc:'Use <code>/security-review</code> to check the proposed changes for security risks before merging.',
  file:['security-review.agent.yaml',`name: security-review
 displayName: Security Review Agent
 description: >
@@ -190,85 +196,104 @@ prompt: |
  extra:card('HIGH \u00b7 src/export.js:42','User input is passed to a shell command','Fix'),
  steps:['Reviewed the diff and related code','Explained the finding with the affected line','Suggested a fix for your approval']},
 {id:'automate',name:'Automate',
- desc:'Put it all together. The <b>worker</b> runs the skill on every new issue, the <b>assessment</b> checks the results each week, and <b>improvement</b> suggests changes for you to approve.',
- file:['factory.json',`{
-  "worker": {
-    "name": "issue-to-pr",
-    "prompt": "/issue-to-pr then /security-review",
-    "triggers": { "issues": { "types": ["opened"] } },
-    "tools": ["gh"],
-    "requireActorWritePermission": true
-  },
-  "assessment": {
-    "name": "Weekly fix check",
-    "interval": "weekly"
-  },
-  "improvement": {
-    "name": "Suggest skill changes",
-    "interval": "manual"
-  },
-  "definition": {
-    "desiredOutcome": "Every new issue gets a reviewed draft PR",
-    "dimensions": ["pr_opened", "checks_passed", "security_clean"]
-  }
-}`],
- you:'Run this for every new issue and tell me how it is doing.',
- cop:'Your factory is ready. It starts paused, so you can review it before turning it on.',
- steps:['Created the worker from /issue-to-pr','Added a weekly assessment','Left improvements for your approval']}];
+ desc:'Save the task as an automation and choose what starts it, such as a new issue.',
+ file:['Example automation prompt',`Run /issue-to-pr for the new issue, then /security-review.
+Leave the pull request as a draft for a person to review.
+Never merge or approve it.`],
+ you:'Run this whenever a new issue is opened.',
+ cop:'The automation runs the task for each new issue. You review the draft pull request.',
+ steps:['Use the issue-to-pr skill','Check the changes for security risks','Keep a person in charge of merging']}];
 const chatHtml=t=>`<div class="you fade"><div class="bubble"><small>You</small>${t.you}</div><img class="avatar" src="mona.png" alt="Mona"></div>
 <div class="cop fade"><div class="ic">${COPILOT}</div><div class="bubble"><small style="font-family:var(--mono)">Copilot</small><h3>${t.cop}</h3>${t.extra||''}<ul>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ul></div></div>`;
 acc.innerHTML=I.map(t=>`<div class="item"><button aria-expanded="false">${t.name}</button><div class="panel">
  <div class="inline-chat"></div>
- <p class="desc">${t.desc}</p>${file(...t.file)}
- <div class="actions"><button class="try" data-id="${t.id}">Try this example &rarr;</button><span class="hint">Opens a step-by-step guide.</span></div></div></div>`).join('');
+ <p class="desc">${t.desc}</p>
+ <div class="actions"><button class="try" data-id="${t.id}">Start ${t.name.toLowerCase()} &rarr;</button></div></div></div>`).join('');
 const items=[...document.querySelectorAll('.item')];
 function show(k){items.forEach((e,i)=>{e.classList.toggle('on',i===k);e.querySelector('button').setAttribute('aria-expanded',i===k)});
+ document.querySelector('.factory').classList.toggle('closed',k===-1);
+ if(k===-1){chat.replaceChildren();return}
  const h=chatHtml(I[k]);chat.innerHTML=h;items[k].querySelector('.inline-chat').innerHTML=h;}
-items.forEach((e,i)=>e.querySelector('button').onclick=()=>show(i));
+items.forEach((e,i)=>e.querySelector('button').onclick=()=>show(e.classList.contains('on')?-1:i));
 document.querySelectorAll('.try').forEach(b=>b.onclick=()=>{location.hash='#/'+b.dataset.id});
 const label={term:'Terminal',chat:'Copilot chat'};
 const diff=s=>s.split('\n').map(l=>l[0]==='+'?'<span class="add">'+esc(l)+'</span>':l[0]==='-'?'<span class="del">'+esc(l)+'</span>':esc(l)+'\n').join('');
+let ME=null,JUST=false;
+// DEMO: "Fork and open project" skips the real fork, shows the fork as created, and opens the event repository.
+const DEMO=true;
+const demoMe=m=>({...m,fork:(m&&m.login||'mona')+'/virtual-universe-26',repo:m&&m.upstream||'octodemo/virtual-universe-26',issues:true,demo:true});
+window.go=u=>{location.href=u};
 const enc=encodeURIComponent;
+const fill=s=>{const f=ME&&ME.fork||(ME&&ME.login||'YOUR-USERNAME')+'/virtual-universe-26';return s.replace(/\{fork\}/g,f).replace(/\{login\}/g,ME&&ME.login||'YOUR-USERNAME').replace(/\{issue\}/g,ME&&ME.issue?' '+ME.issue:'').replace(/\{pr\}/g,ME&&ME.pr||'')};
+const sessionLink=(prompt,pr)=>{if(!ME||!ME.fork)return null;let q='repo='+enc(ME.repo||ME.fork);if(pr){if(!ME.pr)return null;q+='&pr='+ME.pr}return 'ghapp://session/new?'+q+'&mode=interactive&prompt='+enc(prompt)};
+function forkCard(){
+ if(!ME)return `<div class="forkcard"><div><b>Checking your GitHub account&hellip;</b></div></div>`;
+ if(!ME.login)return `<div class="forkcard"><div><b>Sign in to the GitHub CLI</b><span>Run <code>gh auth login</code>, then check again.</span></div><div class="btns"><button class="btn" data-refresh>Check again</button></div></div>`;
+ if(!ME.fork)return `<div class="forkcard"><div><b>No fork yet, @${ME.login}</b><span>One click forks <code>${ME.upstream}</code> to your account and opens it as a project in the Copilot app.</span></div><div class="btns"><a class="btn" href="#" data-forkopen>Fork and open project</a><button class="btn" data-refresh>Check again</button></div></div><p class="forkerr" hidden></p>`;
+ const issuesOff=ME.issues===false?`<div class="note">Forks start with issues turned off. Turn them on: <code>gh repo edit ${ME.fork} --enable-issues</code> <button class="btn" data-refresh>Check again</button></div>`:'';
+ return `<div class="forkcard ok"><div><b>&#10003; Your fork: <code>${ME.fork}</code></b><span>${JUST?'Fork created. Opening the project in the Copilot app.':'Links and commands in these guides use it.'}</span></div><div class="btns"><a class="btn" href="ghapp://github.com/${ME.repo||ME.fork}">Open in Copilot app</a><a class="btn alt" href="https://github.com/${ME.repo||ME.fork}" target="_blank" rel="noopener">View on GitHub</a></div></div>${issuesOff}`;
+}
 const blk=b=>{
- if(typeof b==='string')return `<p>${b}</p>`;
- if(b.link){const hr=b.link.href;const ext=hr.startsWith('http');return `<div class="linkrow"><a class="btn${ext?' alt':''}" href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
+ if(typeof b==='string')return `<p>${fill(b)}</p>`;
+ if(b.list)return `<ul>${b.list.map(text=>`<li>${fill(text)}</li>`).join('')}</ul>`;
+ if(b.fork)return forkCard();
+ if(b.openSkill)return `<p>For our <code>issue-to-pr</code> skill, the file path is <code>.github/skills/issue-to-pr/SKILL.md</code>. <a href="#/skills" data-open-skill>Open the skill.md file here</a> and take a closer look! <span data-open-skill-status role="status"></span></p>`;
+ if(b.link){if(b.link.needs&&!(ME&&ME[b.link.needs]))return '';const hr=fill(b.link.href);const ext=hr.startsWith('http');return `<div class="linkrow"><a${b.link.plain?'':` class="btn${ext?' alt':''}"`} href="${hr}"${ext?' target="_blank" rel="noopener"':''}>${b.link.text}</a></div>`}
  if(b.img)return `<figure class="shot"><img src="${b.img.src}" alt="${b.img.alt}"><figcaption>${b.img.alt}</figcaption></figure>`;
- if(b.note)return `<div class="note">${b.note}</div>`;
- if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`;
- const text=b.text;
+ if(b.note)return `<div class="note">${fill(b.note)}</div>`;
+ if(b.table)return `<table class="qa">${b.table.map(r=>`<tr><td>${fill(r[0])}</td><td>${fill(r[1])}</td></tr>`).join('')}</table>`;
+ const text=fill(b.text);
  const body=b.k==='diff'?diff(text):b.k==='file'?hl(text):esc(text);
  let open='';
- if(b.k==='chat')open=`<button class="send" data-send="${enc(text)}" title="Sends this visible prompt to the current chat">Send to this chat</button>`;
- return `<div class="block ${b.k==='chat'?'chatblk':''}"><div class="bh"><span>${b.label||label[b.k]}</span><span>${open}<button class="copy" data-t="${enc(b.k==='diff'?text.split('\n').filter(l=>l[0]!=='-').map(l=>l.slice(1)).join('\n'):text)}">Copy</button></span></div><pre>${body}</pre><span class="sendstatus" role="status"></span></div>`};
+ if(b.k==='chat'&&!b.noOpen){const l=sessionLink(text,b.pr);open=!l&&ME&&ME.login&&!ME.fork&&!b.pr?`<a class="open" href="#" data-forkopen data-prompt="${enc(text)}" title="Forks the repository to your account, then starts a session in it">Open in Copilot app</a>`:l?`<a class="open" href="${l}" title="Start a session in ${ME.fork}${b.pr?' on pull request #'+ME.pr:''}">Open in Copilot app</a>`:`<a class="open off" title="${b.pr?'Open a pull request in your fork first':'Fork the repository first'}">Open in Copilot app</a>`}
+ return `<div class="block ${b.k==='chat'?'chatblk':''}"><div class="bh"><span>${b.label||label[b.k]}</span><span>${open}<button class="copy" data-t="${enc(b.k==='diff'?text.split('\n').filter(l=>l[0]!=='-').map(l=>l.slice(1)).join('\n'):text)}">Copy</button></span></div><pre>${body}</pre></div>`};
 function copy(t){const done=()=>true;if(navigator.clipboard)return navigator.clipboard.writeText(t).then(done,()=>fallback(t));return Promise.resolve(fallback(t))}
 function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();return ok}
+async function loadMe(force){let v;try{v=await (await fetch('me'+(force?'?refresh=1':''),{cache:'no-store'})).json()}catch{v={login:null}}if(JUST&&ME&&ME.fork&&!v.fork)return;ME=v;if(DEMO&&sessionStorage.demoForked&&!v.fork){ME=demoMe(v);JUST=true}}
+function rerender(){const y=scrollY;route(true);scrollTo(0,y)}
 function route(keep){
  const id=location.hash.slice(2),w=window.WALK&&WALK[id];
  home.hidden=!!w;guide.hidden=!w;
  if(!w){return}
  const i=I.findIndex(t=>t.id===id);
- guide.innerHTML=`<button class="back">&larr; Build your own software factory</button>
+ guide.innerHTML=`<button class="back">&larr; Build your first automation</button>
  <div class="ghead"><div class="mono">${w.eyebrow}</div><h1>${w.title}</h1><p>${w.intro}</p>
  <div class="meta"><span class="pill">${w.time}</span><span class="pill">${w.steps.length} steps</span><span class="pill">Part ${i+1} of ${I.length}</span></div>
  ${w.preview?`<div class="preview">${w.preview}</div>`:''}</div>
- <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${s.h}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
+ ${id==='skills'?'':`<details class="example"><summary>View example</summary>${file(...I[i].file)}</details>`}
+ <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${fill(s.h)}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
  <div class="done"><p>${w.done}</p><div class="actions" style="margin-top:0">
  ${w.next?`<button class="try" data-next="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:''}
- <button class="ghost" data-help="${id}">Stuck? Ask Copilot in chat</button></div><span class="sendstatus" role="status"></span></div>`;
+ <button class="ghost" data-help="${id}">Stuck? Ask Copilot in chat</button></div></div>`;
  guide.querySelector('.back').onclick=()=>{location.hash='';};
+ guide.querySelectorAll('[data-open-skill]').forEach(link=>link.onclick=async event=>{
+  event.preventDefault();
+  if(link.getAttribute('aria-disabled')==='true')return;
+  const status=link.parentElement.querySelector('[data-open-skill-status]');
+  link.setAttribute('aria-disabled','true');status.textContent='Opening skill...';
+  try{
+   const response=await fetch('open-skill',{method:'POST'});
+   const result=await response.json();
+   if(!response.ok)throw new Error(result.error||'Could not open the skill file.');
+   status.textContent='Opened in a file tab.';
+  }catch(error){status.textContent=error.message+' Use + > Files to open .github/skills/issue-to-pr/SKILL.md.'}
+  finally{link.removeAttribute('aria-disabled')}
+ });
  guide.querySelectorAll('.copy').forEach(c=>c.onclick=async()=>{const ok=await copy(decodeURIComponent(c.dataset.t));c.textContent=ok===false?'Select and copy':'Copied';setTimeout(()=>c.textContent='Copy',1600)});
  const n=guide.querySelector('[data-next]');if(n)n.onclick=()=>{location.hash='#/'+n.dataset.next};
- async function sendStep(button,text){
-  const status=button.closest('.block,.done').querySelector('.sendstatus');
-  button.disabled=true;status.textContent='Sending…';
-  try{const r=await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,...(text?{text}:{})})});const result=await r.json();if(!r.ok||result.error)throw new Error(result.error||'The step was not sent.');
-   status.textContent='Sent to this chat. Review Copilot’s response before continuing.';
-  }catch(error){status.textContent=error.message;button.disabled=false}
- }
- const hb=guide.querySelector('[data-help]');hb.onclick=()=>sendStep(hb);
- guide.querySelectorAll('[data-send]').forEach(b=>b.onclick=()=>sendStep(b,decodeURIComponent(b.dataset.send)));
+ const hb=guide.querySelector('[data-help]');hb.onclick=async()=>{hb.textContent='Sent to chat';hb.disabled=true;
+  await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})})};
+ guide.querySelectorAll('[data-forkopen]').forEach(a=>a.onclick=async e=>{e.preventDefault();
+  if(DEMO){ME=demoMe(ME);JUST=true;sessionStorage.demoForked=1;const t=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.repo;rerender();window.go(t);return}
+  if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Creating your fork\u2026';
+  let r;try{r=await (await fetch('fork',{method:'POST'})).json()}catch{r={error:'Could not reach the canvas. Try again.'}}
+  if(r.error||!r.fork){a.textContent='Try again';delete a.dataset.busy;const er=guide.querySelector('.forkerr');if(er){er.hidden=false;er.textContent=r.error||'Something went wrong.'}else alert(r.error);return}
+  ME=r;JUST=true;const target=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.fork;rerender();window.go(target)});
+ guide.querySelectorAll('[data-refresh]').forEach(r=>r.onclick=async()=>{r.textContent='Checking\u2026';await loadMe(true);rerender()});
  if(!keep)window.scrollTo(0,0);
 }
+addEventListener('focus',()=>{if(!guide.hidden)loadMe().then(rerender)});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!guide.hidden)loadMe().then(rerender)});
 addEventListener('hashchange',()=>{route();if(!location.hash){const k=items.findIndex(e=>e.classList.contains('on'));items[k]&&items[k].scrollIntoView({block:'center'})}});
-show(0);route();
+show(0);route();loadMe().then(()=>{if(!guide.hidden)rerender()});
 </script></body></html>
