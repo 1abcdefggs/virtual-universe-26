@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Two hands-on GitHub Universe exercises: try the latest GitHub CLI features and build a Copilot automation with skills, Context7, and security review.">
+  <title>GitHub Universe '26 | Hands-on exercises</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2328;
+      --muted: #59665e;
+      --line: #d1d9d4;
+      --field: #f3f6f4;
+      --green: #08852b;
+      --pink: #fa3986;
+      --blue: #0550ae;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--ink); font-family: "Mona Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color: var(--blue); text-underline-offset: 3px; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, pre:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .skip { position: absolute; left: 16px; top: -80px; background: #fff; padding: 12px; z-index: 2; }
+    .skip:focus { top: 12px; }
+    .wrap { width: 100%; min-height: 100svh; display: flex; flex-direction: column; }
+    main { flex: 1; display: flex; flex-direction: column; }
+    .masthead { min-height: 58px; padding: 12px var(--gutter); display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; letter-spacing: -.025em; font-weight: 600; }
+    .brand svg { flex: none; }
+    .repo-link { color: var(--muted); font-size: 14px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    .page-description { margin: 0; padding: clamp(12px, 2.2vh, 26px) var(--gutter); border-bottom: 1px solid var(--line); color: var(--muted); font-size: clamp(16px, 1.25vw, 22px); line-height: 1.45; letter-spacing: -.01em; }
+    .page-description strong { color: var(--ink); font-weight: 500; }
+    .wrap { --gutter: clamp(20px, 3.4vw, 72px); }
+    .exercises { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; align-content: stretch; grid-template-areas: "cli-intro cli-demo" "copilot-demo copilot-intro"; }
+    .exercise { display: contents; }
+    .intro { padding: clamp(20px, 4vh, 56px) var(--gutter); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+    .cli-intro { grid-area: cli-intro; border-right: 1px solid var(--line); }
+    .copilot-intro { grid-area: copilot-intro; }
+    h2 { font-size: clamp(28px, min(3vw, 5vh), 56px); letter-spacing: -.035em; font-weight: 500; line-height: 1.06; margin: 0 0 clamp(10px, 1vw, 18px); text-wrap: balance; }
+    .description { color: var(--muted); font-size: clamp(16px, min(1.35vw, 2.2vh), 24px); line-height: 1.4; margin: 0 0 clamp(14px, 2.2vh, 28px); max-width: 30em; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--green); background: var(--green); color: #fff; border-radius: 6px; padding: 10px 17px; text-decoration: none; font-size: 15px; line-height: 1.4; font-weight: 600; }
+    .button:hover { background: #076f25; border-color: #076f25; }
+    .hint { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 10px 0 0; }
+    .demo { min-width: 0; min-height: 0; padding: clamp(16px, 4vh, 48px) var(--gutter); border-bottom: 1px solid var(--line); background-color: var(--field); background-image: linear-gradient(#e3eae6 1px, transparent 1px), linear-gradient(90deg, #e3eae6 1px, transparent 1px); background-size: 18px 18px; }
+    .cli-demo { grid-area: cli-demo; display: flex; flex-direction: column; }
+    .cli-demo .terminal { flex: 1 1 0px; display: flex; flex-direction: column; }
+    .copilot-demo { grid-area: copilot-demo; border-right: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
+    .tabs { display: flex; gap: 18px; margin: 0 0 12px; flex-wrap: wrap; }
+    .tab { cursor: pointer; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); padding: 6px 0; min-height: 36px; font-size: 13px; }
+    .tab[aria-selected="true"] { border-bottom-color: var(--green); color: #096b26; }
+    .tab:hover { color: #096b26; }
+    .terminal { border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: -5px 5px 0 var(--green); overflow: hidden; }
+    .terminal-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 14px; background: #f4f6f4; border-bottom: 1px solid var(--line); }
+    .terminal-bar span { font-size: 13px; color: var(--muted); }
+    .replay { cursor: pointer; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; font-size: 12px; min-height: 32px; }
+    .replay:hover { border-color: var(--green); color: #096b26; }
+    .terminal-controls { display: flex; gap: 6px; flex: none; }
+    .screen { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: clamp(12px, .9vw, 16px); line-height: 1.65; flex: 1 1 0px; min-height: clamp(150px, 25vh, 290px); padding: clamp(14px, 1.3vw, 24px); margin: 0; white-space: pre-wrap; overflow: auto; overflow-wrap: anywhere; }
+    .prompt, .success { color: #096b26; }
+    .output { color: var(--muted); }
+    .argument { color: #6639ba; }
+    .error { color: #cf222e; }
+    .conversation { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: clamp(16px, 2vw, 32px); }
+    .message { display: flex; gap: 12px; align-items: flex-start; }
+    .message.user { align-self: flex-end; max-width: 88%; }
+    .avatar { width: clamp(32px, 2.6vw, 48px); height: clamp(32px, 2.6vw, 48px); flex: none; border-radius: 50%; object-fit: cover; }
+    .copilot-icon { display: grid; place-items: center; width: clamp(32px, 2.6vw, 48px); height: clamp(32px, 2.6vw, 48px); border-radius: 50%; background: #fff; border: 1px solid var(--line); flex: none; }
+    .copilot-icon svg { width: 60%; height: 60%; }
+    .bubble { font-size: clamp(14px, 1.1vw, 19px); line-height: 1.5; padding: clamp(10px, .9vw, 16px) clamp(14px, 1.2vw, 22px); border: 1px solid #bcc8c0; border-radius: 6px; background: #fff; box-shadow: -3px 3px 0 var(--pink); }
+    .steps { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #e3e9e5; display: grid; gap: 6px; color: var(--muted); font-size: .88em; }
+    .steps li { display: flex; gap: 10px; align-items: baseline; }
+    .steps li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green); transform: translateY(-1px); }
+    .guides { align-self: stretch; max-width: 34em; border-top: 1px solid var(--line); margin: clamp(12px, 2vh, 24px) 0 0; font-size: clamp(14px, 1vw, 17px); }
+    details + details { border-top: 1px solid var(--line); }
+    summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: clamp(4px, .9vh, 11px) 0; min-height: 32px; cursor: pointer; list-style: none; font-size: 1em; color: var(--muted); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 18px; line-height: 1; }
+    details[open] summary::after { content: "\2212"; }
+    details[open] summary { color: var(--ink); font-weight: 600; }
+    details p { font-size: .93em; line-height: 1.6; margin: 0 0 14px; color: var(--muted); }
+    code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .9em; color: var(--ink); background: #f0f3f1; border: 1px solid #e3e9e5; border-radius: 3px; padding: 1px 3px; overflow-wrap: anywhere; }
+    footer { padding: 19px var(--gutter); display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 13px; line-height: 1.5; color: var(--muted); }
+    footer p { margin: 0; }
+    @media (max-width: 760px) {
+      .masthead { min-height: 54px; padding: 12px 20px; }
+      .brand { font-size: 17px; gap: 8px; }
+      .brand svg { width: 24px; height: 24px; }
+      .repo-link { font-size: 12px; }
+      .page-description { padding: 16px 20px; font-size: 14px; }
+      .exercises { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "cli-intro" "copilot-intro" "cli-demo" "copilot-demo"; }
+      .intro { padding: 20px; }
+      .cli-intro, .copilot-demo { border-right: 0; }
+      h2 { font-size: 25px; margin-bottom: 8px; text-wrap: initial; }
+      .description { font-size: 15px; line-height: 1.4; margin-bottom: 14px; }
+      .button { font-size: 14px; padding: 9px 13px; }
+      .hint { font-size: 12px; margin-top: 8px; }
+      .demo { padding: 24px 20px; border-bottom: 1px solid var(--line); }
+      .copilot-intro .guides { margin: 20px 0 0; }
+      .copilot-intro .description { font-size: 15px; }
+      .conversation { gap: 24px; }
+      footer { padding: 18px 20px; border-top: 0; }
+    }
+    @media (max-width: 380px) {
+      .masthead, .page-description, .intro { padding-inline: 16px; }
+      .repo-link { max-width: 75px; text-align: right; }
+      h2 { font-size: 23px; }
+      .intro { padding-block: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    THESIS: Two calm, alternating exercises, with both launch actions in the first desktop viewport.
+    OWN-WORLD: Reference-led white panels, pale green grids, fine rules, green actions, pink chat offsets.
+    STORY: Choose GitHub CLI or Copilot, inspect a short example, then open the hands-on guide.
+    FIRST VIEWPORT: Full-width introduction and alternating exercises, expanding to fill taller windows.
+    FORM: Original alternating workshop sections, compacted vertically; mobile introductions precede the demos.
+  -->
+  <a class="skip" href="#exercises">Skip to exercises</a>
+  <div class="wrap">
+    <header class="masthead">
+      <div class="brand">
+        <svg width="30" height="30" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        GitHub Universe '26
+      </div>
+      <a class="repo-link" href="https://github.com/octodemo/virtual-universe-26">Workshop repository</a>
+    </header>
+    <main>
+      <h1 class="sr-only">GitHub Universe hands-on exercises</h1>
+      <p class="page-description"><strong>Hands-on guides for trying the latest features in GitHub and Copilot.</strong> Explore the examples below, then launch an exercise to try them yourself.</p>
+      <div class="exercises" id="exercises">
+        <section class="exercise" aria-labelledby="cli-heading">
+          <div class="intro cli-intro">
+            <h2 id="cli-heading">The modern GitHub experience</h2>
+            <p class="description">Create stacked pull requests and attach screenshots to issues and PRs, right from the GitHub CLI.</p>
+            <div class="actions">
+              <a class="button" href="https://codespaces.new/octodemo/virtual-universe-26?ref=main" target="_blank" rel="noopener">Try in Codespaces</a>
+            </div>
+            <p class="hint">Opens a fresh workshop Codespace in a new tab.</p>
+          </div>
+          <div class="demo cli-demo" aria-label="GitHub CLI examples">
+            <div class="tabs" role="tablist" aria-label="CLI examples">
+              <button class="tab" id="tab-stack" role="tab" aria-selected="true" aria-controls="terminal-screen" tabindex="0" data-example="0">Stacked PRs</button>
+              <button class="tab" id="tab-issue" role="tab" aria-selected="false" aria-controls="terminal-screen" tabindex="-1" data-example="1">Attach to an issue</button>
+              <button class="tab" id="tab-pr" role="tab" aria-selected="false" aria-controls="terminal-screen" tabindex="-1" data-example="2">Attach to a PR</button>
+            </div>
+            <div class="terminal">
+              <div class="terminal-bar"><span id="terminal-title">monas-cafe &mdash; gh stack</span><div class="terminal-controls"><button class="replay" id="pause">Pause</button><button class="replay" id="replay">Replay</button></div></div>
+              <pre class="screen" id="terminal-screen" role="tabpanel" aria-labelledby="tab-stack" aria-live="off" tabindex="0"><span class="prompt">monas-cafe &gt; </span>gh stack init fix/price-parser
+<span class="success">&#10003; Started a stack on main</span>
+
+<span class="prompt">monas-cafe &gt; </span>git commit -am <span class="argument">"Strip the $ before parseFloat"</span>
+<span class="prompt">monas-cafe &gt; </span>gh stack add -Am <span class="argument">"Show prices as currency"</span> fix/menu-display
+
+<span class="prompt">monas-cafe &gt; </span>gh stack submit --auto
+<span class="success">&#10003; Draft PR #3  fix/price-parser &rarr; main
+&#10003; Draft PR #4  fix/menu-display &rarr; fix/price-parser</span>
+
+<span class="output">Two small pull requests, reviewed in order.</span></pre>
+            </div>
+          </div>
+        </section>
+        <section class="exercise" aria-labelledby="copilot-heading">
+          <div class="intro copilot-intro">
+            <h2 id="copilot-heading">Build your own automation</h2>
+            <p class="description">Turn an issue into a proposed fix with a skill, current documentation, and a security review. Then automate it.</p>
+            <div class="actions">
+              <a class="button" id="canvas-launch" href="https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-welcome">Build an automation</a>
+            </div>
+            <p class="hint">Opens the Universe welcome canvas in the Copilot app.</p>
+            <div class="guides">
+              <details name="guide"><summary>Skills</summary><p>Open the existing <code>issue-to-pr</code> skill, edit its instructions, and run <code>/issue-to-pr</code>. Prepare your fork when you are ready to make changes.</p></details>
+              <details name="guide"><summary>Tools and connectors</summary><p>Discover a documentation agent with <code>/agentfinder</code>. Add Context7 through <strong>Customize</strong>, look up current Node.js documentation, and add that lookup to your skill.</p></details>
+              <details name="guide"><summary>Security review</summary><p>Run <code>/security-review</code> on the last PR created by the <code>issue-to-pr</code> skill. Review the fix in the PR, then add security review to the skill.</p></details>
+              <details name="guide"><summary>Automate</summary><p>Go to <strong>Automations &rarr; New Automation</strong>, select your fork as the project, and enter <code>/issue-to-pr</code>. Choose a <strong>Manual</strong> trigger for now; schedule it later.</p></details>
+            </div>
+          </div>
+          <div class="demo copilot-demo" aria-label="Copilot automation preview">
+            <div class="conversation" aria-label="Illustrative Copilot conversation">
+              <div class="message user"><div class="bubble" id="user-message">Can you turn an issue into a suggested fix?</div><img class="avatar" src="mona.png" alt="Mona" width="32" height="32"></div>
+              <div class="message">
+                <span class="copilot-icon" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 48 44"><path fill="currentColor" d="M24 2c-6 0-10 2.2-12.6 4.6-3.6 1.3-5.6 4-5.6 8.6 0 .9.1 1.8.2 2.6-.6 1.2-1.1 2.4-1.4 3.3C2 22 .4 24.6 0 26.4V33c0 .5.2 1 .5 1.3C3 37.6 12.6 42 24 42s21-4.4 23.5-7.7c.3-.3.5-.8.5-1.3v-6.6c-.4-1.8-2-4.4-4.6-5.3-.3-.9-.8-2.1-1.4-3.3.1-.8.2-1.7.2-2.6 0-4.6-2-7.3-5.6-8.6C34 4.2 30 2 24 2Z"/><rect x="9.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="25.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="17" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/><rect x="27.4" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/></svg></span>
+                <div class="bubble"><span id="copilot-message">Use <code>/issue-to-pr</code> to propose a fix and open a draft PR for human review.</span><ul class="steps" id="copilot-steps"><li>Read the issue and the code it mentions</li><li>Made the smallest fix and ran the tests</li><li>Opened a draft PR for your review</li></ul></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>Built for trying things. Keep a person in the review loop.</p>
+      <p>Need the app? <a href="https://github.com/features/ai/github-app">Download GitHub Copilot</a></p>
+    </footer>
+  </div>
+  <script>
+    const screen = document.getElementById('terminal-screen');
+    const terminalTitle = document.getElementById('terminal-title');
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const examples = [
+      { title: 'monas-cafe \u2014 gh stack', html: screen.innerHTML },
+      { title: 'monas-cafe \u2014 gh issue comment --attach', html: `<span class="prompt">monas-cafe &gt; </span>npx playwright test
+<span class="error">\u2718 menu prices render as currency
+  Received: ["$NaN", "$NaN", "$NaN", ...]</span>
+<span class="output">test-results/screenshots/menu-prices.png</span>
+
+<span class="prompt">monas-cafe &gt; </span>gh issue comment 1 \\
+  --body <span class="argument">"Playwright caught this:"</span> \\
+  --attach <span class="argument">'./test-results/screenshots/menu-prices.png#Menu board showing $NaN'</span>
+
+<span class="success">\u2713 Screenshot attached, alt text and all.</span>` },
+      { title: 'monas-cafe \u2014 gh pr create --attach', html: `<span class="prompt">monas-cafe &gt; </span>gh pr create \\
+  --title <span class="argument">"Fix: prices render as $NaN"</span> \\
+  --body <span class="argument">"Fixes #1. parseFloat choked on the $."</span> \\
+  --attach <span class="argument">'evidence/after.png#Prices render correctly'</span>
+
+<span class="success">\u2713 Screenshot embedded in the pull request.</span>
+
+<span class="output">Give reviewers the context they need,
+without leaving the terminal.</span>` }
+    ];
+    let selected = 0;
+    let timer;
+    let position = 0;
+    let textNodes = [];
+    let length = 0;
+    let paused = false;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const pauseButton = document.getElementById('pause');
+    function tick() {
+      if (paused || reducedMotion.matches) return;
+      position += 3;
+      let remaining = position;
+      textNodes.forEach(({ node, text }) => {
+        node.textContent = text.slice(0, Math.max(0, remaining));
+        remaining -= text.length;
+      });
+      screen.scrollTop = screen.scrollHeight;
+      if (position < length) timer = setTimeout(tick, 35);
+      else timer = setTimeout(() => selectExample((selected + 1) % examples.length), 5000);
+    }
+    function animateExample() {
+      clearTimeout(timer);
+      screen.innerHTML = examples[selected].html;
+      screen.scrollTop = 0;
+      if (reducedMotion.matches || paused) return;
+      const walker = document.createTreeWalker(screen, NodeFilter.SHOW_TEXT);
+      textNodes = [];
+      while (walker.nextNode()) textNodes.push({ node: walker.currentNode, text: walker.currentNode.textContent });
+      length = textNodes.reduce((sum, item) => sum + item.text.length, 0);
+      position = 0;
+      textNodes.forEach(({ node }) => { node.textContent = ''; });
+      tick();
+    }
+    function selectExample(index) {
+      selected = index;
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+      });
+      screen.setAttribute('aria-labelledby', tabs[index].id);
+      terminalTitle.textContent = examples[index].title;
+      animateExample();
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectExample(index));
+      tab.addEventListener('keydown', event => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = tabs.length - 1;
+        if (next === undefined) return;
+        event.preventDefault();
+        selectExample(next);
+        tabs[next].focus();
+      });
+    });
+    document.getElementById('replay').addEventListener('click', () => {
+      paused = false;
+      pauseButton.textContent = 'Pause';
+      selectExample(selected);
+    });
+    pauseButton.addEventListener('click', () => {
+      paused = !paused;
+      pauseButton.textContent = paused ? 'Play' : 'Pause';
+      clearTimeout(timer);
+      if (paused) screen.innerHTML = examples[selected].html;
+      else animateExample();
+    });
+    function applyMotionPreference() {
+      pauseButton.hidden = reducedMotion.matches;
+      animateExample();
+    }
+    reducedMotion.addEventListener('change', applyMotionPreference);
+    applyMotionPreference();
+    const messages = [
+      ['Can you turn an issue into a suggested fix?', 'Use /issue-to-pr to propose a fix and open a draft PR for human review.', ['Read the issue and the code it mentions', 'Made the smallest fix and ran the tests', 'Opened a draft PR for your review']],
+      ['Check the current Node.js documentation.', 'Use Context7 to ground the fix in current documentation and inspect its source links.', ['Found a documentation agent with /agentfinder', 'Added Context7 through Customize', 'Looked up current Node.js docs with sources']],
+      ['Review the last PR created by the skill.', 'Run /security-review on the fix in that PR, not unrelated local changes.', ['Reviewed the changed lines in the PR', 'Reported only high-confidence findings', 'Added the review step to the skill']],
+      ['Turn this skill into an automation.', 'Select your fork, choose /issue-to-pr, and start with a Manual trigger.', ['Opened Automations and clicked New Automation', 'Selected your fork as the project', 'Ran it manually; schedule it later']]
+    ];
+    const stepList = document.getElementById('copilot-steps');
+    const guides = [...document.querySelectorAll('.guides details')];
+    guides.forEach((guide, index) => guide.addEventListener('toggle', () => {
+      if (!guide.open) return;
+      document.getElementById('user-message').textContent = messages[index][0];
+      document.getElementById('copilot-message').textContent = messages[index][1];
+      stepList.replaceChildren(...messages[index][2].map(step => Object.assign(document.createElement('li'), { textContent: step })));
+    }));
+  </script>
+</body>
+</html>
