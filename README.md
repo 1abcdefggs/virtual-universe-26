@@ -51,7 +51,7 @@ Already in a session? Open **+ → Installed extensions → Universe '26 welcome
 Copy the command below into your terminal for a surprise experience walking you through the GitHub Universe highlights. 
 
 ```
-curl leereily.net
+curl leereilly.net
 ```
 
 1. [GitHub Universe recap page](./03-github-universe-keynote/github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
