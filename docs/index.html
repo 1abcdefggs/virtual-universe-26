@@ -14,7 +14,6 @@
       --line: #d1d9d4;
       --field: #f3f6f4;
       --green: #08852b;
-      --pink: #fa3986;
       --blue: #0550ae;
     }
     * { box-sizing: border-box; }
@@ -25,88 +24,99 @@
     a:focus-visible, button:focus-visible, summary:focus-visible, pre:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
     .skip { position: absolute; left: 16px; top: -80px; background: #fff; padding: 12px; z-index: 2; }
     .skip:focus { top: 12px; }
-    .wrap { width: 100%; min-height: 100svh; display: flex; flex-direction: column; }
-    main { flex: 1; display: flex; flex-direction: column; }
-    .masthead { min-height: 58px; padding: 12px var(--gutter); display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
-    .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; letter-spacing: -.025em; font-weight: 600; }
-    .brand svg { flex: none; }
-    .repo-link { color: var(--muted); font-size: 14px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-    .page-description { margin: 0; padding: clamp(12px, 2.2vh, 26px) var(--gutter); border-bottom: 1px solid var(--line); color: var(--muted); font-size: clamp(16px, 1.25vw, 22px); line-height: 1.45; letter-spacing: -.01em; }
-    .page-description strong { color: var(--ink); font-weight: 500; }
-    .wrap { --gutter: clamp(20px, 3.4vw, 72px); }
-    .exercises { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; align-content: stretch; grid-template-areas: "cli-intro cli-demo" "copilot-demo copilot-intro"; }
-    .exercise { display: contents; }
-    .intro { padding: clamp(20px, 4vh, 56px) var(--gutter); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-    .cli-intro { grid-area: cli-intro; border-right: 1px solid var(--line); }
-    .copilot-intro { grid-area: copilot-intro; }
-    h2 { font-size: clamp(28px, min(3vw, 5vh), 56px); letter-spacing: -.035em; font-weight: 500; line-height: 1.06; margin: 0 0 clamp(10px, 1vw, 18px); text-wrap: balance; }
-    .description { color: var(--muted); font-size: clamp(16px, min(1.35vw, 2.2vh), 24px); line-height: 1.4; margin: 0 0 clamp(14px, 2.2vh, 28px); max-width: 30em; }
+    .wrap { width: 100%; min-height: 100svh; --content-width: 1060px; }
+    .masthead { min-height: 50px; padding: 0 12px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 20px; font-size: 13px; }
+    .brand svg { flex: none; width: 20px; height: 20px; box-sizing: content-box; padding-right: 14px; border-right: 1px solid var(--line); }
+    .repo-link { color: var(--ink); font-size: 11px; font-weight: 600; text-decoration: none; background: #f6f8f6; border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; }
+    .repo-link::after { content: " \2197"; }
+    .hero { border-bottom: 3px solid var(--green); }
+    .hero-inner { position: relative; isolation: isolate; max-width: var(--content-width); min-height: 374px; margin-inline: auto; padding: 54px 24px 120px; overflow: hidden; text-align: center; background: var(--field); border-inline: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 14px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 11px; letter-spacing: .08em; }
+    .eyebrow::after { content: ""; display: inline-block; width: 6px; height: 12px; margin-left: 6px; background: var(--green); vertical-align: -2px; }
+    h1 { margin: 0 0 16px; color: #080b09; font-size: clamp(30px, 3.2vw, 48px); line-height: 1.15; letter-spacing: -.045em; font-weight: 500; }
+    .page-description { max-width: 500px; margin: 0 auto 24px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .hero-art { position: absolute; z-index: -1; width: 280px; height: auto; bottom: -1px; left: 50%; transform: translateX(-50%); }
+    .exercises { padding-top: 28px; overflow: clip; }
+    .exercise { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); max-width: var(--content-width); margin: 0 auto 28px; position: relative; border-inline: 1px solid var(--line); }
+    .exercise::before, .exercise::after { content: ""; position: absolute; left: 50%; width: 100vw; transform: translateX(-50%); border-top: 1px solid var(--line); pointer-events: none; }
+    .exercise::before { top: 0; }
+    .exercise::after { bottom: 0; }
+    .intro { min-height: 550px; padding: 56px 54px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+    h2 { font-size: 30px; letter-spacing: -.035em; font-weight: 500; line-height: 1.2; margin: 0 0 14px; text-wrap: balance; }
+    .cli-intro h2 { max-width: 300px; }
+    .description { color: var(--muted); font-size: 14px; line-height: 1.5; margin: 0 0 20px; max-width: 30em; }
     .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--green); background: var(--green); color: #fff; border-radius: 6px; padding: 10px 17px; text-decoration: none; font-size: 15px; line-height: 1.4; font-weight: 600; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; border: 1px solid var(--green); background: var(--green); color: #fff; border-radius: 5px; padding: 8px 17px; text-decoration: none; font-size: 13px; line-height: 1.4; font-weight: 600; }
     .button:hover { background: #076f25; border-color: #076f25; }
-    .hint { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 10px 0 0; }
-    .demo { min-width: 0; min-height: 0; padding: clamp(16px, 4vh, 48px) var(--gutter); border-bottom: 1px solid var(--line); background-color: var(--field); background-image: linear-gradient(#e3eae6 1px, transparent 1px), linear-gradient(90deg, #e3eae6 1px, transparent 1px); background-size: 18px 18px; }
-    .cli-demo { grid-area: cli-demo; display: flex; flex-direction: column; }
-    .cli-demo .terminal { flex: 1 1 0px; display: flex; flex-direction: column; }
-    .copilot-demo { grid-area: copilot-demo; border-right: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
-    .tabs { display: flex; gap: 18px; margin: 0 0 12px; flex-wrap: wrap; }
-    .tab { cursor: pointer; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); padding: 6px 0; min-height: 36px; font-size: 13px; }
-    .tab[aria-selected="true"] { border-bottom-color: var(--green); color: #096b26; }
+    .hint { font-size: 11px; line-height: 1.5; color: var(--muted); margin: 12px 0 0; }
+    .demo { min-width: 0; padding: 56px 26px; border-left: 1px solid var(--line); background-color: var(--field); background-image: linear-gradient(#e3eae6 1px, transparent 1px), linear-gradient(90deg, #e3eae6 1px, transparent 1px); background-size: 16px 16px; }
+    .cli-demo { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .cli-demo .terminal { display: flex; flex-direction: column; }
+    .copilot-demo { display: flex; align-items: center; justify-content: center; }
+    .tabs { display: flex; justify-content: center; gap: 12px; margin: 0 0 12px; flex-wrap: wrap; }
+    .tab { cursor: pointer; border: 1px solid transparent; border-radius: 24px; background: transparent; color: var(--muted); padding: 7px 14px; min-height: 36px; font-size: 12px; }
+    .tab[aria-selected="true"] { border-color: #b7c5bb; background: #e7ede8; color: var(--ink); }
     .tab:hover { color: #096b26; }
-    .terminal { border: 1px solid var(--line); border-radius: 7px; background: #fff; box-shadow: -5px 5px 0 var(--green); overflow: hidden; }
+    .terminal { border: 1px solid #aebdb3; border-radius: 5px; background: #fff; box-shadow: -3px 3px 0 var(--green); overflow: hidden; }
     .terminal-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 14px; background: #f4f6f4; border-bottom: 1px solid var(--line); }
-    .terminal-bar span { font-size: 13px; color: var(--muted); }
+    .terminal-bar span { font-size: 11px; color: var(--muted); }
     .replay { cursor: pointer; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; font-size: 12px; min-height: 32px; }
     .replay:hover { border-color: var(--green); color: #096b26; }
     .terminal-controls { display: flex; gap: 6px; flex: none; }
-    .screen { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: clamp(12px, .9vw, 16px); line-height: 1.65; flex: 1 1 0px; min-height: clamp(150px, 25vh, 290px); padding: clamp(14px, 1.3vw, 24px); margin: 0; white-space: pre-wrap; overflow: auto; overflow-wrap: anywhere; }
+    .screen { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 10px; line-height: 1.65; height: 230px; padding: 16px; margin: 0; white-space: pre-wrap; overflow: auto; overflow-wrap: anywhere; }
     .prompt, .success { color: #096b26; }
     .output { color: var(--muted); }
     .argument { color: #6639ba; }
     .error { color: #cf222e; }
-    .conversation { width: 100%; max-width: 760px; display: flex; flex-direction: column; gap: clamp(16px, 2vw, 32px); }
+    .conversation { width: 100%; display: flex; flex-direction: column; gap: 14px; }
     .message { display: flex; gap: 12px; align-items: flex-start; }
     .message.user { align-self: flex-end; max-width: 88%; }
-    .avatar { width: clamp(32px, 2.6vw, 48px); height: clamp(32px, 2.6vw, 48px); flex: none; border-radius: 50%; object-fit: cover; }
-    .copilot-icon { display: grid; place-items: center; width: clamp(32px, 2.6vw, 48px); height: clamp(32px, 2.6vw, 48px); border-radius: 50%; background: #fff; border: 1px solid var(--line); flex: none; }
+    .avatar { width: 36px; height: 36px; flex: none; border-radius: 50%; object-fit: cover; }
+    .copilot-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 1px solid var(--line); flex: none; }
     .copilot-icon svg { width: 60%; height: 60%; }
-    .bubble { font-size: clamp(14px, 1.1vw, 19px); line-height: 1.5; padding: clamp(10px, .9vw, 16px) clamp(14px, 1.2vw, 22px); border: 1px solid #bcc8c0; border-radius: 6px; background: #fff; box-shadow: -3px 3px 0 var(--pink); }
+    .bubble { font-size: 13px; line-height: 1.5; padding: 14px 18px; border: 1px solid #bcc8c0; border-radius: 5px; background: #fff; box-shadow: -3px 3px 0 var(--green); }
+    .message.request { margin-left: 48px; }
+    .typing { margin-left: 48px; width: 62%; color: var(--muted); letter-spacing: 3px; }
     .steps { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid #e3e9e5; display: grid; gap: 6px; color: var(--muted); font-size: .88em; }
+    .steps[hidden] { display: none; }
     .steps li { display: flex; gap: 10px; align-items: baseline; }
     .steps li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green); transform: translateY(-1px); }
-    .guides { align-self: stretch; max-width: 34em; border-top: 1px solid var(--line); margin: clamp(12px, 2vh, 24px) 0 0; font-size: clamp(14px, 1vw, 17px); }
-    details + details { border-top: 1px solid var(--line); }
-    summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: clamp(4px, .9vh, 11px) 0; min-height: 32px; cursor: pointer; list-style: none; font-size: 1em; color: var(--muted); }
+    .guides { align-self: stretch; margin: 26px 0 0; font-size: 16px; }
+    details { border-bottom: 1px solid var(--line); }
+    summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 0; min-height: 44px; cursor: pointer; list-style: none; font-size: 1em; color: var(--ink); }
     summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; font-size: 18px; line-height: 1; }
-    details[open] summary::after { content: "\2212"; }
+    summary::after { content: "\25be"; font-size: 14px; line-height: 1; color: var(--green); }
+    details[open] summary::after { content: "\25b4"; }
     details[open] summary { color: var(--ink); font-weight: 600; }
     details p { font-size: .93em; line-height: 1.6; margin: 0 0 14px; color: var(--muted); }
     code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .9em; color: var(--ink); background: #f0f3f1; border: 1px solid #e3e9e5; border-radius: 3px; padding: 1px 3px; overflow-wrap: anywhere; }
-    footer { padding: 19px var(--gutter); display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 13px; line-height: 1.5; color: var(--muted); }
+    .keynote-cta { max-width: var(--content-width); margin-inline: auto; padding: 48px 24px; text-align: center; background: var(--field); border: 1px solid var(--line); border-top: 3px solid var(--green); }
+    .keynote-cta .description { margin-inline: auto; }
+    footer { max-width: var(--content-width); margin-inline: auto; padding: 20px 26px; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 12px; line-height: 1.5; color: var(--muted); }
     footer p { margin: 0; }
     @media (max-width: 760px) {
-      .masthead { min-height: 54px; padding: 12px 20px; }
-      .brand { font-size: 17px; gap: 8px; }
-      .brand svg { width: 24px; height: 24px; }
-      .repo-link { font-size: 12px; }
-      .page-description { padding: 16px 20px; font-size: 14px; }
-      .exercises { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "cli-intro" "copilot-intro" "cli-demo" "copilot-demo"; }
-      .intro { padding: 20px; }
-      .cli-intro, .copilot-demo { border-right: 0; }
+      .masthead { padding: 10px 16px; gap: 12px; }
+      .brand { font-size: 12px; gap: 10px; }
+      .brand svg { padding-right: 10px; }
+      .repo-link { font-size: 10px; }
+      .hero-inner { padding: 42px 20px 120px; min-height: 360px; }
+      .page-description { font-size: 14px; }
+      .exercise { grid-template-columns: 1fr; margin-bottom: 24px; border-inline: 0; }
+      .intro { padding: 36px 24px; min-height: 0; }
       h2 { font-size: 25px; margin-bottom: 8px; text-wrap: initial; }
       .description { font-size: 15px; line-height: 1.4; margin-bottom: 14px; }
       .button { font-size: 14px; padding: 9px 13px; }
       .hint { font-size: 12px; margin-top: 8px; }
-      .demo { padding: 24px 20px; border-bottom: 1px solid var(--line); }
+      .demo { padding: 36px 24px; border-left: 0; border-top: 1px solid var(--line); }
+      .screen { font-size: 11px; height: 260px; }
       .copilot-intro .guides { margin: 20px 0 0; }
       .copilot-intro .description { font-size: 15px; }
-      .conversation { gap: 24px; }
+      .conversation { max-width: 480px; gap: 16px; }
       footer { padding: 18px 20px; border-top: 0; }
     }
     @media (max-width: 380px) {
-      .masthead, .page-description, .intro { padding-inline: 16px; }
+      .masthead, .intro { padding-inline: 16px; }
       .repo-link { max-width: 75px; text-align: right; }
       h2 { font-size: 23px; }
       .intro { padding-block: 16px; }
@@ -114,13 +124,6 @@
   </style>
 </head>
 <body>
-  <!--
-    THESIS: Two calm, alternating exercises, with both launch actions in the first desktop viewport.
-    OWN-WORLD: Reference-led white panels, pale green grids, fine rules, green actions, pink chat offsets.
-    STORY: Choose GitHub CLI or Copilot, inspect a short example, then open the hands-on guide.
-    FIRST VIEWPORT: Full-width introduction and alternating exercises, expanding to fill taller windows.
-    FORM: Original alternating workshop sections, compacted vertically; mobile introductions precede the demos.
-  -->
   <a class="skip" href="#exercises">Skip to exercises</a>
   <div class="wrap">
     <header class="masthead">
@@ -128,18 +131,25 @@
         <svg width="30" height="30" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         GitHub Universe '26
       </div>
-      <a class="repo-link" href="https://github.com/octodemo/virtual-universe-26">Workshop repository</a>
+      <a class="repo-link" href="https://github.com/octodemo/virtual-universe-26?utm_source=virtual-universe-insider-resources-repo&utm_medium=web&utm_campaign=universe-2026">Workshop repository</a>
     </header>
     <main>
-      <h1 class="sr-only">GitHub Universe hands-on exercises</h1>
-      <p class="page-description"><strong>Hands-on guides for trying the latest features in GitHub and Copilot.</strong> Explore the examples below, then launch an exercise to try them yourself.</p>
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-inner">
+          <p class="eyebrow">GITHUB UNIVERSE '26</p>
+          <h1 id="hero-heading">Try what's next. Build it yourself.</h1>
+          <p class="page-description">Hands-on guides for trying the latest features in GitHub and Copilot. Explore the examples, then launch an exercise to try them yourself.</p>
+          <a class="button" href="https://github.com/features/ai/github-app?utm_source=virtual-universe-26-insider-resources-cta-top-app-download&utm_medium=web&utm_campaign=universe-2026">Download GitHub Copilot app</a>
+          <img class="hero-art" src="universe-mona.png" alt="" width="514" height="154">
+        </div>
+      </section>
       <div class="exercises" id="exercises">
         <section class="exercise" aria-labelledby="cli-heading">
           <div class="intro cli-intro">
             <h2 id="cli-heading">The modern GitHub experience</h2>
             <p class="description">Create stacked pull requests and attach screenshots to issues and PRs, right from the GitHub CLI.</p>
             <div class="actions">
-              <a class="button" href="https://codespaces.new/octodemo/virtual-universe-26?ref=main" target="_blank" rel="noopener">Try in Codespaces</a>
+              <a class="button" href="https://github.com/codespaces/new/octodemo/virtual-universe-26?ref=main&utm_source=virtual-universe-26-insider-resources-cta-bottom-codespace&utm_medium=web&utm_campaign=universe-2026" target="_blank" rel="noopener">Try in Codespaces</a>
             </div>
             <p class="hint">Opens a fresh workshop Codespace in a new tab.</p>
           </div>
@@ -170,7 +180,7 @@
             <h2 id="copilot-heading">Build your own automation</h2>
             <p class="description">Turn an issue into a proposed fix with a skill, current documentation, and a security review. Then automate it.</p>
             <div class="actions">
-              <a class="button" id="canvas-launch" href="https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-welcome">Build an automation</a>
+              <a class="button" id="canvas-launch" href="https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-welcome&utm_source=virtual-universe-26-insider-resources-cta-mid-tutorial&utm_medium=web&utm_campaign=universe-2026">Create an automation</a>
             </div>
             <p class="hint">Opens the Universe welcome canvas in the Copilot app.</p>
             <div class="guides">
@@ -182,19 +192,26 @@
           </div>
           <div class="demo copilot-demo" aria-label="Copilot automation preview">
             <div class="conversation" aria-label="Illustrative Copilot conversation">
-              <div class="message user"><div class="bubble" id="user-message">Can you turn an issue into a suggested fix?</div><img class="avatar" src="mona.png" alt="Mona" width="32" height="32"></div>
+              <div class="message user"><div class="bubble">Hi Copilot &#128075;</div><img class="avatar" src="mona.png" alt="Mona" width="36" height="36"></div>
+              <div class="message request"><div class="bubble" id="user-message">Can you turn new issues into suggested fixes for this repo?</div></div>
               <div class="message">
                 <span class="copilot-icon" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 48 44"><path fill="currentColor" d="M24 2c-6 0-10 2.2-12.6 4.6-3.6 1.3-5.6 4-5.6 8.6 0 .9.1 1.8.2 2.6-.6 1.2-1.1 2.4-1.4 3.3C2 22 .4 24.6 0 26.4V33c0 .5.2 1 .5 1.3C3 37.6 12.6 42 24 42s21-4.4 23.5-7.7c.3-.3.5-.8.5-1.3v-6.6c-.4-1.8-2-4.4-4.6-5.3-.3-.9-.8-2.1-1.4-3.3.1-.8.2-1.7.2-2.6 0-4.6-2-7.3-5.6-8.6C34 4.2 30 2 24 2Z"/><rect x="9.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="25.5" y="9.5" width="13" height="11" rx="5" fill="#fff"/><rect x="17" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/><rect x="27.4" y="27" width="3.6" height="7" rx="1.8" fill="#fff"/></svg></span>
-                <div class="bubble"><span id="copilot-message">Use <code>/issue-to-pr</code> to propose a fix and open a draft PR for human review.</span><ul class="steps" id="copilot-steps"><li>Read the issue and the code it mentions</li><li>Made the smallest fix and ran the tests</li><li>Opened a draft PR for your review</li></ul></div>
+                <div class="bubble"><span id="copilot-message">I'm setting up an automation for all new issues to open draft PRs.</span><ul class="steps" id="copilot-steps" hidden></ul></div>
               </div>
+              <div class="bubble typing" aria-hidden="true">&bull;&bull;&bull;</div>
             </div>
           </div>
         </section>
       </div>
+      <section class="keynote-cta" aria-labelledby="keynote-heading">
+        <h2 id="keynote-heading">Catch up on the keynote highlights</h2>
+        <p class="description">Explore the biggest announcements from GitHub Universe and see what's next.</p>
+        <a class="button" href="https://github.com/events/universe/recap?utm_source=virtual-universe-26-insider-resources-cta-very-bottom-k2k&amp;utm_medium=web&amp;utm_campaign=universe-2026">Explore keynote highlights</a>
+      </section>
     </main>
     <footer>
       <p>Built for trying things. Keep a person in the review loop.</p>
-      <p>Need the app? <a href="https://github.com/features/ai/github-app">Download GitHub Copilot</a></p>
+      <p>Need the app? <a href=" https://github.com/features/ai/github-app?utm_source=virtual-universe-26-insider-resources-cta-top-app-download&utm_medium=web&utm_campaign=universe-2026">Download GitHub Copilot</a></p>
     </footer>
   </div>
   <script>
@@ -310,6 +327,7 @@ without leaving the terminal.</span>` }
       if (!guide.open) return;
       document.getElementById('user-message').textContent = messages[index][0];
       document.getElementById('copilot-message').textContent = messages[index][1];
+      stepList.hidden = false;
       stepList.replaceChildren(...messages[index][2].map(step => Object.assign(document.createElement('li'), { textContent: step })));
     }));
   </script>

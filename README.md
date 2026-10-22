@@ -1,5 +1,3 @@
-Sample PR 1
-
 # GitHub Virtual Universe '26
 
 Cookbooks to learn how to build with GitHub's latest features.<br>
