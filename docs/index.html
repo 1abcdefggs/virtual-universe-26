@@ -91,6 +91,8 @@
     details[open] summary { color: var(--ink); font-weight: 600; }
     details p { font-size: .93em; line-height: 1.6; margin: 0 0 14px; color: var(--muted); }
     code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .9em; color: var(--ink); background: #f0f3f1; border: 1px solid #e3e9e5; border-radius: 3px; padding: 1px 3px; overflow-wrap: anywhere; }
+    .keynote-cta { max-width: var(--content-width); margin-inline: auto; padding: 48px 24px; text-align: center; background: var(--field); border: 1px solid var(--line); border-top: 3px solid var(--green); }
+    .keynote-cta .description { margin-inline: auto; }
     footer { max-width: var(--content-width); margin-inline: auto; padding: 20px 26px; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: 12px; line-height: 1.5; color: var(--muted); }
     footer p { margin: 0; }
     @media (max-width: 760px) {
@@ -201,6 +203,11 @@
           </div>
         </section>
       </div>
+      <section class="keynote-cta" aria-labelledby="keynote-heading">
+        <h2 id="keynote-heading">Catch up on the keynote highlights</h2>
+        <p class="description">Explore the biggest announcements from GitHub Universe and see what's next.</p>
+        <a class="button" href="https://github.com/events/universe/recap?utm_source=virtual-universe-26-insider-resources-cta-very-bottom-k2k&amp;utm_medium=web&amp;utm_campaign=universe-2026">Explore keynote highlights</a>
+      </section>
     </main>
     <footer>
       <p>Built for trying things. Keep a person in the review loop.</p>
