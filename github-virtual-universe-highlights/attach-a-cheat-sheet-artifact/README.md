@@ -24,7 +24,7 @@ In your fork, ask Copilot:
 Create an issue titled "My GitHub Universe '26 cheat sheet" and open a session for it
 ```
 
-Switch to the new session. `/create-issue-artifact` attaches to the issue
+Switch to the new session since `/create-issue-artifact` attaches to the issue
 linked to the session you run it in.
 
 ## 2. Run the skill
