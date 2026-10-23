@@ -51,7 +51,7 @@ Learn about:
 
 ### Putting it all together
 
-1. [Attach a cheat sheet artifact](./03-github-universe-keynote/attach-a-cheat-sheet-artifact/): Ask Copilot to turn the recap into a cheat sheet and file it as an issue with an image and an artifact.
+1. [Attach a cheat sheet artifact](./03-github-universe-keynote/attach-a-cheat-sheet-artifact/): Ask Copilot to make a GitHub Universe cheat sheet and file it as an issue with an image artifact. (Also find a ✨super duper secret surprise✨ at the end of this section)
 2. [GitHub Universe recap page](./03-github-universe-keynote/github-universe-recap/): View all the main announcements, with links to demos and resources.
 
 
