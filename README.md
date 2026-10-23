@@ -53,5 +53,6 @@ Learn about:
 
 1. [GitHub Universe recap page](./03-github-universe-keynote/github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
 2. [GitHub Universe cheat sheet](./03-github-universe-keynote/github-universe-cheat-sheet/): Find the key features, useful commands, and next steps in one place, with a terminal-friendly edition planned.
+3. [Attach a cheat sheet artifact](./03-github-universe-keynote/attach-a-cheat-sheet-artifact/): Ask Copilot to turn the recap into a cheat sheet and file it as an issue with an image and an artifact.
 
 [![Watch GitHub on YouTube](https://img.shields.io/badge/Watch_GitHub_on_YouTube-24292F?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/@GitHub)

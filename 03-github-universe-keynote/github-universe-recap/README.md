@@ -20,4 +20,5 @@ release notes or recordings, not inferred from a demo title.
 - [GitHub Copilot app](https://github.com/features/ai/github-app)
 
 [Open the GitHub Universe cheat sheet](../github-universe-cheat-sheet/) ·
+[Attach a cheat sheet artifact](../attach-a-cheat-sheet-artifact/) ·
 [Back to Section 3](../README.md)
