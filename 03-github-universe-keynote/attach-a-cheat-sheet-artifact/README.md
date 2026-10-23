@@ -50,18 +50,11 @@ easter egg we've left for you in your
 
 ## What you'll get
 
-<table>
-  <tr>
-    <td width="70%" valign="top">
-      <img src="cheatsheet-preview.png" alt="Example cheat sheet with The Modern GitHub Experience and Agentic Software Development with GitHub Copilot features">
-      <p align="center"><b>Artifact 1</b> · Your cheat sheet</p>
-    </td>
-    <td width="30%" valign="middle" align="center">
-      <img src="../../.github/skills/universe-cheatsheet/magic-egg.svg" alt="A sparkly magic egg" width="140">
-      <p><b>Artifact 2</b> · The surprise card<br><sub>No spoilers. Run the skill to see it.</sub></p>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="cheatsheet-preview.png" alt="Example cheat sheet with The Modern GitHub Experience and Agentic Software Development with GitHub Copilot features" width="85%">
+</p>
+
+<p align="center"><b>Artifact 1</b> · your cheat sheet &nbsp;·&nbsp; <b>Artifact 2</b> · a surprise you'll only see once you run the skill ✨</p>
 
 ---
 
