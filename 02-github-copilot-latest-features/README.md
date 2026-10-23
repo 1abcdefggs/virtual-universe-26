@@ -19,6 +19,12 @@ Use the canvas's **Start** buttons to follow the guides.
 
 ## The four steps
 
+Prefer to read the guides here? Each step has a full page:
+[Skills](skills/README.md) ·
+[Tools and connectors](tools-and-connectors/README.md) ·
+[Security review](security-review/README.md) ·
+[Automate](automate/README.md)
+
 1. **Skills:** Open the existing
    [`issue-to-pr`](../.github/skills/issue-to-pr/SKILL.md) file in an editor tab.
    Click **<>** to edit it and add a **How to test** requirement. Use the
