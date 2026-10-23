@@ -1,0 +1,12 @@
+{
+  "name": "universe-cheatsheet",
+  "description": "Make a themed GitHub Universe '26 cheat sheet and file it as issue artifacts with the GitHub CLI.",
+  "version": "1.0.0",
+  "author": {
+    "name": "octodemo",
+    "url": "https://github.com/octodemo"
+  },
+  "repository": "https://github.com/octodemo/virtual-universe-26",
+  "keywords": ["github-universe", "cheat-sheet", "issue-artifacts", "skills"],
+  "skills": [".github/skills/universe-cheatsheet"]
+}

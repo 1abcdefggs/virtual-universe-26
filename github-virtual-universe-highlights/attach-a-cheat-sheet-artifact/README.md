@@ -28,6 +28,24 @@ Look for `universe-cheatsheet`. It's already in this repository at
 [`.github/skills/universe-cheatsheet/`](../../.github/skills/universe-cheatsheet/SKILL.md),
 so there's nothing to install.
 
+> [!TIP]
+> **Not working in this repository?** The skill is also published as the
+> `universe-cheatsheet` plugin. Ask Agent Finder to find it:
+>
+> ```text
+> /agentfinder universe cheatsheet skill
+> ```
+>
+> Or install it straight from this repository's plugin marketplace:
+>
+> ```bash
+> copilot plugin marketplace add octodemo/virtual-universe-26
+> copilot plugin install universe-cheatsheet@virtual-universe-26
+> ```
+>
+> Start a new session, then run step 2. Copilot will ask which of your
+> repositories should get the issue.
+
 ## 2. Run the skill
 
 ```text

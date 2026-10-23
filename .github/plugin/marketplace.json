@@ -1,0 +1,20 @@
+{
+  "name": "virtual-universe-26",
+  "owner": {
+    "name": "octodemo",
+    "url": "https://github.com/octodemo"
+  },
+  "metadata": {
+    "description": "Skills from the GitHub Virtual Universe '26 workshop.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "universe-cheatsheet",
+      "description": "Make a themed GitHub Universe '26 cheat sheet and file it as issue artifacts.",
+      "version": "1.0.0",
+      "source": "./",
+      "skills": [".github/skills/universe-cheatsheet"]
+    }
+  ]
+}
