@@ -1,0 +1,26 @@
+{
+  "name": "Section 1: Attach images to an issue",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/01-github-latest-features/attach-images-to-an-issue",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": { "version": "latest" }
+  },
+  // Runs during the prebuild, so new codespaces start with it already done.
+  "onCreateCommand": "bash ../../.devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["GitHub.github-vscode-theme"],
+      "settings": {
+        "workbench.colorTheme": "GitHub Light Default",
+        "workbench.startupEditor": "readme",
+        "workbench.tips.enabled": false,
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor" },
+        "markdown.preview.openMarkdownLinks": "inPreview",
+        "markdown.styles": [".vscode/preview.css"],
+        "terminal.integrated.cwd": "${workspaceFolder}/../..",
+        "git.openRepositoryInParentFolders": "always",
+        "extensions.ignoreRecommendations": true
+      }
+    }
+  }
+}
