@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" width="1280" height="480" role="img" aria-label="Section 1 tutorial 2: Create a stacked PR">
+  <style>
+    .s{font-family:"Mona Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+    .m{font-family:"Monaspace Neon",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  </style>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#e3e5e0"/></pattern>
+    <filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#1f2328" flood-opacity=".08"/></filter>
+    <clipPath id="c1"><rect x="600" y="44" width="620" height="128" rx="12"/></clipPath>
+    <clipPath id="c2"><rect x="560" y="196" width="620" height="248" rx="12"/></clipPath>
+  </defs>
+  <rect width="1280" height="480" fill="#f3f4f1"/>
+  <rect width="1280" height="480" fill="url(#grid)"/>
+
+  <text x="56" y="120" class="m" font-size="15" letter-spacing="3" fill="#59636e">SECTION 1 · TUTORIAL 2</text>
+  <text x="56" y="198" class="s" font-size="60" font-weight="600" letter-spacing="-1.5" fill="#0d0d0d">Create a</text>
+  <text x="56" y="266" class="s" font-size="60" font-weight="600" letter-spacing="-1.5" fill="#0d0d0d">stacked PR</text>
+  <rect x="56" y="298" width="64" height="4" fill="#1f883d"/>
+  <text x="56" y="350" class="s" font-size="24" fill="#59636e">Small pull requests that</text>
+  <text x="56" y="384" class="s" font-size="24" fill="#59636e">build on each other.</text>
+
+  <!-- PR header card (Conversation tab) -->
+  <g filter="url(#sh)"><rect x="600" y="44" width="620" height="128" rx="12" fill="#fff"/></g>
+  <g clip-path="url(#c1)"><rect x="600" y="44" width="7" height="128" fill="#1f883d"/></g>
+  <text x="632" y="84" class="s" font-size="22" fill="#1f2328">Add latte to the menu <tspan fill="#59636e">#5</tspan></text>
+  <rect x="632" y="98" width="70" height="26" rx="13" fill="#1f883d"/>
+  <text x="667" y="116" class="s" font-size="13" font-weight="600" text-anchor="middle" fill="#fff">Open</text>
+  <rect x="712" y="98" width="54" height="26" rx="13" fill="#fff" stroke="#d1d9e0"/>
+  <path d="M724 107l6-3 6 3-6 3zM724 111l6 3 6-3M724 115l6 3 6-3" fill="none" stroke="#59636e" stroke-width="1.3"/>
+  <text x="742" y="116" class="s" font-size="13" fill="#1f2328">2/2</text>
+  <rect x="778" y="100" width="108" height="22" rx="6" fill="#ddf4ff"/><text x="832" y="116" class="m" font-size="12" text-anchor="middle" fill="#0969da">menu/espresso</text>
+  <text x="896" y="116" class="s" font-size="13" fill="#59636e">←</text>
+  <rect x="914" y="100" width="88" height="22" rx="6" fill="#ddf4ff"/><text x="958" y="116" class="m" font-size="12" text-anchor="middle" fill="#0969da">menu/latte</text>
+  <line x1="600" y1="138" x2="1220" y2="138" stroke="#d1d9e0"/>
+  <rect x="632" y="138" width="120" height="34" fill="#fff"/>
+  <path d="M632 172V142a4 4 0 0 1 4-4h112a4 4 0 0 1 4 4v30" fill="none" stroke="#d1d9e0"/>
+  <text x="692" y="161" class="s" font-size="13" font-weight="600" text-anchor="middle" fill="#1f2328">Conversation</text>
+  <text x="790" y="161" class="s" font-size="13" fill="#59636e">Commits</text>
+  <text x="866" y="161" class="s" font-size="13" fill="#59636e">Checks</text>
+  <text x="938" y="161" class="s" font-size="13" fill="#59636e">Files changed</text>
+
+  <!-- merge box card -->
+  <g filter="url(#sh)"><rect x="560" y="196" width="620" height="248" rx="12" fill="#fff"/></g>
+  <g clip-path="url(#c2)"><rect x="560" y="196" width="7" height="248" fill="#1f883d"/></g>
+  <circle cx="606" cy="232" r="16" fill="#0969da"/>
+  <path d="M598 228l8-4 8 4-8 4zM598 233l8 4 8-4" fill="none" stroke="#fff" stroke-width="1.6"/>
+  <text x="634" y="230" class="s" font-size="16" font-weight="600" fill="#1f2328">Able to merge as a stack</text>
+  <text x="634" y="250" class="s" font-size="13" fill="#59636e">Merging this pull request will also merge 1 pull request below it.</text>
+  <text x="592" y="286" class="s" font-size="13" font-weight="600" fill="#59636e">Stack #6</text>
+  <rect x="586" y="296" width="568" height="38" rx="6" fill="#eff2f5"/>
+  <circle cx="602" cy="309" r="6" fill="#0969da"/><path d="M599 309l2 2 4-4" fill="none" stroke="#fff" stroke-width="1.4"/>
+  <text x="616" y="313" class="s" font-size="14" font-weight="600" fill="#1f2328">Add latte to the menu</text>
+  <text x="616" y="328" class="s" font-size="11" fill="#59636e">#5 · menu/latte</text>
+  <rect x="1094" y="304" width="48" height="20" rx="10" fill="#ddf4ff"/><text x="1118" y="318" class="s" font-size="11" text-anchor="middle" fill="#0969da">Ready</text>
+  <circle cx="602" cy="351" r="6" fill="#0969da"/><path d="M599 351l2 2 4-4" fill="none" stroke="#fff" stroke-width="1.4"/>
+  <text x="616" y="355" class="s" font-size="14" font-weight="600" fill="#1f2328">Add espresso to the menu</text>
+  <text x="616" y="370" class="s" font-size="11" fill="#59636e">#4 · menu/espresso</text>
+  <rect x="1094" y="346" width="48" height="20" rx="10" fill="#ddf4ff"/><text x="1118" y="360" class="s" font-size="11" text-anchor="middle" fill="#0969da">Ready</text>
+  <circle cx="602" cy="388" r="4" fill="none" stroke="#59636e" stroke-width="1.4"/>
+  <rect x="614" y="379" width="40" height="18" rx="4" fill="#ddf4ff"/><text x="634" y="392" class="m" font-size="11" text-anchor="middle" fill="#0969da">main</text>
+  <rect x="592" y="406" width="128" height="28" rx="6" fill="#0969da"/>
+  <text x="646" y="425" class="s" font-size="13" font-weight="600" text-anchor="middle" fill="#fff">Merge stack</text>
+  <circle cx="700" cy="420" r="8" fill="#0550ae"/><text x="700" y="424" class="s" font-size="10" font-weight="600" text-anchor="middle" fill="#fff">2</text>
+</svg>
