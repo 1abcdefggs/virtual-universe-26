@@ -4,14 +4,18 @@
 
 **Final exercise · 5 min · 3 steps**
 
-Finish the workshop by asking Copilot to make your own GitHub Universe cheat
-sheet and file it on an issue. This brings together two things you've already
-used: the GitHub CLI `--attach` flag from Section 1 and Copilot skills from
-Section 2.
+You're almost done with the workshop! To bring everything you learned together
+you will create an Issue Artifact.
 
 > [!NOTE]
-> You need your fork of this repository with issues enabled, and GitHub CLI
-> 2.99.0 or later. Check with `gh --version`.
+> **Issue Artifacts** let you attach rich, structured artifacts; implementation
+> plans, research and investigation notes, design docs, images and reference
+> links — directly to a GitHub issue. Instead of important context living in
+> scattered comments or external tools.
+
+In this section we will use the GitHub CLI and Copilot skills to attach an
+image with a cheatsheet of the top updates we covered in the Virtual Universe
+practical sessions.
 
 ## 1. Find the skill
 
@@ -33,21 +37,16 @@ so there's nothing to install.
 
 Copilot will:
 
-- 📖 Read the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
-- 🎨 Design a one-page cheat sheet in the Universe theme and save it as an image
-- 🥚 Make a surprise card in the style of the [Badger](https://leereilly.net/badger.github.io/virtual/) site
-- 📎 Create an issue and upload the cheat sheet, the card, and a magic egg picture with `gh issue create --attach`
-- 🗂️ Open a session from that issue and use `/create-issue-artifact` to add the cheat sheet and card as artifacts
+- 📖 read the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
+- 🎨 design a one-page cheat sheet in the Universe theme and save it as an image
+- 🥚 make a surprise card image
+- 🗂️ open a session from that issue and use `/create-issue-artifact` to add both images as artifacts
 
 ## 3. Open your issue
 
-Open the issue link that Copilot gives you. The description shows a magic egg
-and says:
-
-> ✨Read the **Badger easter egg card** to get the full Universe recap details.✨
-
-Open **Artifacts**. You'll find two: your cheat sheet image, and the Badger
-easter egg card with a surprise for you to find.
+Open the issue link that Copilot gives you. Read the surprise card to see an
+easter egg we've left for you in your
+[Virtual GitHub Universe Badge](https://leereilly.net/badger.github.io/virtual/).
 
 ## What you'll get
 
@@ -59,36 +58,15 @@ easter egg card with a surprise for you to find.
     </td>
     <td width="30%" valign="middle" align="center">
       <img src="../../.github/skills/universe-cheatsheet/magic-egg.svg" alt="A sparkly magic egg" width="140">
-      <p><b>Artifact 2</b> · The easter egg card<br><sub>No spoilers. Run the skill to see it.</sub></p>
+      <p><b>Artifact 2</b> · The surprise card<br><sub>No spoilers. Run the skill to see it.</sub></p>
     </td>
   </tr>
 </table>
-
-<details>
-<summary><b>How the artifact is added</b></summary>
-<br>
-
-An artifact's body is Markdown, so the images are uploaded first with
-`gh issue create --attach`. The skill then removes the cheat sheet and card
-from the issue body and links each one from its own artifact instead. Only
-the magic egg stays in the description.
-
-`/create-issue-artifact` adds artifacts to the issue that the current Copilot
-app session was opened from. That's why the skill opens a new session from
-your issue before it adds them. Artifacts can have the type `generic`, `file`,
-`plan`, or `link`.
-
-</details>
-
-> [!TIP]
-> The skill doesn't change any files in your repository. It only creates one
-> issue, one issue session, and two artifacts.
 
 ---
 
 <p align="center">
   🎉 <b>That's the end of the workshop.</b> Thanks for building with us!<br><br>
   <a href="../README.md">← Back to Section 3</a> ·
-  <a href="../github-universe-recap/">Universe recap</a> ·
-  <a href="../github-universe-cheat-sheet/">Cheat sheet</a>
+  <a href="../github-universe-recap/">Universe recap</a>
 </p>
