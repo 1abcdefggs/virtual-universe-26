@@ -12,56 +12,37 @@ you will create an Issue Artifact.
 > links — directly to a GitHub issue. Instead of important context living in
 > scattered comments or external tools.
 
-In this section we will use the GitHub CLI and Copilot skills to attach an
-image with a cheatsheet of the top updates we covered in the Virtual Universe
-practical sessions.
+In this section you'll use the `/create-issue-artifact` skill to attach a
+cheat sheet of the top updates from the Virtual Universe practical sessions to
+an issue.
 
-## 1. Find the skill
+## 1. Open an issue session
 
-In the Copilot app, run:
+In your fork, ask Copilot:
 
 ```text
-/skills list
+Create an issue titled "My GitHub Universe '26 cheat sheet" and open a session for it
 ```
 
-Look for `universe-cheatsheet`. It's already in this repository at
-[`.github/skills/universe-cheatsheet/`](../../.github/skills/universe-cheatsheet/SKILL.md),
-so there's nothing to install.
-
-> [!TIP]
-> **Not working in this repository?** The skill is also published as the
-> `universe-cheatsheet` plugin. Ask Agent Finder to find it:
->
-> ```text
-> /agentfinder universe cheatsheet skill
-> ```
->
-> Or install it straight from this repository's plugin marketplace:
->
-> ```bash
-> copilot plugin marketplace add octodemo/virtual-universe-26
-> copilot plugin install universe-cheatsheet@virtual-universe-26
-> ```
->
-> Start a new session, then run step 2. Copilot will ask which of your
-> repositories should get the issue.
+Switch to the new session. `/create-issue-artifact` attaches to the issue
+linked to the session you run it in.
 
 ## 2. Run the skill
 
 ```text
-/universe-cheatsheet create an issue artifact with the cheat sheet
+/create-issue-artifact follow github-virtual-universe-highlights/attach-a-cheat-sheet-artifact/instructions.md
 ```
 
-Copilot will:
+Copilot reads [the instructions](instructions.md), then:
 
-- read the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
-- design a one-page cheat sheet in the Universe theme and save it as an image
-- make a ✨surprise card✨ image (open it for details) 
-- open a session from that issue and use `/create-issue-artifact` to add both images as artifacts
+- reads the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
+- designs a one-page cheat sheet in the Universe theme
+- makes a ✨surprise card✨
+- adds both images to your issue as artifacts
 
 ## 3. Open your issue
 
-Open the issue link that Copilot gives you. Read the surprise card to see an
+Open the issue and select **Artifacts**. Read the surprise card to see an
 easter egg we've left for you in your
 [Virtual GitHub Universe Badge](https://leereilly.net/badger.github.io/virtual/).
 
