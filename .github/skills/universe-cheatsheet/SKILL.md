@@ -24,8 +24,8 @@ The issue has two artifacts: the cheat sheet image and a Badger easter egg card.
    command.
 
 2. Read these files and nothing else for content:
-   - `03-github-universe-keynote/github-universe-recap/README.md`
-   - `03-github-universe-keynote/github-universe-cheat-sheet/README.md`
+   - `github-virtual-universe-highlights/github-universe-recap/README.md`
+   - `github-virtual-universe-highlights/github-universe-cheat-sheet/README.md`
 
    Pick at most four features for each of the two cookbook themes: *The Modern
    GitHub Experience* and *Agentic Software Development with GitHub Copilot*.
