@@ -7,7 +7,6 @@
 You're almost done with the workshop! To bring everything you learned together
 you will create an Issue Artifact.
 
-> [!NOTE]
 > **Issue Artifacts** let you attach rich, structured artifacts; implementation
 > plans, research and investigation notes, design docs, images and reference
 > links — directly to a GitHub issue. Instead of important context living in
@@ -37,10 +36,10 @@ so there's nothing to install.
 
 Copilot will:
 
-- 📖 read the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
-- 🎨 design a one-page cheat sheet in the Universe theme and save it as an image
-- 🥚 make a surprise card image
-- 🗂️ open a session from that issue and use `/create-issue-artifact` to add both images as artifacts
+- read the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
+- design a one-page cheat sheet in the Universe theme and save it as an image
+- make a ✨surprise card✨ image (open it for details) 
+- open a session from that issue and use `/create-issue-artifact` to add both images as artifacts
 
 ## 3. Open your issue
 
