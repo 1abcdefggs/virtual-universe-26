@@ -37,14 +37,15 @@ Copilot reads [the instructions](instructions.md), then:
 
 - reads the [recap](../github-universe-recap/) and [cheat sheet](../github-universe-cheat-sheet/) pages
 - designs a one-page cheat sheet in the Universe theme
-- makes a ✨surprise card✨
+- makes a **surprise card** 
 - adds both images to your issue as artifacts
 
 ## 3. Open your issue
 
-Open the issue and select **Artifacts**. Read the surprise card to see an
-easter egg we've left for you in your
-[Virtual GitHub Universe Badge](https://leereilly.net/badger.github.io/virtual/).
+Open the issue and select **Artifacts**. 
+
+✨Read the **surprise card to see an easter egg** we've left for you in your
+[Virtual GitHub Universe Badge](https://leereilly.net/badger.github.io/virtual/)
 
 ## What you'll get
 
@@ -52,7 +53,7 @@ easter egg we've left for you in your
   <img src="cheatsheet-preview.png" alt="Example cheat sheet with The Modern GitHub Experience and Agentic Software Development with GitHub Copilot features" width="85%">
 </p>
 
-<p align="center"><b>Artifact 1</b> · your cheat sheet &nbsp;·&nbsp; <b>Artifact 2</b> · a surprise you'll only see once you run the skill ✨</p>
+<p align="center"><b>Artifact 1</b> · your cheat sheet &nbsp;·&nbsp; <b>Artifact 2</b> · a surprise you'll only see once you run the skill </p>
 
 ---
 
