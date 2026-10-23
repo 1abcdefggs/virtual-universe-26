@@ -35,24 +35,21 @@ Are you an open source maintainer? Check out the settings we've shipped to help 
 
 ## Section 2: Agentic Software Development with GitHub Copilot
 
-Build an automation with a skill, a documentation connector, and a security review. Open the welcome canvas and use its **Start** buttons to follow the four guides.
+### Build your first Automation
+
+Click the button below to open a guided GitHub Copilot App session to learn how to build your first Automation.
 
 [![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-welcome)
 
-Already in a session? Open **+ → Installed extensions → Universe '26 welcome** after the extension loads. Start reading immediately—no fork or session switch needed. Prepare a fork destination later, in the same checkout, when you are ready to make changes. [Read the guide](./02-github-copilot-latest-features/README.md).
-
-1. **Skills:** Edit the [`issue-to-pr`](./.github/skills/issue-to-pr/SKILL.md) skill and run it with `/issue-to-pr`.
-2. **Tools and connectors:** Discover a documentation agent with `/agentfinder`, add Context7 through **Customize**, and look up current Node.js documentation.
-3. **Security review:** Run `/security-review` on the agent's pull request and add a review step to the skill.
-4. **Automate:** Select your fork in **Automations → New Automation**, enter `/issue-to-pr`, and start with a **Manual** trigger. Add a schedule later.
+Learn about: 
+1. [Skills]() 
+2. [Tools and Connectors]() 
+3. [Security Review]() 
+4. [Scheduled Actions]() 
 
 ## Section 3: GitHub Universe Highlights
 
-Copy the command below into your terminal for a surprise experience walking you through the GitHub Universe highlights. 
 
-```
-curl leereilly.net
-```
 
 1. [GitHub Universe recap page](./03-github-universe-keynote/github-universe-recap/): Catch up on the main announcements, with links to demos and resources.
 2. [GitHub Universe cheat sheet](./03-github-universe-keynote/github-universe-cheat-sheet/): Find the key features, useful commands, and next steps in one place, with a terminal-friendly edition planned.
