@@ -52,7 +52,7 @@ Learn about:
 ### Putting it all together
 
 1. [Attach a cheat sheet artifact](./github-virtual-universe-highlights/attach-a-cheat-sheet-artifact/): Ask Copilot to make a GitHub Universe cheat sheet and file it as an issue with an image artifact. (Also find a ✨super duper secret surprise✨ at the end of this section)
-2. [GitHub Universe recap page](./github-virtual-universe-highlights/github-universe-recap/): View all the main announcements, with links to demos and resources.
+2. [GitHub Universe recap page](https://github.com/events/universe/recap/): View all the main announcements, with links to demos and resources.
 
 
 
