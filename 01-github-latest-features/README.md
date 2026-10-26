@@ -8,8 +8,10 @@ In this section you'll learn how to use the GitHub CLI to attach images to an
 issue and to create a stacked pull request.
 
 > [!NOTE]
-> Paste and run each command in the terminal at the bottom of your Codespace.
-> If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
+> To copy a command, hover over its code block and click the copy button at
+> the top right. Paste it into the terminal at the bottom of your Codespace and
+> press <kbd>Enter</kbd>. If the terminal isn't open, press
+> <kbd>Ctrl</kbd>+<kbd>`</kbd>.
 
 ## Getting started
 

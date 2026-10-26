@@ -12,8 +12,9 @@ Use `--attach` to add a screenshot to an issue, straight from the terminal.
 
 ## Before you start
 
-Paste and run each command in the terminal at the bottom of your Codespace.
-If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
+To copy a command, hover over its code block and click the copy button at the
+top right. Paste it into the terminal at the bottom of your Codespace and press
+<kbd>Enter</kbd>. If the terminal isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
 
 Skip the rest of this section if you already signed in on the
 [Section 1 page](../README.md#getting-started). Otherwise, sign in to GitHub:

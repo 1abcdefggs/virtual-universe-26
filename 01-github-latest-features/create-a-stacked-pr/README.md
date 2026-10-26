@@ -13,8 +13,9 @@ reviewers see one layer at a time.
 
 ## Before you start
 
-Paste and run each command in the terminal at the bottom of your Codespace.
-If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
+To copy a command, hover over its code block and click the copy button at the
+top right. Paste it into the terminal at the bottom of your Codespace and press
+<kbd>Enter</kbd>. If the terminal isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
 
 Skip the rest of this section if you already signed in on the
 [Section 1 page](../README.md#getting-started). Otherwise, sign in to GitHub:
@@ -80,10 +81,17 @@ GH_REPO="$(git remote get-url origin)" gh stack submit --auto --remote origin
 `GH_REPO` selects the repository for the pull requests; `--remote origin`
 selects where the branches are pushed. Both must point to your fork.
 
-## 5. Open your pull requests
+## 5. Open the top of the stack
 
-Open the links that `gh` prints. The latte pull request is based on the
-espresso branch, so it only shows the latte change.
+`gh` prints a link for each pull request. You only need the top one, latte.
+Open it on github.com:
+
+```bash
+GH_REPO="$(git remote get-url origin)" gh pr view menu/latte --web
+```
+
+The latte pull request is based on the espresso branch, so it only shows the
+latte change.
 
 <p align="center">
   <img src="stack-conversation.png" alt="Pull request 'Add latte to the menu #5' on the Conversation tab, with a 2/2 stack button and menu/latte merging into menu/espresso" width="90%">
