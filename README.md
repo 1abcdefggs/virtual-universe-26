@@ -51,6 +51,8 @@ Learn about:
 
 ### Putting it all together
 
+[![Open in Copilot App](https://img.shields.io/badge/Open_in_Copilot_App-238636?style=flat&logo=githubcopilot&logoColor=white)](https://github.com/copilot/app/launch?open=ghapp%3A%2F%2Fsession%2Fnew%3Frepo%3Doctodemo%252Fvirtual-universe-26%26canvas%3Duniverse-cheatsheet-artifact)
+
 1. [Attach a cheat sheet artifact](./github-virtual-universe-highlights/attach-a-cheat-sheet-artifact/): Attach an Artifact to an Issue and download a cheat sheet for everything in this repo. (Also find a ✨super duper secret surprise✨ at the end of this section)
 2. [GitHub Universe recap page](https://github.com/events/universe/recap/): View all the main announcements, with links to demos and resources.
 
