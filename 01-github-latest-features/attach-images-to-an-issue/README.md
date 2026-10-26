@@ -10,6 +10,29 @@ Use `--attach` to add a screenshot to an issue, straight from the terminal.
 > Mona's café menu has a bug: Playwright caught every price showing `$NaN`.
 > You'll file it with the screenshot attached, without leaving the terminal.
 
+## Before you start
+
+Paste and run each command in the terminal at the bottom of your Codespace.
+If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
+
+Skip the rest of this section if you already signed in on the
+[Section 1 page](../README.md#getting-started). Otherwise, sign in to GitHub:
+
+```bash
+unset GH_TOKEN GITHUB_TOKEN
+gh auth login --hostname github.com --git-protocol https --web
+```
+
+Finish authorizing in the browser and wait for the terminal prompt to return.
+Then create your fork and make it the target for issues and pull requests:
+
+```bash
+gh auth setup-git &&
+gh repo fork --remote &&
+gh repo set-default "$(git remote get-url origin)" &&
+gh repo edit --enable-issues
+```
+
 ## 1. Go to this folder
 
 ```bash

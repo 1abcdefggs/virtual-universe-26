@@ -1,15 +1,20 @@
-# Section 1: The Modern GitHub Experience
+<p align="center">
+  <img src="banner.svg" alt="Section 1: The Modern GitHub Experience. Five-minute tutorials with the GitHub CLI." width="100%">
+</p>
+
+**Section 1 · 2 tutorials · 5 min each**
 
 In this section you'll learn how to use the GitHub CLI to attach images to an
-issue and to create a stacked pull request. Each tutorial takes about five minutes.
+issue and to create a stacked pull request.
+
+> [!NOTE]
+> Paste and run each command in the terminal at the bottom of your Codespace.
+> If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
 
 ## Getting started
 
-The Codespace opens this folder in Explorer and this README in preview.
-The terminal starts at the repository root, so the tutorial commands work unchanged.
-
 Work in your own fork, so the issues and pull requests you create are yours.
-Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and sign in:
+Sign in to GitHub:
 
 ```bash
 unset GH_TOKEN GITHUB_TOKEN

@@ -11,6 +11,29 @@ reviewers see one layer at a time.
 > You'll build a two-layer stack for Mona's café menu: espresso first, then
 > latte on top. Each layer becomes its own pull request.
 
+## Before you start
+
+Paste and run each command in the terminal at the bottom of your Codespace.
+If it isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
+
+Skip the rest of this section if you already signed in on the
+[Section 1 page](../README.md#getting-started). Otherwise, sign in to GitHub:
+
+```bash
+unset GH_TOKEN GITHUB_TOKEN
+gh auth login --hostname github.com --git-protocol https --web
+```
+
+Finish authorizing in the browser and wait for the terminal prompt to return.
+Then create your fork and make it the target for issues and pull requests:
+
+```bash
+gh auth setup-git &&
+gh repo fork --remote &&
+gh repo set-default "$(git remote get-url origin)" &&
+gh repo edit --enable-issues
+```
+
 ## 1. Go to this folder
 
 ```bash
@@ -26,7 +49,7 @@ gh repo set-default --view
 ```
 
 The output should name your fork, not `octodemo/virtual-universe-26`.
-If you haven't forked yet, complete [Getting started](../README.md#getting-started)
+If you haven't forked yet, complete [Before you start](#before-you-start)
 first.
 
 `gh stack` can still prefer the `upstream` remote despite this setting.
