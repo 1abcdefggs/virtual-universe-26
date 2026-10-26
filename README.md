@@ -17,7 +17,7 @@ Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai
 
 Click the button below to open a pre-configured Codespace with all the dependencies needed for the cookbooks in this section. 
 
-[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-238636?style=flat&logo=github&logoColor=white)](https://codespaces.new/octodemo/virtual-universe-26?quickstart=1)
+[![Open in GitHub Codespaces](https://img.shields.io/badge/Open_in_GitHub_Codespaces-238636?style=flat&logo=github&logoColor=white)](https://codespaces.new/octodemo/virtual-universe-26?quickstart=1&devcontainer_path=.devcontainer/devcontainer.json)
 
 1. [Attach images to an issue](./01-github-latest-features/attach-images-to-an-issue/README.md): Add a screenshot to an issue from the terminal.
 2. [Create a stacked PR](./01-github-latest-features/create-a-stacked-pr/README.md): Split one change into small pull requests that build on each other.
