@@ -57,5 +57,3 @@ Learn about:
 2. [GitHub Universe recap page](https://github.com/events/universe/recap/): View all the main announcements, with links to demos and resources.
 
 
-
-[![Watch GitHub on YouTube](https://img.shields.io/badge/Watch_GitHub_on_YouTube-24292F?style=flat&logo=youtube&logoColor=white)](https://www.youtube.com/@GitHub)
