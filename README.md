@@ -2,7 +2,6 @@
 
 Cookbooks to learn how to build with GitHub's latest features.<br>
 Start by downloading the [**GitHub Copilot app**](https://github.com/features/ai/github-app) ✨<br>
-Visit the [**event site**](https://literate-adventure-lkl7g1q.pages.github.io/) for a quick tour of the exercises. Its source is in [`docs/`](docs/).
 
 ## What do you want to build?
 
