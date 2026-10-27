@@ -11,8 +11,13 @@ skills: {
   intro: "A skill is a set of instructions, scripts, and resources that Copilot loads when needed to perform a specialized task.<br><br>In this guide you'll edit the <code>issue-to-pr</code> skill and then run it with a slash command.",
   steps: [
     { h: "Understand how a skill is built", body: [
-      "To create a skill, navigate to or create a <code>.github/skills/my-skill/</code> folder, then create a Markdown file named <code>SKILL.md</code> inside it.",
-      "In the <code>SKILL.md</code> file, the <b>name</b> becomes its slash command. The <b>description</b> tells Copilot when to use it. The body lists the steps and the rules. Here's what it would look like.",
+      "By convention, each skill gets its own folder: <code>.github/skills/my-skill/</code>, with a Markdown file named <code>SKILL.md</code> inside it. Replace <code>my-skill</code> with a short name that says what the skill does, like <code>issue-to-pr</code>.",
+      "A <code>SKILL.md</code> file has two parts:",
+      { list: [
+        "<b>The YAML frontmatter</b>, between the two <code>---</code> lines at the top. The <b>name</b> becomes the skill's slash command, and the <b>description</b> tells Copilot when to use it.",
+        "<b>The body</b>, below the frontmatter. It lists the steps Copilot follows and the rules it must keep.",
+      ] },
+      "Here's what that looks like:",
       { k: "file", label: ".github/skills/my-skill/SKILL.md", text: `---
 name: my-skill
 description: What the skill does and when to use it.
@@ -27,20 +32,22 @@ description: What the skill does and when to use it.
       { openSkill: true },
     ]},
     { h: "Edit the skill", body: [
-      "To create a new skill, you need to add a <code>skills</code> folder in the <code>.github</code> folder of your repo. In this guide you will edit a skill that already exists. Click the <code>&lt;&gt;</code> symbol in the file tab to edit the file.",
-      "Make every pull request explain how to test it. <b>Replace</b> the <code>gh pr create</code> line in step 6:",
-      { k: "diff", label: ".github/skills/issue-to-pr/SKILL.md", text: ` 6. Commit, push, and open a draft pull request that closes the issue:
+      "To create a new skill, you need to add a <code>skills</code> folder in the <code>.github</code> folder of your repo. In this guide you will edit a skill that already exists. Click the <code>&lt;&gt;</code> symbol in the file tab of the <code>SKILL.md</code> file you opened above to edit the file.",
+      "<b>Replace</b> the <code>gh pr create</code> line in step 6. You can delete step 6, click the <b>Copy</b> button and paste this in its place:",
+      { k: "diff", label: ".github/skills/issue-to-pr/SKILL.md", text: ` 6. Commit only the files you changed for this issue, push the branch to the
+    fork, and open a draft pull request that closes the issue:
 -   \`gh pr create --draft --title "Fix #<n>: <issue title>" --body "Closes #<n>"\`
 +   \`gh pr create --draft --title "Fix #<n>: <issue title>" --body "<body>"\`
 +   Start the body with "Closes #<n>", then add a short summary and a
 +   "How to test" section with the exact commands a reviewer can run.` },
+      "This change makes every pull request explain how to test it.",
       { list: [
         "<b>Copy the prompt</b> below into this session's Copilot chat.",
-        "Copilot will create your own fork of the tutorial repo.",
+        "Copilot will use your existing fork of the tutorial repo, or create one if you don't have it yet.",
       ] },
-      { k: "chat", noOpen: true, text: `Save my edited issue-to-pr skill to a new fork of octodemo/virtual-universe-26:
+      { k: "chat", noOpen: true, text: `Save my edited issue-to-pr skill to my fork of octodemo/virtual-universe-26:
 - Check GitHub access and help me sign in only if needed.
-- Create a fork under my personal GitHub account.
+- Find my fork: list the forks of octodemo/virtual-universe-26 and use the one owned by my personal GitHub account, even if it has a different name. Only create a fork if I don't have one. Don't treat an existing fork as a blocker.
 - Preserve my saved local edit to .github/skills/issue-to-pr/SKILL.md.
 - Commit only that skill change and push it to my fork's default branch. Do not publish any other local changes or push to the event repository.
 - Do not ask me to preview or confirm the destination before committing. Keep any required app permission prompts.
@@ -55,14 +62,11 @@ description: What the skill does and when to use it.
       "The terminal will open to run the command. Note the issue number it prints. You can <b>click the issue link</b> to preview it, then <b>return to the Universe welcome canvas tab</b> to continue.",
     ]},
     { h: "Run the skill with its slash command", body: [
-      "Run the skill on your newest issue. <b>Open in Copilot app</b> starts a new session in your fork with the command filled in. If you leave off the number, Copilot lists your open issues and asks which one.",
-      { k: "chat", text: `/issue-to-pr{issue}` },
-      { note: "Already in a chat? Run <code>/skills reload</code> first so Copilot picks up your edit." },
+      "Run <code>/skills reload</code> first so Copilot picks up your edit.",
+      "Then run the skill on your newest issue. <b>Type</b> <code>/issue-to-pr{issue}</code> in this session's Copilot chat. As you type, the skill pops up in the slash command list. If you leave off the number, Copilot lists your open issues and asks which one.",
     ]},
     { h: "Review the draft pull request", body: [
-      "Open the pull request and check that it has a <b>How to test</b> section. Then try the commands it lists.",
-      { link: { href: "ghapp://github.com/{fork}/pull/{pr}", text: "Open the pull request in Copilot app", needs: "pr", plain: true } },
-      { link: { href: "https://github.com/{fork}/pulls", text: "View pull requests on GitHub", plain: true } },
+      "Open the pull request link Copilot shares in chat and check that it has a <b>How to test</b> section.",
       { note: "Leave the pull request open. You'll review it for security issues later in this section." },
     ]},
   ],
@@ -74,36 +78,35 @@ tools: {
   eyebrow: "TOOLS · GUIDE",
   title: "Give Copilot the right tools and context",
   time: "10 min",
-  intro: "A custom agent gives Copilot a focused approach. A connector gives it access to tools and information.<br><br>APIs change, and Copilot's built-in knowledge may be out of date. Use Context7 to look up current Node.js documentation so your issue-to-pr skill can base its fixes on documented APIs and examples, with sources you can check.",
+  intro: "A connector gives Copilot access to tools and information it doesn't have built in.<br><br>APIs change, and Copilot's built-in knowledge may be out of date. Find a connector that looks up current documentation so your issue-to-pr skill can base its fixes on documented APIs and examples, with sources you can check.",
   steps: [
-    { h: "Find a documentation agent with Agent Finder", body: [
-      "<b>Copy the prompt</b> into this session's Copilot chat:",
-      { k: "chat", noOpen: true, text: `/agentfinder find the Context7 Expert custom agent in github/awesome-copilot for looking up current library documentation` },
-      "<b>Review the result</b>, then ask Copilot to add the agent.",
-      { k: "chat", noOpen: true, text: `Add the Context7 Expert agent from github/awesome-copilot to this project. Check compatibility with this app and use the keyless Context7 connector with its current resolve-library-id and query-docs tools. Ask before installing or changing its configuration. Keep this session open.` },
+    { h: "Find the right tool with Agent Finder", body: [
+      "Describe your problem and let Agent Finder suggest a tool. <b>Copy the prompt</b> into this session's Copilot chat:",
+      { k: "chat", noOpen: true, text: `/agentfinder my coding agent uses outdated library APIs, find a tool that gives it current documentation` },
+      "Agent Finder only searches; it doesn't install anything. The top result should be <b>Context7</b>, an MCP server that looks up current library documentation.",
     ]},
-    { h: "Add the Context7 connector", body: [
+    { h: "Add the suggested connector", body: [
       { list: [
         "On the left of your screen in the Copilot app, <b>click Customize</b> at the top of the sidebar that shows your sessions.",
-        "Use the search bar to <b>search for Context7</b>, select the server, and <b>click Add server</b>.",
+        "Use the search bar to <b>search for Context7</b>, the tool Agent Finder suggested. Select the server and <b>click Add server</b>.",
         "<b>Select the HTTP tab</b> and accept the default settings presented.",
         "<b>Return to this session's Universe welcome canvas tab</b> to continue.",
       ] },
     ]},
     { h: "Try a documentation lookup", body: [
       "<b>Copy the prompt</b> into this chat:",
-      { k: "chat", noOpen: true, text: `Use the Context7 Expert agent and the Context7 MCP connector to find how Node.js reads a UTF-8 file with node:fs/promises. Show a short example and its documentation source. Send only this public documentation query, not repository contents. If the agent or connector isn't available in this session, tell me; don't substitute web search.` },
+      { k: "chat", noOpen: true, text: `Use the Context7 MCP connector to find how Node.js reads a UTF-8 file with node:fs/promises. Show a short example and its documentation source. If the connector isn't available in this session, tell me; don't substitute web search.` },
       "Look for a Context7 tool call and a linked Node.js source. The connector retrieves documentation; it doesn't certify that a PR is correct.",
     ]},
     { h: "Use it in your skill", body: [
       "<b>Ask Copilot</b> to update the skill by copying this prompt into chat, or <b>edit it yourself</b> using the instructions below.",
-      { k: "chat", noOpen: true, text: `Update .github/skills/issue-to-pr/SKILL.md to use the Context7 Expert agent and connector when a fix needs library or API documentation. Send only public documentation queries, cite relevant sources in the draft PR, and report unavailable tools instead of pretending a lookup succeeded. Show me the edit; don't commit or push yet.` },
+      { k: "chat", noOpen: true, text: `Update .github/skills/issue-to-pr/SKILL.md to use the Context7 connector when a fix needs library or API documentation. Send only public documentation queries, cite relevant sources in the draft PR, and report unavailable tools instead of pretending a lookup succeeded. Show me the edit; don't commit or push yet.` },
       "To edit it yourself, <a href=\"#/tools\" data-open-skill>open the skill.md file here</a> <span data-open-skill-status role=\"status\"></span> and click the <code>&lt;&gt;</code> symbol. Add this instruction before the step that makes the fix, then save:",
-      { k: "file", label: "Add to .github/skills/issue-to-pr/SKILL.md", text: `When a fix needs library or API documentation, use the Context7 Expert
-agent and Context7 MCP connector to look it up. Send only public
-documentation queries, not repository contents. Cite relevant sources
-in the draft PR. If the agent or connector is unavailable, report it
-instead of claiming the lookup succeeded.` },
+      { k: "file", label: "Add to .github/skills/issue-to-pr/SKILL.md", text: `When a fix needs library or API documentation, use the Context7 MCP
+connector to look it up. Send only public documentation queries, not
+repository contents. Cite relevant sources in the draft PR. If the
+connector is unavailable, report it instead of claiming the lookup
+succeeded.` },
     ]},
   ],
   done: "Your skill can now ask for current documentation. Next, review the draft PR for security issues.",
@@ -114,7 +117,7 @@ security: {
   eyebrow: "SECURITY REVIEW · GUIDE",
   title: "Review the agent's work for security issues",
   time: "10 min",
-  intro: "The security review agent checks changed code and reports only vulnerabilities it is confident someone could exploit. In this guide you run it on the fix in the PR and make the review part of your skill.",
+  intro: "Copilot now has a built-in <code>/security-review</code> skill. The security review skill checks changed code and reports only vulnerabilities it is confident someone could exploit. In this guide you run it on the fix in the PR and make the review part of your skill.",
   steps: [
     { h: "Run the review on the fix in the PR", body: [
       "Review the pull request the skill opened earlier.",
@@ -122,23 +125,17 @@ security: {
       { k: "chat", noOpen: true, text: `/security-review Review the last PR created by the issue-to-pr skill in this chat. Use the chat history to identify it and review the fix in that PR, not unrelated local changes. If the PR is unclear, ask me which one.` },
       "The review shows findings in a table with the severity, file, lines, and confidence. No findings is a good result.",
     ]},
-    { h: "Add the review to your skill", body: [
-      "<a href=\"#/security\" data-open-skill>Open the skill.md file here</a> <span data-open-skill-status role=\"status\"></span> and <b>click &lt;&gt; to edit</b>. Add the review step shown below before the pull request is opened, then renumber the following steps and save.",
-      { k: "diff", label: ".github/skills/issue-to-pr/SKILL.md", text: ` 5. Make the smallest change that fixes the issue, and run the project's tests
-    if it has any.
-+6. Ask the security-review agent to review your changes. Fix any HIGH or
-+   CRITICAL findings, and list the others in the pull request body.
--6. Commit, push, and open a draft pull request that closes the issue:
-+7. Commit, push, and open a draft pull request that closes the issue:` },
-      "<b>Copy this command</b> into chat to commit only the skill file on your current branch. The <code>!</code> prefix opens the terminal to run it. No branch switch is needed to use the edited skill locally.",
-      { k: "chat", noOpen: true, text: `!git add .github/skills/issue-to-pr/SKILL.md && git commit --only .github/skills/issue-to-pr/SKILL.md -m "Review security in issue-to-pr"` },
-      "This commits the edit locally. Before publishing it, ask Copilot to verify the fork remote and target branch rather than running a plain <code>git push</code>.",
+    { h: "Add the security review skill to your skill", body: [
+      "<b>Copy the prompt</b> into this session's chat. Copilot adds the review step to your skill and commits the change:",
+      { k: "chat", noOpen: true, text: `Update .github/skills/issue-to-pr/SKILL.md so it runs the built-in /security-review skill on its changes after making the fix and before committing and opening the pull request. Fix any HIGH or CRITICAL findings, and list any others in the pull request body. Renumber the following steps. Then commit only that file on the current branch with the message "Run security review in issue-to-pr".` },
+      "Open the <a href=\"#/security\" data-open-skill>skill.md file</a> <span data-open-skill-status role=\"status\"></span> to check the new step.",
     ]},
     { h: "Run it on a new issue", body: [
-      { k: "term", text: `gh issue create -R {fork} --title "Add a search command to universe-notes" \\
+      "<b>Copy and run</b> this command in this session's Copilot chat to create a new issue. The <code>!</code> prefix runs it as a Bash command.",
+      { k: "chat", noOpen: true, text: `!gh issue create -R {fork} --title "Add a search command to universe-notes" \\
   --body "Add 'npm run search -- <word>' that prints highlights whose title or summary contains the word."` },
-      { k: "chat", text: `/issue-to-pr{issue}` },
-      "Copilot now reviews its own change before it opens the pull request.",
+      "Then <b>type</b> <code>/issue-to-pr{issue}</code> in the chat to run your skill on it.",
+      "Copilot now runs the security review skill on its own change before it opens the pull request.",
     ]},
   ],
   done: "Your skill now checks its own work for security issues. Next, let a trigger start it for you.",
@@ -168,6 +165,6 @@ automate: {
       "When you're ready, <b>click the play button</b> on the automation. Follow its run and review the draft PR it produces; nothing should merge without your review.",
     ]},
   ],
-  done: "You've turned your skill into an automation you can run on demand. Later, you can give it a schedule.",
+  done: "🎉 <b>Congratulations on completing this tutorial!</b><br><br>You built an <code>issue-to-pr</code> skill that turns an issue into a draft pull request. You connected Context7 so it uses current documentation, added the built-in <code>/security-review</code> skill so it checks its own work, and saved it as an automation you can run on demand.<br><br>For more resources, visit the <a href=\"https://github.com/octodemo/virtual-universe-26\" target=\"_blank\" rel=\"noopener\">Virtual Universe '26 repository</a>.",
 },
 };

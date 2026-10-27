@@ -91,6 +91,13 @@ table.qa{width:100%;border-collapse:collapse;margin:0 0 14px;font-size:14px}
 .done p{margin:0 0 14px;font-size:16px;line-height:1.5}
 .ghost{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-size:14px;font-weight:600}
 .ghost:focus-visible{outline:2px solid var(--g)}
+.done a:not(.btn){color:var(--g);font-weight:600}
+.done .nav{margin-top:0;justify-content:space-between}
+.done p.help{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--mute)}
+.helplink{all:unset;cursor:pointer;color:var(--g);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.helplink:hover{text-decoration-thickness:2px}
+.helplink:focus-visible{outline:2px solid var(--g);outline-offset:2px;border-radius:2px}
+.helplink[disabled]{color:var(--mute);text-decoration:none;cursor:default}
 .forkcard{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#f6f8fa}
 .forkcard.ok{border-color:var(--g);background:#eef6ef}
 .forkcard b{display:block;font-size:15px}
@@ -114,15 +121,15 @@ a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outlin
 <div id="home">
 <header><h1>Build your first automation</h1><div class="mono">Universe&#8217;26 &middot; Section 2</div></header>
 <div class="lede">
-<p>Turn a new issue into a suggested fix and a draft pull request. <b>You review before anything merges.</b></p>
-<blockquote class="def"><span class="mono">What is an automation?</span><p>A saved agent task that runs on a schedule, on demand, or in response to a repository event.</p></blockquote>
+<p>Turn a new issue into a suggested fix and a draft pull request. You review before anything merges.</p>
+<blockquote class="def"><span class="mono" style="font-weight:700">What is an automation?</span><p>A saved agent task that runs on a schedule, on demand, or in response to a repository event.</p></blockquote>
 <p>In this tutorial, you'll turn a skill into an automation, connect to an MCP server, and review the draft PR for security issues. Start with a manual trigger; add a schedule later.</p>
 </div>
 <section class="factory">
  <div class="chatcol" id="chat"></div>
  <div class="list">
   <div class="eyebrow">FOUR STEPS</div>
-  <h2>Start with a skill</h2>
+  <h2>1. Skills</h2>
   <div id="acc"></div>
  </div>
 </section>
@@ -138,7 +145,7 @@ const hl=s=>s.split('\n').map(l=>{if(l==='---')return '<span class="c">---</span
 const file=(p,c)=>`<div class="file"><div class="fh">${p}</div><pre>${hl(c)}</pre></div>`;
 const card=(t,d,a)=>`<div class="card"><div><b>${t}</b><span>${d}</span></div><div class="tag">${a}</div></div>`;
 const I=[
-{id:'skills',name:'Skills',
+{id:'skills',name:'Skills',label:'Start by creating an agent skill',
  desc:'Teach Copilot to read an issue, suggest a fix, and open a draft pull request.',
  file:['.github/skills/issue-to-pr/SKILL.md',`---
 name: issue-to-pr
@@ -158,27 +165,26 @@ description: Read an open issue, propose a fix, and open a draft pull request.
  cop:'I read the issue, wrote the smallest fix, and opened a draft pull request for your review.',
  steps:['Read issue #42 and the code it mentions','Wrote a fix and ran the tests','Opened draft PR #43 that closes #42']},
 {id:'tools',name:'Tools and connectors',
- desc:'Find a documentation agent and connect Context7 for current Node.js examples.',
+ desc:'Use Agent Finder to find a documentation connector, then add Context7 for current Node.js examples.',
  you:'Use Context7 to show how Node.js reads a UTF-8 file.',
  cop:'Here is a file-reading example from the Node.js documentation.',
  steps:['Looked up Node.js with Context7','Retrieved a relevant code example','Linked the documentation source']},
 {id:'security',name:'Security review',
  desc:'Use <code>/security-review</code> to check the proposed changes for security risks before merging.',
- file:['security-review.agent.yaml',`name: security-review
-displayName: Security Review Agent
+ file:['security-review/SKILL.md',`---
+name: security-review
 description: >
   Performs security-focused code review to identify
   high-confidence vulnerabilities in the diff.
-tools:
-  - "*"
-prompt: |
-  Identify HIGH-CONFIDENCE security vulnerabilities
-  in the modified and added lines of code.
+---
+
+Identify HIGH-CONFIDENCE security vulnerabilities
+in the modified and added lines of code.
   1. MINIMIZE FALSE POSITIVES: only flag issues you
-     are more than 80% confident are exploitable.
-  2. FOCUS ON IMPACT: unauthorized access, data
-     breaches, or system compromise.
-  3. Skip style, performance, and theoretical issues.`],
+   are more than 80% confident are exploitable.
+2. FOCUS ON IMPACT: unauthorized access, data
+   breaches, or system compromise.
+3. Skip style, performance, and theoretical issues.`],
  you:'<code>/security-review</code>',
  cop:'I checked the changed code for security risks and found one issue that needs your attention.',
  extra:card('HIGH \u00b7 src/export.js:42','User input is passed to a shell command','Fix'),
@@ -188,9 +194,9 @@ prompt: |
  you:'Can I save this skill as an automation?',
  cop:'Choose your fork, enter /issue-to-pr, and select Manual to run it when you are ready.',
  steps:['Open New Automation','Select your fork and skill','Save with a Manual trigger']}];
-const chatHtml=t=>`<div class="you fade"><div class="bubble"><small>You</small>${t.you}</div><img class="avatar" src="mona.png" alt="Mona"></div>
+const chatHtml=t=>`<div class="you fade"><div class="bubble"><small>You</small>${t.you}</div><img class="avatar" src="avatar.svg" alt="Marlene"></div>
 <div class="cop fade"><div class="ic">${COPILOT}</div><div class="bubble"><small style="font-family:var(--mono)">Copilot</small><h3>${t.cop}</h3>${t.extra||''}<ul>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ul></div></div>`;
-acc.innerHTML=I.map(t=>`<div class="item"><button aria-expanded="false">${t.name}</button><div class="panel">
+acc.innerHTML=I.map(t=>`<div class="item"><button aria-expanded="false">${t.label||t.name}</button><div class="panel">
  <div class="inline-chat"></div>
  <p class="desc">${t.desc}</p>
  <div class="actions"><button class="try" data-id="${t.id}">Start ${t.name.toLowerCase()} &rarr;</button></div></div></div>`).join('');
@@ -247,9 +253,10 @@ function route(keep){
  ${w.preview?`<div class="preview">${w.preview}</div>`:''}</div>
  ${id==='skills'||!I[i].file?'':`<details class="example"><summary>View example</summary>${file(...I[i].file)}</details>`}
  <ol class="steps">${w.steps.map(s=>`<li class="step"><h3>${fill(s.h)}</h3>${s.body.map(blk).join('')}</li>`).join('')}</ol>
- <div class="done"><p>${w.done}</p><div class="actions" style="margin-top:0">
- ${w.next?`<button class="try" data-next="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:''}
- <button class="ghost" data-help="${id}">Stuck? Ask Copilot in chat</button></div></div>`;
+ <div class="done"><p>${w.done}</p><div class="actions nav">
+ ${i>0?`<button class="ghost" data-nav="${I[i-1].id}">&larr; Back: ${I[i-1].name}</button>`:`<button class="ghost" data-nav="">&larr; Back: Build your first automation</button>`}
+ ${w.next?`<button class="try" data-nav="${w.next}">Next: ${I.find(t=>t.id===w.next).name} &rarr;</button>`:`<button class="try" data-nav="">Next: Back to start &rarr;</button>`}</div>
+ <p class="help">Stuck on a step? <button class="helplink" data-help="${id}">Ask Copilot in chat</button> <span class="helpstatus" role="status"></span></p></div>`;
  guide.querySelector('.back').onclick=()=>{location.hash='';};
  guide.querySelectorAll('[data-open-skill]').forEach(link=>link.onclick=async event=>{
   event.preventDefault();
@@ -265,9 +272,10 @@ function route(keep){
   finally{link.removeAttribute('aria-disabled')}
  });
  guide.querySelectorAll('.copy').forEach(c=>c.onclick=async()=>{const ok=await copy(decodeURIComponent(c.dataset.t));c.textContent=ok===false?'Select and copy':'Copied';setTimeout(()=>c.textContent='Copy',1600)});
- const n=guide.querySelector('[data-next]');if(n)n.onclick=()=>{location.hash='#/'+n.dataset.next};
- const hb=guide.querySelector('[data-help]');hb.onclick=async()=>{hb.textContent='Sent to chat';hb.disabled=true;
-  await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})})};
+ guide.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{location.hash=b.dataset.nav?'#/'+b.dataset.nav:'';scrollTo(0,0)});
+ const hb=guide.querySelector('[data-help]');hb.onclick=async()=>{hb.disabled=true;const st=guide.querySelector('.helpstatus');
+  try{const r=await fetch('try',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})});if(!r.ok)throw 0;st.textContent='Sent. Check the chat.'}
+  catch{hb.disabled=false;st.textContent='Couldn\u2019t send. Try again.'}};
  guide.querySelectorAll('[data-forkopen]').forEach(a=>a.onclick=async e=>{e.preventDefault();
   if(DEMO){ME=demoMe(ME);JUST=true;sessionStorage.demoForked=1;const t=a.dataset.prompt?sessionLink(decodeURIComponent(a.dataset.prompt)):'ghapp://github.com/'+ME.repo;rerender();window.go(t);return}
   if(a.dataset.busy)return;a.dataset.busy=1;a.textContent='Creating your fork\u2026';

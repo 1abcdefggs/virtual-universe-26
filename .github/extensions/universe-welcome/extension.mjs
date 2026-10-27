@@ -15,7 +15,7 @@ const EXAMPLES = {
 };
 const files = {
     "/": ["welcome.html", "text/html; charset=utf-8"],
-    "/mona.png": ["mona.png", "image/png"],
+    "/avatar.svg": ["avatar.svg", "image/svg+xml"],
     "/open-files.png": ["open-files.png", "image/png"],
     "/new-automation.png": ["new-automation.png", "image/png"],
     "/walkthroughs.js": ["walkthroughs.js", "text/javascript; charset=utf-8"],
