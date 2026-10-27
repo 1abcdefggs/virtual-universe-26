@@ -52,15 +52,6 @@ gh repo set-default "$(git remote get-url origin)"
 gh repo set-default --view
 ```
 
-The output should name your fork, not `octodemo/virtual-universe-26`.
-If you haven't forked yet, complete [Before you start](#before-you-start-skip-if-you-already-signed-in-on-section-1)
-first.
-
-> **Note**
->
-> `gh stack` can still prefer the `upstream` remote despite this setting.
-> Step 4 uses `GH_REPO` to explicitly target your fork for pull requests.
-
 ## 2. Start a stack, then commit the first change
 
 ```bash

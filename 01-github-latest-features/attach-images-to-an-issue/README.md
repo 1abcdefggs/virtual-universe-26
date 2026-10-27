@@ -13,7 +13,7 @@ Use `--attach` to add a screenshot to an issue, straight from the terminal.
 > site in a headless browser on every pull request, clicks through each page,
 > checks what it sees and saves screenshots when something looks wrong. On its
 > last run it caught every price on the menu showing `$NaN` and saved
-> `menu-prices.png`.
+> [`menu-prices.png`](menu-prices.png).
 >
 > You'll file that bug with the screenshot attached, without leaving the
 > terminal. A workflow can run the same `gh issue create --attach` command to
@@ -79,7 +79,7 @@ the issue.
   <img src="menu-prices.png" alt="Mona's café menu with a 'We couldn't load prices for this menu' error and every price showing $NaN" width="60%">
 </p>
 
-<p align="center"><b>menu-prices.png</b> · every price on the menu shows <code>$NaN</code></p>
+<p align="center"><a href="menu-prices.png"><b>menu-prices.png</b></a> · every price on the menu shows <code>$NaN</code></p>
 
 ---
 
