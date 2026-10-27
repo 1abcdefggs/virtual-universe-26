@@ -129,7 +129,7 @@ a.btn:focus-visible,button.btn:focus-visible{outline:2px solid var(--ink);outlin
  <div class="chatcol" id="chat"></div>
  <div class="list">
   <div class="eyebrow">FOUR STEPS</div>
-  <h2>1. Skills</h2>
+  <h2>Get Started</h2>
   <div id="acc"></div>
  </div>
 </section>
@@ -145,7 +145,7 @@ const hl=s=>s.split('\n').map(l=>{if(l==='---')return '<span class="c">---</span
 const file=(p,c)=>`<div class="file"><div class="fh">${p}</div><pre>${hl(c)}</pre></div>`;
 const card=(t,d,a)=>`<div class="card"><div><b>${t}</b><span>${d}</span></div><div class="tag">${a}</div></div>`;
 const I=[
-{id:'skills',name:'Skills',label:'Start by creating an agent skill',
+{id:'skills',name:'Skills',label:'Skills',
  desc:'Teach Copilot to read an issue, suggest a fix, and open a draft pull request.',
  file:['.github/skills/issue-to-pr/SKILL.md',`---
 name: issue-to-pr
