@@ -58,6 +58,8 @@ Git remote. Make sure the selected fork project contains your updated skill.
 The screenshot in the guide shows the event repository and a Daily trigger
 for illustration; choose **your fork** and **Manual** instead.
 
+## Notes
+
 Context7's remote endpoint was tested without an API key. Rate limits and app
 or organization policies may affect availability. Send only public documentation
 queries to the connector, not repository contents. A documentation lookup is
@@ -67,5 +69,9 @@ The canvas lives in
 [`.github/extensions/universe-welcome`](../.github/extensions/universe-welcome/).
 Existing sessions may need updated repository files and an extension reload to
 show changes. Its canvas ID remains `universe-welcome`.
+
+## Additional Resources
+
+Want to get hands-on with the GitHub Copilot app? Check out [this course](https://gh.io/copilotapp-firststeps).
 
 [Back to the cookbooks](../README.md)
