@@ -403,6 +403,7 @@ window.setInterval(() => {
 type Recording = {
   id: string; interval: number; start: number; last: number; hash: number; rendered: number
   fps: number; scale: number; captureVideo: boolean; stopping: boolean; badge?: BadgeCrop
+  captured: number; ticker: number
   uploads: Promise<unknown>[]; video?: { canvas: HTMLCanvasElement; recorder?: MediaRecorder; chunks: Blob[]; error?: string }
 }
 let recording: Recording | null = null
@@ -412,9 +413,14 @@ function frameHash(data: Uint8ClampedArray) {
   for (let i = 0; i < words.length; i++) h = Math.imul(h ^ words[i], 0x01000193)
   return h >>> 0
 }
-function recordFrame(force = false) {
+// `force` also bypasses the de-duplicating hash, so a still badge still yields the
+// one frame a GIF needs.
+function recordFrame(force = false, lastResort = false) {
   const rec = recording
-  if (!rec || !hasAppFrame || rec.stopping) return
+  if (!rec || rec.stopping) return
+  // The 3D badge renders on its own, so only screen captures need an app frame,
+  // and even then the closing shot is better than nothing.
+  if (!hasAppFrame && !rec.badge && !lastResort) return
   const now = performance.now()
   if (!force && now - rec.last < rec.interval - 2) return
   const { width, height } = rec.badge ?? screen
@@ -430,11 +436,11 @@ function recordFrame(force = false) {
     paint.fillRect(0, 0, width, height)
     const crop = rec.badge
     const gl = host.querySelector<HTMLCanvasElement>('canvas:not([data-screen])')
-    if (!gl) return
+    if (!gl?.width) return
     paint.imageSmoothingQuality = 'high'
     // capture() renders a fresh frame; read the WebGL canvas in the same task, before it is cleared.
-    try { model.capture(1, 1) } catch { return }
-    paint.drawImage(gl, crop.x, crop.y, crop.w, crop.h, 0, 0, width, height)
+    try { model.capture(1, 1) } catch { /* keep the frame we can still draw */ }
+    try { paint.drawImage(gl, crop.x, crop.y, crop.w, crop.h, 0, 0, width, height) } catch { return }
     image = paint.getImageData(0, 0, width, height)
   } else image = screen.getContext('2d')!.getImageData(0, 0, width, height)
   const hash = frameHash(image.data) ^ (width << 16) ^ height
@@ -444,9 +450,10 @@ function recordFrame(force = false) {
     ctx.imageSmoothingEnabled = false
     ctx.drawImage(screen, 0, 0, rec.video.canvas.width, rec.video.canvas.height)
   }
-  if (hash === rec.hash) return
+  if (hash === rec.hash && !force) return
   rec.last = now
   rec.hash = hash
+  rec.captured++
   const query = `id=${rec.id}&t=${(now - rec.start).toFixed(1)}&w=${width}&h=${height}`
   rec.uploads.push(fetch(`/api/record-frame?${query}`, {
     method: 'POST', headers: { 'Content-Type': 'application/octet-stream', 'X-Badge-Simulator': '1' }, body: image.data,
@@ -518,8 +525,17 @@ async function startRecording(id: string, fps: number, video: boolean, scale: nu
     if (!badge) { leaveBadgeStage(); void post('/api/record-done', { id, error: 'Could not find the 3D badge to record' }); return }
   }
   const now = performance.now()
-  recording = { id, interval: 1000 / fps, start: now, last: -Infinity, hash: -1, rendered: 0, uploads: [], fps, scale, captureVideo: video && view !== 'badge', stopping: false, badge }
+  recording = { id, interval: 1000 / fps, start: now, last: -Infinity, hash: -1, rendered: 0, captured: 0, ticker: 0, uploads: [], fps, scale, captureVideo: video && view !== 'badge', stopping: false, badge }
   recordFrame(true)
+  // App frames alone are not a reliable clock: an app that finishes its animation,
+  // boots slowly, or just paints a still screen would otherwise capture nothing.
+  // Sample on our own animation frames instead and let the interval throttle.
+  const tick = () => {
+    if (recording?.id !== id || recording.stopping) return
+    recordFrame()
+    recording.ticker = requestAnimationFrame(tick)
+  }
+  recording.ticker = requestAnimationFrame(tick)
 }
 function startRecordingVideo(rec: Recording) {
   const canvas = document.createElement('canvas')
@@ -541,7 +557,11 @@ function startRecordingVideo(rec: Recording) {
 async function stopRecording(id: string) {
   const rec = recording
   if (!rec || rec.id !== id || rec.stopping) { void post('/api/record-done', { id, error: 'No active recording in this canvas' }); return }
+  cancelAnimationFrame(rec.ticker)
   recordFrame(true)
+  // A GIF of one still frame beats no GIF at all, so take a last unthrottled shot
+  // if nothing landed. The badge is on screen by now even if the app never painted.
+  if (!rec.captured) { rec.last = -Infinity; recordFrame(true, true) }
   rec.stopping = true
   const duration = performance.now() - rec.start
   let video: { mime: string; data: string } | undefined
@@ -559,7 +579,7 @@ async function stopRecording(id: string) {
   }
   if (rec.badge) leaveBadgeStage()
   await Promise.all(rec.uploads)
-  void post('/api/record-done', { id, duration_ms: duration, rendered_frames: rec.rendered, video, video_error: videoError })
+  void post('/api/record-done', { id, duration_ms: duration, rendered_frames: rec.rendered, captured_frames: rec.captured, video, video_error: videoError })
   recording = null
 }
 
@@ -580,7 +600,7 @@ function connect() {
     else if (event.type === 'exec') execCode(event.id, event.code)
     else if (event.type === 'record-start') void startRecording(event.id, event.fps, event.video, event.scale, event.view)
     else if (event.type === 'share-status') showShare(event.text, event.done ? 'shared' : 'sharing')
-    else if (event.type === 'issue') shareButton.title = 'Record your badge as a GIF and save it to your Downloads folder'
+    else if (event.type === 'issue') shareButton.title = 'Save your badge as a GIF in your Downloads folder'
     else if (event.type === 'record-stop') void stopRecording(event.id)
     else if (event.type === 'rotate') { if (event.value === undefined || event.value !== rotated) rotateButton.click() }
     else if (event.type === 'press') {
@@ -616,17 +636,17 @@ async function runShare(body: Record<string, unknown>, busyText: string) {
     shareButton.disabled = false
   }
 }
-shareButton.addEventListener('click', () => { if (!shareButton.disabled) void runShare({ download: true }, 'Recording your badge…') })
+shareButton.addEventListener('click', () => { if (!shareButton.disabled) void runShare({ download: true }, 'Making your badge GIF…') })
 $('[data-clear-output]').addEventListener('click', () => { lines.length = 0; output.textContent = '' })
 
 async function init() {
   const state = await fetch('/api/state').then(r => r.json()) as { apps: string[]; app: string | null; issue: { repo: string; number: number } | null; auto_share?: boolean }
-  if (state.issue) shareButton.title = 'Record your badge as a GIF and save it to your Downloads folder'
+  if (state.issue) shareButton.title = 'Save your badge as a GIF in your Downloads folder'
   setApps(state.apps, state.app)
   model.start()
   startWorker()
   if (state.app) await loadApp()
   connect()
-  if (state.auto_share) void runShare({ auto: true }, 'Recording your badge for your issue…')
+  if (state.auto_share) void runShare({ auto: true }, 'Making your badge GIF for your issue…')
 }
 void init()

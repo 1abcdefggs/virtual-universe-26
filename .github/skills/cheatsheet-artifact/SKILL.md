@@ -30,7 +30,7 @@ reading. Do only these steps.
    and explain if `fork` is `octodemo/virtual-universe-26` — artifacts belong in
    the learner's own fork, never the workshop repository.
 
-2. Do this first, so the badge records while you work: open the Badge Simulator
+2. Do this first, so the badge is ready while you work: open the Badge Simulator
    canvas (`canvasId` `badge-simulator`, `instanceId` `universe-badge`) with
    input `{"app": "universe_congrats", "issue": "<fork>#<number>"}`. It records
    the badge and adds the third artifact itself — don't wait for it, check it,
@@ -55,7 +55,7 @@ reading. Do only these steps.
    ```
 
 5. Reply in three sentences: the two artifacts are on the issue (link it), the
-   Badge Simulator is recording their badge right now to add as a third, and
+   Badge Simulator is preparing their badge right now to add as a third, and
    `/create-issue-artifact` is the built-in tool to reach for in their own
    work, with a custom version used just for this workshop so the whole
    exercise stays in one session.

@@ -46,8 +46,8 @@ In about a minute Copilot:
 - adds a second artifact, **How Copilot built this**, with its working notes
   from the session
 - opens the **Virtual Universe Badge Simulator** with a surprise on your badge,
-  which starts recording straight away and adds the GIF to your issue as a
-  third artifact, **Your Virtual Universe 26 badge**
+  then adds it to your issue as a third artifact, **Your Virtual Universe 26
+  badge**
 
 ## 2. Share your badge
 
@@ -64,7 +64,7 @@ top right button for a tiny recap!
   <img src="cheatsheet-preview.png" alt="Example cheat sheet with The Modern GitHub Experience and Agentic Software Development with GitHub Copilot features" width="85%">
 </p>
 
-<p align="center"><b>Artifact 1</b> · your cheat sheet &nbsp;·&nbsp; <b>Artifact 2</b> · how Copilot built it &nbsp;·&nbsp; <b>Artifact 3</b> · a surprise your badge records itself</p>
+<p align="center"><b>Artifact 1</b> · your cheat sheet &nbsp;·&nbsp; <b>Artifact 2</b> · how Copilot built it &nbsp;·&nbsp; <b>Artifact 3</b> · a surprise on your badge</p>
 
 ---
 

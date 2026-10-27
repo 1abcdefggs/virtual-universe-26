@@ -410,7 +410,7 @@ function hasVisibleClient(inst) {
 async function requireVisibleClient(inst, timeoutMs = 120000) {
     await requireClient(inst);
     if (hasVisibleClient(inst)) return;
-    broadcast(inst, { type: "share-status", text: "Open the Badge Simulator tab so your badge can be recorded…" });
+    broadcast(inst, { type: "share-status", text: "Open the Badge Simulator tab so your badge can finish…" });
     const deadline = Date.now() + timeoutMs;
     while (Date.now() < deadline) {
         await sleep(250);
@@ -528,9 +528,11 @@ async function doShare(inst, input = {}) {
     if (inst.sharing) throw new Error("Your badge is already being shared.");
     inst.sharing = true;
     try {
-        step("Recording your badge…");
-        const rec = await doRecord(inst, { duration_ms: 4000, fps: 12, view: "badge", label: "share", sheet: false });
-        if (!rec.gif) throw new Error(rec.error ?? "The recording failed.");
+        step("Making your badge GIF…");
+        let rec = await doRecord(inst, { duration_ms: 4000, fps: 12, view: "badge", label: "share", sheet: false });
+        // The 3D badge can come up empty on some GPUs; the app screen is a fine stand-in.
+        if (!rec.gif) rec = await doRecord(inst, { duration_ms: 2500, fps: 12, view: "screen", label: "share", sheet: false });
+        if (!rec.gif) throw new Error(rec.error ?? "Your badge GIF could not be made.");
         inst.lastGif = rec.gif;
         let artifact = null, issueError = null;
         if (inst.issue) {
@@ -546,7 +548,7 @@ async function doShare(inst, input = {}) {
         if (artifact) parts.push("Added to your issue's Artifacts");
         if (saved) parts.push(`saved to ${saved.saved}`);
         if (issueError) parts.push(issueError);
-        return { ok: !issueError, gif: rec.gif, saved: saved?.saved ?? null, artifact, message: parts.join(" · ") || "Recorded your badge", seconds: (Date.now() - started) / 1000 };
+        return { ok: !issueError, gif: rec.gif, saved: saved?.saved ?? null, artifact, message: parts.join(" · ") || "Your badge GIF is ready", seconds: (Date.now() - started) / 1000 };
     } finally {
         inst.sharing = false;
     }
@@ -584,7 +586,7 @@ async function recordScreen(inst, input) {
     if (done.error) result.error = done.error;
     const frames = rec.frames.sort((a, b) => a.t - b.t);
     if (!frames.length) {
-        result.error ??= "No frames were captured. Keep the Badge Simulator panel visible (a hidden canvas pauses) and make sure the app is running.";
+        result.error ??= "The badge did not render. Keep the Badge Simulator panel visible (a hidden canvas pauses) and make sure the app is running.";
         return { ...snapshot(inst), ...result, output: linesSince(inst, since).slice(-80).join("\n") };
     }
     const { width, height } = frames[0];

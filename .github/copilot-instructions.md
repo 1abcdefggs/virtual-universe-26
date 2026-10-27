@@ -85,8 +85,8 @@ the whole exercise stays in the session the learner is already in.
    "github-virtual-universe-highlights/attach-a-cheat-sheet-artifact/astronaut.png#Copilot astronaut"`,
    where `<text>` is `Run /cheatsheet-artifact in the session where you opened
    the guide.` followed by a line saying Copilot attaches the cheat sheet and
-   its working notes as Artifacts and opens the Badge Simulator, which records
-   the badge and adds the GIF as a third artifact, and a closing line pointing
+   its working notes as Artifacts and opens the Badge Simulator, which adds
+   the badge GIF as a third artifact, and a closing line pointing
    anyone who missed Virtual Universe '26 at
    [octodemo/virtual-universe-26](https://github.com/octodemo/virtual-universe-26).
    Then read the uploaded image URL

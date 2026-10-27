@@ -105,4 +105,4 @@ svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width:
 
 /* Share: the 3D view is briefly enlarged to a fixed stage to record a sharp GIF. */
 #sim[data-recording-badge] .model { position: fixed; inset: 0 auto auto 0; z-index: 20; background: var(--sim-bg); }
-#sim[data-recording-badge] .stage::after { content: "Recording your badge…"; position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: var(--sim-bg); color: var(--sim-fg); font-size: 14px; }
+#sim[data-recording-badge] .stage::after { content: "Making your badge GIF…"; position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: var(--sim-bg); color: var(--sim-fg); font-size: 14px; }
