@@ -7,18 +7,18 @@
 Split one change into small pull requests that build on each other, so
 reviewers see one layer at a time.
 
-> [!NOTE]
+> **Note**
+>
 > You'll build a two-layer stack for Mona's café menu: espresso first, then
 > latte on top. Each layer becomes its own pull request.
 
-## Before you start
+## Before you start (skip if you already signed in on Section 1)
 
 To copy a command, hover over its code block and click the copy button at the
 top right. Paste it into the terminal at the bottom of your Codespace and press
 <kbd>Enter</kbd>. If the terminal isn't open, press <kbd>Ctrl</kbd>+<kbd>`</kbd>.
 
-Skip the rest of this section if you already signed in on the
-[Section 1 page](../README.md#getting-started). Otherwise, sign in to GitHub:
+Sign in to GitHub:
 
 ```bash
 unset GH_TOKEN GITHUB_TOKEN
@@ -35,6 +35,9 @@ gh repo set-default "$(git remote get-url origin)" &&
 gh repo edit --enable-issues
 ```
 
+After signing in, follow the steps below by copying and pasting the commands
+below into your terminal.
+
 ## 1. Go to this folder
 
 ```bash
@@ -50,11 +53,13 @@ gh repo set-default --view
 ```
 
 The output should name your fork, not `octodemo/virtual-universe-26`.
-If you haven't forked yet, complete [Before you start](#before-you-start)
+If you haven't forked yet, complete [Before you start](#before-you-start-skip-if-you-already-signed-in-on-section-1)
 first.
 
-`gh stack` can still prefer the `upstream` remote despite this setting.
-Step 4 uses `GH_REPO` to explicitly target your fork for pull requests.
+> **Note**
+>
+> `gh stack` can still prefer the `upstream` remote despite this setting.
+> Step 4 uses `GH_REPO` to explicitly target your fork for pull requests.
 
 ## 2. Start a stack, then commit the first change
 
@@ -72,14 +77,16 @@ echo '- Latte: $4.50' >> menu.md
 git commit -am "Add latte to the menu"
 ```
 
-## 4. Push both branches and open a draft pull request for each
+## 4. Push both branches and open a pull request for each
 
 ```bash
-GH_REPO="$(git remote get-url origin)" gh stack submit --auto --remote origin
+GH_REPO="$(git remote get-url origin)" gh stack submit --auto --open --remote origin
 ```
 
 `GH_REPO` selects the repository for the pull requests; `--remote origin`
-selects where the branches are pushed. Both must point to your fork.
+selects where the branches are pushed. Both must point to your fork. `--open`
+creates the pull requests ready for review instead of as drafts, so the stack
+can be merged.
 
 ## 5. Open the top of the stack
 
@@ -104,20 +111,6 @@ jump between its pull requests.
   <img src="stack-navigator.png" alt="Stack #6 menu listing Add latte to the menu #5, Add espresso to the menu #4, and main, opened from the 2/2 button on the Conversation tab" width="90%">
 </p>
 
-> [!TIP]
-> Review stacks from the **Conversation** tab. The stack menu and the merge box
-> both live there.
-
-> [!WARNING]
-> If a previous submit pushed the branches but failed with "Head ref must be a
-> branch" or "No commits between", retry with the explicit repository override.
-> Setting `gh repo set-default` alone is not enough for affected `gh stack`
-> versions. You do not need to recreate the branches or commits:
->
-> ```bash
-> GH_REPO="$(git remote get-url origin)" gh stack submit --auto --remote origin
-> ```
-
 ## What you'll get
 
 Scroll to the bottom of the **Conversation** tab on the top pull request. The
@@ -128,6 +121,18 @@ merge box lists every layer in the stack and merges them together.
 </p>
 
 <p align="center"><b>Stack #6</b> · latte on top of espresso on top of <code>main</code>, merged in one click</p>
+
+## Troubleshooting
+
+If a previous submit pushed the branches but failed with "Head ref must be a
+branch" or "No commits between", or the merge box says **Blocked downstack**
+because a pull request is still a draft, run submit again with the explicit
+repository override and `--open`. You do not need to recreate the branches
+or commits:
+
+```bash
+GH_REPO="$(git remote get-url origin)" gh stack submit --auto --open --remote origin
+```
 
 ---
 

@@ -92,3 +92,7 @@ kbd {
   border-radius: 6px;
   padding: 1px 6px;
 }
+
+/* Bold first line of a blockquote is its callout title. */
+blockquote > p:first-child > strong:only-child { color: #0969da; }
+blockquote > p:first-child:has(> strong:only-child) { margin-bottom: 4px; }
