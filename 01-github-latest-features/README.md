@@ -43,4 +43,13 @@ If you're an open source maintainer, check out the
 [settings we've shipped to help you manage your project](manage-your-open-source-project/README.md)
 and keep AI-generated contributions under control.
 
+## Bonus: Mona's Bug Bash
+
+The [GitHub Universe '26 Sponsors page](https://reg.githubuniverse.com/flow/github/universe26/attendee-portal/page/sponsors)
+has a link to [Mona's Bug Bash](https://bug-bash.github.com/) in its footer,
+disguised as the command `echo "bug-bash-game/" >> .gitignore`. Click the
+screenshot to open the game.
+
+[![Mona's Bug Bash title screen](monas-bug-bash-title-screen.png)](https://bug-bash.github.com/)
+
 [Back to the cookbooks](../README.md)
